@@ -99,8 +99,14 @@ public class Player_Camera : MonoBehaviour
     public void CommandDog()
     {
         RaycastHit[] hits = Physics.RaycastAll(transform.position, m_camera.transform.forward, 1000.0f, m_commandTargetLayerMask);
-        
+
         if (hits.Length != 0)
+        {
             Instantiate(m_dogPingPrefabVFX, hits[0].point, Quaternion.identity);
+
+            Vector3 dogSpawn = transform.position;
+            dogSpawn.y = 0.0f;
+            Dog.CreateDogToLoc(dogSpawn, hits[0].point);
+        }
     }
 }

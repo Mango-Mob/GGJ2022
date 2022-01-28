@@ -57,7 +57,7 @@ public class Player_Controller : MonoBehaviour
             playerCamera.ShootGun();
         }
 
-        if (InputManager.Instance.GetMouseDown(MouseButton.MIDDLE))
+        if (GameManager.Instance.m_dog == null && InputManager.Instance.GetMouseDown(MouseButton.MIDDLE))
         {
             playerCamera.CommandDog();
         }
