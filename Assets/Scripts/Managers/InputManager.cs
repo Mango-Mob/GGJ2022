@@ -93,6 +93,7 @@ public class InputManager : SingletonPersistent<MonoBehaviour>
 
     protected override void Awake()
     {
+        base.Awake();
         mouse = Mouse.current;
         Debug.Log($"{mouse.displayName} has connected as a PRIMARY_MOUSE to the InputManager.");
         keyboard = Keyboard.current;
@@ -117,6 +118,7 @@ public class InputManager : SingletonPersistent<MonoBehaviour>
         {
             LoadBinds();
         }
+        
     }
 
     private void Update()
