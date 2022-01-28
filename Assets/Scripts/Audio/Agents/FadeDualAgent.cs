@@ -20,9 +20,9 @@ namespace AudioSystem.Agents
 
         protected float timeA, timeB;
 
-        protected override void Awake()
+        protected override void Start()
         {
-            base.Awake();
+            base.Start();
             playerA = new AudioPlayer(gameObject, audioClipA);
             playerB = new AudioPlayer(gameObject, audioClipB);
 
