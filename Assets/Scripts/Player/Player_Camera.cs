@@ -44,9 +44,9 @@ public class Player_Camera : MonoBehaviour
             }
         }
     }
-    public void ToggleScope()
+    public void ToggleScope(bool _active)
     {
-        m_isScoped = !m_isScoped;
+        m_isScoped = _active;
 
         if (m_crosshairCanvas != null)
             m_crosshairCanvas.SetActive(m_isScoped);

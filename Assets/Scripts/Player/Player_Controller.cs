@@ -26,18 +26,17 @@ public class Player_Controller : MonoBehaviour
     void Update()
     {
         // Aim Camera
-        Vector2 mouseMove = (InputManager.Instance as InputManager).GetMouseDelta();
-        Debug.Log(mouseMove);
+        Vector2 mouseMove = InputManager.Instance.GetMouseDelta();
         playerCamera.MoveCamera(mouseMove * Time.deltaTime);
 
         // Scope
-        if ((InputManager.Instance as InputManager).IsMouseButtonPressed(MouseButton.RIGHT))
+        if (InputManager.Instance.GetMouseDown(MouseButton.RIGHT))
         {
-            playerCamera.ToggleScope();
+            playerCamera.ToggleScope(!playerCamera.m_isScoped);
         }
 
         // Shoot Gun
-        if (m_maxAmmo > 0 && (InputManager.Instance as InputManager).GetMouseDown(MouseButton.LEFT))
+        if (m_maxAmmo > 0 && InputManager.Instance.GetMouseDown(MouseButton.LEFT))
         {
             Debug.Log("Pew Pew");
             m_maxAmmo--;
