@@ -483,7 +483,7 @@ GameObject:
   - component: {fileID: 522707126}
   - component: {fileID: 522707125}
   - component: {fileID: 522707124}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1136,12 +1136,17 @@ MonoBehaviour:
   m_waitMax: 2
   m_isWaitingForDestination: 1
   m_currentState: 0
+  isBeingWatched: 0
   m_targetPack: {fileID: 0}
   m_targetSheep: {fileID: 0}
+  m_blendSpeed: 2.5
+  m_unblendSpeed: 4.5
+  m_roamDistance: 6
   m_rangeTillBlend: 2
   m_timeTillKill: 15
   m_KillTimeMin: 15
   m_KillTimeMax: 30
+  m_killRange: 2
 --- !u!1 &869366342
 GameObject:
   m_ObjectHideFlags: 0
