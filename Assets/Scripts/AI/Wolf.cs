@@ -16,6 +16,8 @@ public class Wolf : Sheep
 
     [Header("Wolf Settings")]
     public SheepPack m_targetPack;
+    public Sheep m_targetSheep;
+
     public float m_rangeTillBlend = 2f;
     public float m_timeTillKill = 15.0f;
     public float m_KillTimeMin = 15.0f;
@@ -49,8 +51,17 @@ public class Wolf : Sheep
                 {
                     m_targetPack.GenerateRoamLocation(this);
                 }
+                if(!IsVisibleByCamera())
+                {
+                    m_timeTillKill -= Time.deltaTime;
+                    if(m_timeTillKill <= 0)
+                    {
+                        TransitionTo(AIState.Hunt);
+                    }
+                }
                 break;
             case AIState.Hunt:
+                m_myLegs.SetDestination(moveTarget);
                 break;
             default:
                 break;
@@ -73,6 +84,7 @@ public class Wolf : Sheep
                 m_timeTillKill = Random.Range(m_KillTimeMin, m_KillTimeMax);
                 break;
             case AIState.Hunt:
+                m_targetSheep = m_targetPack.GetClosestSheep(transform.position);
                 break;
             default:
                 break;
@@ -92,6 +104,15 @@ public class Wolf : Sheep
 
     private bool IsVisibleByCamera()
     {
-        return false;
+        Vector3 viewPos = GameManager.Instance.m_playerCamera.WorldToViewportPoint(transform.position);
+        
+        return (viewPos.x <= 1.0f && viewPos.x >= 0.0f) && (viewPos.y <= 1.0f && viewPos.y >= 0.0f) && viewPos.z > 0;
+    }
+
+    public override void Kill(bool fromShot = false)
+    {
+        GameManager.Instance.m_wolfList.Remove(this);
+
+        Destroy(gameObject);
     }
 }
