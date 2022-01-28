@@ -211,6 +211,7 @@ MonoBehaviour:
   isMuted: 0
   audioClips:
   - {fileID: 8300000, guid: 8380515fe9e12114abf38f78b2c1ae66, type: 3}
+  - {fileID: 8300000, guid: a2ec5137809c66c4e81f70d830d9ddf2, type: 3}
   audioPlayersCount: 5
   channel: 1
 --- !u!1 &3158487443512353158
