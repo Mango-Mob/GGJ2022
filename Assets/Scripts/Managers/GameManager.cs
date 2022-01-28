@@ -5,10 +5,17 @@ public class GameManager : Singleton<GameManager>
 {
     public List<SheepPack> m_packOfSheep { get; private set; }
 
+    public List<Wolf> m_wolfList { get; private set; }
+
+    public Camera m_playerCamera { get; private set; }
+
     protected override void Awake()
     {
         base.Awake();
         m_packOfSheep = new List<SheepPack>(FindObjectsOfType<SheepPack>());
+        m_wolfList = new List<Wolf>(FindObjectsOfType<Wolf>());
+        m_playerCamera = FindObjectOfType<Camera>();
+
     }
 
     public SheepPack GetNearestPack(Vector3 position)
@@ -27,6 +34,11 @@ public class GameManager : Singleton<GameManager>
         }
 
         return closest;
+    }
+
+    public void NotifyAnimalsOfShot(Vector3 hitLoc)
+    {
+
     }
 
     public int GetSheepCount()
