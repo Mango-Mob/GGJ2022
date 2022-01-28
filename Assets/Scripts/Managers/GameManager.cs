@@ -3,9 +3,12 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
+    [SerializeField] public GameObject m_dogPrefab;
+
     public List<SheepPack> m_packOfSheep { get; private set; }
 
     public List<Wolf> m_wolfList { get; private set; }
+    public Dog m_dog { get; set; }
 
     public Camera m_playerCamera { get; private set; }
 
