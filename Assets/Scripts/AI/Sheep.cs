@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 public class Sheep : MonoBehaviour
 {
-    public NavMeshAgent m_myLegs;
+    private NavMeshAgent m_myLegs;
     public float m_roamDist = 5f;
     public float m_stoppingDistance = 0.5f;
     public float m_waitMin = 1.0f;
@@ -23,7 +23,7 @@ public class Sheep : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //GetNewTarget();
+        
     }
 
     // Update is called once per frame

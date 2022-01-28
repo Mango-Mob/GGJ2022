@@ -7,7 +7,7 @@ using UnityEngine.UI;
 /// <summary>
 /// William de Beer
 /// </summary>
-public class LevelManager : SingletonPersistent<MonoBehaviour>
+public class LevelManager : SingletonPersistent<LevelManager>
 {
     public enum Transition
     {

@@ -44,7 +44,7 @@ public enum StickType
 
 #endregion
 
-public class InputManager : SingletonPersistent<MonoBehaviour>
+public class InputManager : SingletonPersistent<InputManager>
 {
     protected Mouse mouse;
     protected Keyboard keyboard = Keyboard.current;
