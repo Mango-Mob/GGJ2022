@@ -49,7 +49,6 @@ public class Wolf : Sheep
                 {
                     m_targetPack.GenerateRoamLocation(this);
                 }
-                
                 break;
             case AIState.Hunt:
                 break;
@@ -89,5 +88,10 @@ public class Wolf : Sheep
             Vector3 pos = m_targetPack.GetAveragePosition();
             Gizmos.DrawSphere(pos, 0.25f);
         }
+    }
+
+    private bool IsVisibleByCamera()
+    {
+        return false;
     }
 }
