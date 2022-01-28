@@ -16,6 +16,9 @@ public class Wolf : Sheep
     public bool isBeingWatched = false;
 
     [Header("Wolf Settings")]
+    public GameObject m_sheepBody;
+    public GameObject m_wolfBody;
+
     public SheepPack m_targetPack;
     public Sheep m_targetSheep;
 
@@ -188,5 +191,11 @@ public class Wolf : Sheep
         GameManager.Instance.m_wolfList.Remove(this);
 
         Destroy(gameObject);
+    }
+
+    public void Reveal()
+    {
+        m_sheepBody.SetActive(false);
+        m_wolfBody.SetActive(true);
     }
 }

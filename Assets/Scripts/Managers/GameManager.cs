@@ -23,10 +23,7 @@ public class GameManager : Singleton<GameManager>
 
     protected virtual void Update()
     {
-        //if(InputManager.Instance.IsKeyDown(KeyType.K))
-        //{
-        //    Dog.CreateDogToLoc(Vector3.zero, Random.insideUnitSphere * 15f);
-        //}
+        
     }
 
     public SheepPack GetNearestPack(Vector3 position)
