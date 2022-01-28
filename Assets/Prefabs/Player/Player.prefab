@@ -162,6 +162,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_maxAmmo: 8
   m_maxDogCommands: 3
+  m_bulletCount: {fileID: 0}
+  m_sheepCount: {fileID: 0}
+  m_wolfCount: {fileID: 0}
 --- !u!114 &716204191044742358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,4 +184,4 @@ MonoBehaviour:
     m_Bits: 256
   m_lookSensitivity: {x: 5, y: 5}
   m_aimSensitivity: {x: 5, y: 5}
-  m_crosshairCanvas: {fileID: 0}
+  m_crosshair: {fileID: 0}

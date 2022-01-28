@@ -14,7 +14,7 @@ public class Player_Controller : MonoBehaviour
     private int m_dogCommands;
 
     [Header("UI")]
-    [SerializeField] private GameObject m_bulletCount;
+    [SerializeField] private UI_BulletCount m_bulletCount;
     [SerializeField] private TextMeshProUGUI m_sheepCount;
     [SerializeField] private TextMeshProUGUI m_wolfCount;
 
@@ -26,6 +26,12 @@ public class Player_Controller : MonoBehaviour
 
         m_ammoCount = m_maxAmmo;
         m_maxDogCommands = m_dogCommands;
+
+        if (m_bulletCount != null)
+        {
+            m_bulletCount.SetupMaxAmmo(m_maxAmmo);
+        }
+
     }
 
     // Update is called once per frame
@@ -42,17 +48,17 @@ public class Player_Controller : MonoBehaviour
         }
 
         // Shoot Gun
-        if (m_maxAmmo > 0 && InputManager.Instance.GetMouseDown(MouseButton.LEFT))
+        if (m_ammoCount > 0 && InputManager.Instance.GetMouseDown(MouseButton.LEFT))
         {
             Debug.Log("Pew Pew");
-            m_maxAmmo--;
+            m_ammoCount--;
             playerCamera.ShootGun();
         }
 
         // UI Update
         if (m_bulletCount != null)
         {
-
+            m_bulletCount.SetAmmoCount(m_ammoCount);
         }
         if (m_sheepCount != null)
         {
@@ -60,7 +66,7 @@ public class Player_Controller : MonoBehaviour
         }
         if (m_wolfCount != null)
         {
-            m_wolfCount.text = $"{GameManager.Instance.GetSheepCount()} Wolves";
+            m_wolfCount.text = $"{GameManager.Instance.m_wolfList.Count} Wolves";
         }
     }
 }
