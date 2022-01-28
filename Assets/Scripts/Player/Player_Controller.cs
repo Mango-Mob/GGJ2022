@@ -7,15 +7,14 @@ using AudioSystem.Agents;
 public class Player_Controller : MonoBehaviour
 {
     [Header("General")]
-    [SerializeField] private int m_maxAmmo = 8;
     [SerializeField] private int m_maxDogCommands = 3;
 
     private Player_Camera playerCamera;
     public MultiAudioAgent audioAgent { get; private set; }
-    private int m_ammoCount;
     private int m_dogCommands;
 
     [Header("UI")]
+    [SerializeField] private UI_AmmoCount m_ammoCount;
     [SerializeField] private UI_BulletCount m_bulletCount;
     [SerializeField] private TextMeshProUGUI m_sheepCount;
     [SerializeField] private TextMeshProUGUI m_wolfCount;
@@ -29,13 +28,13 @@ public class Player_Controller : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        m_ammoCount = m_maxAmmo;
         m_maxDogCommands = m_dogCommands;
 
-        if (m_bulletCount != null)
-        {
-            m_bulletCount.SetupMaxAmmo(m_maxAmmo);
-        }
+        //m_ammoCount = m_maxAmmo;
+        //if (m_bulletCount != null)
+        //{
+        //    m_bulletCount.SetupMaxAmmo(m_maxAmmo);
+        //}
 
     }
 
@@ -53,10 +52,10 @@ public class Player_Controller : MonoBehaviour
         }
 
         // Shoot Gun
-        if (m_ammoCount > 0 && InputManager.Instance.GetMouseDown(MouseButton.LEFT))
+        if (GameManager.Instance.m_ammoCount > 0 && InputManager.Instance.GetMouseDown(MouseButton.LEFT))
         {
             Debug.Log("Pew Pew");
-            m_ammoCount--;
+            GameManager.Instance.m_ammoCount--;
             playerCamera.ShootGun();
 
             audioAgent.Play("Gunshot");
@@ -74,12 +73,7 @@ public class Player_Controller : MonoBehaviour
             }
         }
 
-
         // UI Update
-        if (m_bulletCount != null)
-        {
-            m_bulletCount.SetAmmoCount(m_ammoCount);
-        }
         if (m_sheepCount != null)
         {
             m_sheepCount.text = $"{GameManager.Instance.GetSheepCount()} Sheep";

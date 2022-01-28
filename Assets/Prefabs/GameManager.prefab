@@ -45,3 +45,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_dogPrefab: {fileID: 546139197456685822, guid: a08d4f7e88b2abf41961508ff3465e30,
     type: 3}
+  m_ammoCount: 8

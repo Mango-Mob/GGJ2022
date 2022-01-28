@@ -13,6 +13,8 @@ public class GameManager : Singleton<GameManager>
 
     public Camera m_playerCamera { get; private set; }
 
+    public int m_ammoCount = 8;
+
     protected override void Awake()
     {
         base.Awake();
