@@ -24,9 +24,9 @@ public class Wolf : Sheep
     public float m_roamDistance = 6.0f;
 
     public float m_rangeTillBlend = 2f;
-    public float m_timeTillKill = 15.0f;
-    public float m_KillTimeMin = 15.0f;
-    public float m_KillTimeMax = 30.0f;
+    public float m_timeTillKill = 10.0f;
+    public float m_KillTimeMin = 10.0f;
+    public float m_KillTimeMax = 15.0f;
     public float m_killRange = 2.0f;
 
     // Start is called before the first frame update
@@ -97,7 +97,7 @@ public class Wolf : Sheep
             case AIState.Hunt:
                 m_myLegs.SetDestination(m_targetSheep.transform.position);
 
-                if(!isBeingWatched)
+                if(isBeingWatched)
                     TransitionTo(AIState.Blend);
 
                 if (m_myLegs.IsNearDestination(m_killRange))
@@ -105,11 +105,13 @@ public class Wolf : Sheep
                     if(m_targetPack.m_sheepList.Count > 1)
                     {
                         m_targetSheep.Kill(false);
+                        m_timeTillKill = Random.Range(m_KillTimeMin, m_KillTimeMax);
                         TransitionTo(AIState.Blend);
                     }
                     else
                     {
                         m_targetSheep.Kill(false);
+                        m_timeTillKill = Random.Range(m_KillTimeMin, m_KillTimeMax);
                         TransitionTo(AIState.MovingToPack);
                     }
                 }
@@ -133,6 +135,7 @@ public class Wolf : Sheep
                 m_targetPack = GameManager.Instance.GetNearestPack(transform.position);
                 m_target = Vector3.zero;
                 m_myLegs.SetDestination(m_targetPack.GetAveragePosition());
+                m_timeTillKill = Random.Range(m_KillTimeMin, m_KillTimeMax);
                 break;
             case AIState.Blend:
                 if(m_targetPack == null)
@@ -142,7 +145,6 @@ public class Wolf : Sheep
                 else
                 {
                     m_targetPack.GenerateRoamLocation(this);
-                    m_timeTillKill = Random.Range(m_KillTimeMin, m_KillTimeMax);
                 }
                 m_myLegs.speed = m_blendSpeed;
                 break;
