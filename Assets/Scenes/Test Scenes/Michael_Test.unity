@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_sheepList: []
-  m_roamRangeMin: 4
+  m_roamRangeMin: 4.37
   m_roamRangeMax: 8
 --- !u!4 &69403377
 Transform:
@@ -478,7 +478,7 @@ GameObject:
   - component: {fileID: 220854129}
   - component: {fileID: 220854128}
   - component: {fileID: 220854127}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2739,11 +2739,17 @@ MonoBehaviour:
   m_waitMax: 2
   m_isWaitingForDestination: 1
   m_currentState: 0
+  isBeingWatched: 0
   m_targetPack: {fileID: 0}
+  m_targetSheep: {fileID: 0}
+  m_blendSpeed: 2.5
+  m_unblendSpeed: 6.5
+  m_roamDistance: 6
   m_rangeTillBlend: 2
   m_timeTillKill: 15
-  m_KillTimeMin: 15
+  m_KillTimeMin: 10
   m_KillTimeMax: 15
+  m_killRange: 2
 --- !u!4 &2151561267532561782
 Transform:
   m_ObjectHideFlags: 0
