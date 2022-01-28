@@ -10,7 +10,7 @@ public class Sheep : MonoBehaviour
     public float m_waitMin = 1.0f;
     public float m_waitMax = 2.0f;
 
-    private Vector3 m_target;
+    protected Vector3 m_target;
     private float m_waitTime;
 
     public bool m_isWaitingForDestination = true;
@@ -30,7 +30,7 @@ public class Sheep : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        if(Vector3.Distance(transform.position, m_target) < m_stoppingDistance)
+        if(m_myLegs.IsNearDestination(m_stoppingDistance))
         {
             if(m_timer < m_waitTime)
             {
