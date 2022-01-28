@@ -8,6 +8,7 @@ public class Player_Camera : MonoBehaviour
     [SerializeField] [Range(1.0f, 120.0f)] private float m_lookFOV = 90.0f;
     [SerializeField] [Range(1.0f, 120.0f)] private float m_aimFOV = 45.0f;
     [SerializeField] private LayerMask m_gunTargetLayerMask;
+    [SerializeField] private LayerMask m_commandTargetLayerMask;
 
     [Header("Player Settings")]
     [SerializeField] private Vector2 m_lookSensitivity = new Vector2(5.0f, 5.0f);
@@ -16,9 +17,20 @@ public class Player_Camera : MonoBehaviour
     [Header("Objects")]
     [SerializeField] private GameObject m_crosshair;
 
+    [Header("Prefab")]
+    [SerializeField] private GameObject m_dogPingPrefabVFX;
+
     private Camera m_camera;
     private float m_xRotation = 0.0f;
     public bool m_isScoped { get; private set; } = false;
+
+    // Recoil
+    [Header("Recoil")]
+    [SerializeField] private float m_verticalRecoil = 1.0f;
+    [SerializeField] private float m_horizontalRecoil = 1.0f;
+    [SerializeField] private float m_recoilSmoothTime = 0.3f;
+    private Vector2 m_recoilVelocity = Vector2.zero;
+    private Vector2 m_recoilDampVelocity = Vector2.zero;
 
     // Start is called before the first frame update
     void Start()
@@ -26,13 +38,19 @@ public class Player_Camera : MonoBehaviour
         m_camera = GetComponentInChildren<Camera>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        // Recoil process
+        AdjustCamera(m_recoilVelocity.x, m_recoilVelocity.y);
+
+        m_recoilVelocity = Vector2.SmoothDamp(m_recoilVelocity, Vector2.zero, ref m_recoilDampVelocity, m_recoilSmoothTime);
     }
+
     public void ShootGun()
     {
+        m_recoilVelocity.y += m_verticalRecoil;
+        m_recoilVelocity.x += Random.Range(-m_horizontalRecoil, m_horizontalRecoil);
+
         RaycastHit[] hits = Physics.RaycastAll(transform.position, m_camera.transform.forward, 1000.0f, m_gunTargetLayerMask);
         
         Collider hitCollider = null;
@@ -92,10 +110,27 @@ public class Player_Camera : MonoBehaviour
             verticalMove = _mouseMove.y * m_aimSensitivity.x;
         }
 
-        m_xRotation -= verticalMove;
+        AdjustCamera(horizontalMove, verticalMove);
+    }
+    private void AdjustCamera(float _horizontal, float _vertical)
+    {
+        m_xRotation -= _vertical;
         m_xRotation = Mathf.Clamp(m_xRotation, -90.0f, 90.0f);
 
         m_camera.transform.localRotation = Quaternion.Euler(m_xRotation, 0.0f, 0.0f);
-        transform.Rotate(Vector3.up, horizontalMove);
+        transform.Rotate(Vector3.up, _horizontal);
+    }
+    public void CommandDog()
+    {
+        RaycastHit[] hits = Physics.RaycastAll(transform.position, m_camera.transform.forward, 1000.0f, m_commandTargetLayerMask);
+
+        if (hits.Length != 0)
+        {
+            Instantiate(m_dogPingPrefabVFX, hits[0].point, Quaternion.identity);
+
+            Vector3 dogSpawn = transform.position;
+            dogSpawn.y = 0.0f;
+            Dog.CreateDogToLoc(dogSpawn, hits[0].point);
+        }
     }
 }
