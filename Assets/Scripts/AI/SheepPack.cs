@@ -39,7 +39,7 @@ public class SheepPack : MonoBehaviour
         }
     }
 
-    private void GenerateRoamLocation(Sheep sheep)
+    public void GenerateRoamLocation(Sheep sheep)
     {
         Vector3 direction = Random.insideUnitSphere;
         direction.y = 0;
@@ -71,5 +71,11 @@ public class SheepPack : MonoBehaviour
 
         Handles.color = Color.red;
         Handles.DrawWireDisc(pos, Vector3.up, m_roamRangeMax);
+    }
+
+    public void Destroy(Sheep sheep)
+    {
+        m_sheepList.Remove(sheep);
+        Destroy(sheep.gameObject);
     }
 }

@@ -3,7 +3,8 @@ using UnityEngine.AI;
 
 public class Sheep : MonoBehaviour
 {
-    private NavMeshAgent m_myLegs;
+    protected NavMeshAgent m_myLegs;
+    [Header("Sheep Stats")]
     public float m_roamDist = 5f;
     public float m_stoppingDistance = 0.5f;
     public float m_waitMin = 1.0f;
@@ -15,19 +16,19 @@ public class Sheep : MonoBehaviour
     public bool m_isWaitingForDestination = true;
 
     private float m_timer;
-    public void Awake()
+    protected virtual void Awake()
     {
         m_myLegs = GetComponent<NavMeshAgent>();
     }
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         if(Vector3.Distance(transform.position, m_target) < m_stoppingDistance)
         {
@@ -52,7 +53,7 @@ public class Sheep : MonoBehaviour
         m_isWaitingForDestination = false;
     }
 
-    private void OnDrawGizmosSelected()
+    protected virtual void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawSphere(m_target, 0.25f);
@@ -61,8 +62,8 @@ public class Sheep : MonoBehaviour
         Gizmos.DrawLine(transform.position, transform.position + transform.forward * 5f);
     }
 
-    public void Kill(bool fromShot = false)
+    public virtual void Kill(bool fromShot = false)
     {
-
+        GetComponentInParent<SheepPack>().Destroy(this);
     }
 }

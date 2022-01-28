@@ -3,44 +3,90 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Wolf : MonoBehaviour
+public class Wolf : Sheep
 {
     public enum AIState
     {
+        MovingToPack,
         Blend,
         Hunt,
     }
 
-    private NavMeshAgent m_myLegs;
+    public AIState m_currentState = AIState.MovingToPack;
 
-    public SheepPack m_target;
-
-    public void Awake()
-    {
-        m_myLegs = GetComponent<NavMeshAgent>();
-    }
+    [Header("Wolf Settings")]
+    public SheepPack m_targetPack;
+    public float m_rangeTillBlend = 2f;
+    public float m_timeTillKill = 15.0f;
+    public float m_KillTimeMin = 15.0f;
+    public float m_KillTimeMax = 30.0f;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        m_target = GameManager.Instance.GetNearestPack(transform.position);
+        m_targetPack = GameManager.Instance.GetNearestPack(transform.position);
 
-        m_myLegs.SetDestination(m_target.GetAveragePosition());
+        m_myLegs.SetDestination(m_targetPack.GetAveragePosition());
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        
+        Vector3 moveTarget = m_targetPack.GetAveragePosition();
+
+        switch (m_currentState)
+        {
+            case AIState.MovingToPack:
+                m_myLegs.SetDestination(moveTarget);
+                if (Vector3.Distance(moveTarget, transform.position) < m_rangeTillBlend)
+                {
+                    TransitionTo(AIState.Blend);
+                }
+                break;
+            case AIState.Blend:
+                base.Update();
+                if(m_isWaitingForDestination || m_targetPack.m_roamRangeMax < Vector3.Distance(moveTarget, transform.position))
+                {
+                    m_targetPack.GenerateRoamLocation(this);
+                }
+                
+                break;
+            case AIState.Hunt:
+                break;
+            default:
+                break;
+        }
+    }
+    
+    private void TransitionTo(AIState state)
+    {
+        if (m_currentState == state)
+            return;
+
+        m_currentState = state;
+
+        switch (m_currentState)
+        {
+            case AIState.MovingToPack:
+                break;
+            case AIState.Blend:
+                m_targetPack.GenerateRoamLocation(this);
+                m_timeTillKill = Random.Range(m_KillTimeMin, m_KillTimeMax);
+                break;
+            case AIState.Hunt:
+                break;
+            default:
+                break;
+        }
     }
 
-    public void OnDrawGizmosSelected()
+    protected override void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
 
-        if(m_target != null)
+        if(m_targetPack != null)
         {
-            Vector3 pos = m_target.GetAveragePosition();
+            Vector3 pos = m_targetPack.GetAveragePosition();
             Gizmos.DrawSphere(pos, 0.25f);
         }
     }
