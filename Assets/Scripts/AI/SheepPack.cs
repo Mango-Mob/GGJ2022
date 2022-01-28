@@ -31,6 +31,12 @@ public class SheepPack : MonoBehaviour
                 GenerateRoamLocation(item);
             }
         }
+
+        if(m_sheepList.Count == 0)
+        {
+            (GameManager.Instance as GameManager).RemovePack(this);
+            Destroy(gameObject);
+        }
     }
 
     private void GenerateRoamLocation(Sheep sheep)
@@ -43,7 +49,7 @@ public class SheepPack : MonoBehaviour
         sheep.SetTarget(GetAveragePosition() + direction.normalized * dist);
     }
 
-    private Vector3 GetAveragePosition()
+    public Vector3 GetAveragePosition()
     {
         Vector3 pos = Vector3.zero;
         foreach (var item in m_sheepList)
