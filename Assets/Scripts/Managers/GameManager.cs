@@ -8,6 +8,7 @@ public class GameManager : Singleton<GameManager>
     public List<SheepPack> m_packOfSheep { get; private set; }
 
     public List<Wolf> m_wolfList { get; private set; }
+
     public Dog m_dog { get; set; }
 
     public Camera m_playerCamera { get; private set; }
@@ -22,10 +23,7 @@ public class GameManager : Singleton<GameManager>
 
     protected virtual void Update()
     {
-        //if(InputManager.Instance.IsKeyDown(KeyType.K))
-        //{
-        //    Dog.CreateDogToLoc(Vector3.zero, Random.insideUnitSphere * 15f);
-        //}
+        
     }
 
     public SheepPack GetNearestPack(Vector3 position)
