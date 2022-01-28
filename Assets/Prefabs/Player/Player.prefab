@@ -181,7 +181,7 @@ MonoBehaviour:
   m_aimFOV: 15
   m_gunTargetLayerMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1280
   m_lookSensitivity: {x: 5, y: 5}
   m_aimSensitivity: {x: 5, y: 5}
   m_crosshair: {fileID: 0}

@@ -36,6 +36,7 @@ public class Player_Camera : MonoBehaviour
         RaycastHit[] hits = Physics.RaycastAll(transform.position, m_camera.transform.forward, 1000.0f, m_gunTargetLayerMask);
         
         Collider hitCollider = null;
+        Vector3 hitPosition = Vector3.zero;
         if (hits.Length == 1)
         {
             hitCollider = hits[0].collider;
@@ -49,6 +50,7 @@ public class Player_Camera : MonoBehaviour
                 if (distance < closestDistance)
                 {
                     hitCollider = hit.collider;
+                    hitPosition = hit.point;
                     closestDistance = distance;
                 }
             }
@@ -56,6 +58,8 @@ public class Player_Camera : MonoBehaviour
 
         if (hitCollider == null)
             return;
+
+        GameManager.Instance.NotifyAnimalsOfShot(hitPosition);
 
         Sheep target = hitCollider.GetComponentInParent<Sheep>();
         if (target)
