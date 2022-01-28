@@ -855,6 +855,7 @@ GameObject:
   - component: {fileID: 3681095919806284943}
   - component: {fileID: 3681095919806284981}
   - component: {fileID: 3681095919806284977}
+  - component: {fileID: 8616942496980367019}
   m_Layer: 8
   m_Name: Wolf
   m_TagString: Untagged
@@ -933,6 +934,24 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &8616942496980367019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3681095919806284978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20c936e73eec43a43969c7948e51a2a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localVolume: 1
+  isMuted: 0
+  audioClips:
+  - {fileID: 8300000, guid: c8994d778b4e9a34bbadfd37b7f3dea0, type: 3}
+  audioPlayersCount: 5
+  channel: 1
 --- !u!1 &3681095919853383229
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using AudioSystem.Agents;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -32,6 +33,13 @@ public class Wolf : Sheep
     public float m_KillTimeMax = 15.0f;
     public float m_killRange = 2.0f;
 
+    private MultiAudioAgent m_audioAgent;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        m_audioAgent = GetComponent<MultiAudioAgent>();
+    }
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -195,7 +203,11 @@ public class Wolf : Sheep
 
     public void Reveal()
     {
-        m_sheepBody.SetActive(false);
-        m_wolfBody.SetActive(true);
+        if(!m_wolfBody.activeInHierarchy)
+        {
+            m_audioAgent.Play("WolfReveal");
+            m_sheepBody.SetActive(false);
+            m_wolfBody.SetActive(true);
+        }
     }
 }
