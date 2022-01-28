@@ -3,9 +3,12 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
+    [SerializeField] public GameObject m_dogPrefab;
+
     public List<SheepPack> m_packOfSheep { get; private set; }
 
     public List<Wolf> m_wolfList { get; private set; }
+    public Dog m_dog { get; set; }
 
     public Camera m_playerCamera { get; private set; }
 
@@ -15,7 +18,14 @@ public class GameManager : Singleton<GameManager>
         m_packOfSheep = new List<SheepPack>(FindObjectsOfType<SheepPack>());
         m_wolfList = new List<Wolf>(FindObjectsOfType<Wolf>());
         m_playerCamera = FindObjectOfType<Camera>();
+    }
 
+    protected virtual void Update()
+    {
+        //if(InputManager.Instance.IsKeyDown(KeyType.K))
+        //{
+        //    Dog.CreateDogToLoc(Vector3.zero, Random.insideUnitSphere * 15f);
+        //}
     }
 
     public SheepPack GetNearestPack(Vector3 position)

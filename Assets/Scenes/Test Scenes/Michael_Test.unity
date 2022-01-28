@@ -1368,6 +1368,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f3719c94752e0944bf8a49def9a4e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_dogPrefab: {fileID: 546139197456685822, guid: a08d4f7e88b2abf41961508ff3465e30,
+    type: 3}
 --- !u!4 &639491016 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3355329126320892788, guid: aed3f8fa65b0ab84a9fbf4952ada79ee,
