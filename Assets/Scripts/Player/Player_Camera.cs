@@ -121,7 +121,7 @@ public class Player_Camera : MonoBehaviour
         m_camera.transform.localRotation = Quaternion.Euler(m_xRotation, 0.0f, 0.0f);
         transform.Rotate(Vector3.up, _horizontal);
     }
-    public void CommandDog()
+    public bool CommandDog()
     {
         RaycastHit[] hits = Physics.RaycastAll(transform.position, m_camera.transform.forward, 1000.0f, m_commandTargetLayerMask);
 
@@ -132,6 +132,9 @@ public class Player_Camera : MonoBehaviour
             Vector3 dogSpawn = transform.position;
             dogSpawn.y = 0.0f;
             Dog.CreateDogToLoc(dogSpawn, hits[0].point);
+            return true;
         }
+
+        return false;
     }
 }
