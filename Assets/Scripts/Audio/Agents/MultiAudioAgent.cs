@@ -108,12 +108,34 @@ namespace AudioSystem.Agents
                 }
             }
         }
+        public void StopAllAudio()
+        {
+            foreach (var player in players)
+            {
+                if (player.IsPlaying())
+                {
+                    player.Stop();
+                }
+            }
+        }
 
         public bool IsAudioPlaying(string clipName)
         {
             foreach (var player in players)
             {
                 if (player.IsPlaying() && player.currentClip?.name == clipName)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool IsAudioPlaying()
+        {
+            foreach (var player in players)
+            {
+                if (player.IsPlaying())
                 {
                     return true;
                 }

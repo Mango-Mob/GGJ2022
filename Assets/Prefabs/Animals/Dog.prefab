@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 8850223450874647778}
   - component: {fileID: 2968789380740458628}
   - component: {fileID: 845818366757729987}
+  - component: {fileID: 7916743651031249973}
   m_Layer: 0
   m_Name: Dog
   m_TagString: Untagged
@@ -168,6 +169,28 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &7916743651031249973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 546139197456685822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20c936e73eec43a43969c7948e51a2a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localVolume: 1
+  isMuted: 0
+  audioClips:
+  - {fileID: 8300000, guid: 38c271b990f1e9a46bf1a324fbbe9ed4, type: 3}
+  - {fileID: 8300000, guid: 5e9f063c6526de5448d0b16f3cb5a6fa, type: 3}
+  - {fileID: 8300000, guid: a844aaad3284d7a438aca1056f867e10, type: 3}
+  - {fileID: 8300000, guid: 4a23d6d1b3720704192559d3f6c5a741, type: 3}
+  - {fileID: 8300000, guid: cc20c4ca237ca394b953624376194a01, type: 3}
+  audioPlayersCount: 5
+  channel: 1
 --- !u!1 &729794953402260626
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,6 +203,7 @@ GameObject:
   - component: {fileID: 3946503050278291853}
   - component: {fileID: 1234053181458464071}
   - component: {fileID: 1470504567554529741}
+  - component: {fileID: 2773243641735552399}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -267,6 +291,45 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2773243641735552399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 729794953402260626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 734b87b0b12b68a4583c1594b61a9dbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventOne:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2968789380740458628}
+        m_MethodName: Bark
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  eventTwo:
+    m_PersistentCalls:
+      m_Calls: []
+  eventThree:
+    m_PersistentCalls:
+      m_Calls: []
+  eventFour:
+    m_PersistentCalls:
+      m_Calls: []
+  eventFive:
+    m_PersistentCalls:
+      m_Calls: []
+  animEvents: []
 --- !u!1 &1925759773984659261
 GameObject:
   m_ObjectHideFlags: 0
