@@ -48,6 +48,7 @@ public class SheepPack : MonoBehaviour
 
         sheep.SetTarget(GetAveragePosition() + direction.normalized * dist);
     }
+
     public Sheep GetClosestSheep(Vector3 pos)
     {
         Sheep closest = null;
@@ -89,8 +90,6 @@ public class SheepPack : MonoBehaviour
         Handles.color = Color.red;
         Handles.DrawWireDisc(pos, Vector3.up, m_roamRangeMax);
     }
-
-   
 
     public void Destroy(Sheep sheep)
     {

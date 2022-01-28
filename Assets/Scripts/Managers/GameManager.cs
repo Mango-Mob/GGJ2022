@@ -36,6 +36,11 @@ public class GameManager : Singleton<GameManager>
         return closest;
     }
 
+    public void NotifyAnimalsOfShot(Vector3 hitLoc)
+    {
+
+    }
+
     public int GetSheepCount()
     {
         int count = 0;
