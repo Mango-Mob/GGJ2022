@@ -160,6 +160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c83937b79f2607a49bc5964651df3519, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_maxAmmo: 8
+  m_maxDogCommands: 3
 --- !u!114 &716204191044742358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,5 +174,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b8d2a82cfef27241be9d69261d9e946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_lookFOV: 90
+  m_aimFOV: 15
+  m_gunTargetLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
   m_lookSensitivity: {x: 5, y: 5}
   m_aimSensitivity: {x: 5, y: 5}
+  m_crosshairCanvas: {fileID: 0}

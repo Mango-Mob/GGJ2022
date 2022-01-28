@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Player_Controller : MonoBehaviour
 {
@@ -11,6 +12,11 @@ public class Player_Controller : MonoBehaviour
     private Player_Camera playerCamera;
     private int m_ammoCount;
     private int m_dogCommands;
+
+    [Header("UI")]
+    [SerializeField] private GameObject m_bulletCount;
+    [SerializeField] private TextMeshProUGUI m_sheepCount;
+    [SerializeField] private TextMeshProUGUI m_wolfCount;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +47,20 @@ public class Player_Controller : MonoBehaviour
             Debug.Log("Pew Pew");
             m_maxAmmo--;
             playerCamera.ShootGun();
+        }
+
+        // UI Update
+        if (m_bulletCount != null)
+        {
+
+        }
+        if (m_sheepCount != null)
+        {
+            m_sheepCount.text = $"{GameManager.Instance.GetSheepCount()} Sheep";
+        }
+        if (m_wolfCount != null)
+        {
+            m_wolfCount.text = $"{GameManager.Instance.GetSheepCount()} Wolves";
         }
     }
 }

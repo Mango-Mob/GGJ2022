@@ -5,8 +5,8 @@ using UnityEngine;
 public class Player_Camera : MonoBehaviour
 {
     [Header("General")]
-    [SerializeField] private float m_lookFOV = 90.0f;
-    [SerializeField] private float m_aimFOV = 45.0f;
+    [SerializeField] [Range(1.0f, 120.0f)] private float m_lookFOV = 90.0f;
+    [SerializeField] [Range(1.0f, 120.0f)] private float m_aimFOV = 45.0f;
     [SerializeField] private LayerMask m_gunTargetLayerMask;
 
     [Header("Player Settings")]
@@ -14,7 +14,7 @@ public class Player_Camera : MonoBehaviour
     [SerializeField] private Vector2 m_aimSensitivity = new Vector2(5.0f, 5.0f);
 
     [Header("Objects")]
-    [SerializeField] private GameObject m_crosshairCanvas;
+    [SerializeField] private GameObject m_crosshair;
 
     private Camera m_camera;
     private float m_xRotation = 0.0f;
@@ -34,22 +34,42 @@ public class Player_Camera : MonoBehaviour
     public void ShootGun()
     {
         RaycastHit[] hits = Physics.RaycastAll(transform.position, m_camera.transform.forward, 1000.0f, m_gunTargetLayerMask);
-        if (hits.Length > 0)
+        
+        Collider hitCollider = null;
+        if (hits.Length == 1)
         {
-            Sheep target = hits[0].collider.GetComponentInParent<Sheep>();
-            if (target)
+            hitCollider = hits[0].collider;
+        }
+        else
+        {
+            float closestDistance = Mathf.Infinity;
+            foreach (var hit in hits)
             {
-                Debug.Log("Target Hit");
-                target.Kill(true);
+                float distance = Vector3.Distance(transform.position, hit.point);
+                if (distance < closestDistance)
+                {
+                    hitCollider = hit.collider;
+                    closestDistance = distance;
+                }
             }
+        }
+
+        if (hitCollider == null)
+            return;
+
+        Sheep target = hitCollider.GetComponentInParent<Sheep>();
+        if (target)
+        {
+            Debug.Log("Target Hit");
+            target.Kill(true);
         }
     }
     public void ToggleScope(bool _active)
     {
         m_isScoped = _active;
 
-        if (m_crosshairCanvas != null)
-            m_crosshairCanvas.SetActive(m_isScoped);
+        if (m_crosshair != null)
+            m_crosshair.SetActive(m_isScoped);
 
         m_camera.fieldOfView = !m_isScoped ? m_lookFOV : m_aimFOV;
     }
