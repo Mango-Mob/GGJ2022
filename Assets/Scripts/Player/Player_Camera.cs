@@ -8,6 +8,7 @@ public class Player_Camera : MonoBehaviour
     [SerializeField] [Range(1.0f, 120.0f)] private float m_lookFOV = 90.0f;
     [SerializeField] [Range(1.0f, 120.0f)] private float m_aimFOV = 45.0f;
     [SerializeField] private LayerMask m_gunTargetLayerMask;
+    [SerializeField] private LayerMask m_commandTargetLayerMask;
 
     [Header("Player Settings")]
     [SerializeField] private Vector2 m_lookSensitivity = new Vector2(5.0f, 5.0f);
@@ -15,6 +16,9 @@ public class Player_Camera : MonoBehaviour
 
     [Header("Objects")]
     [SerializeField] private GameObject m_crosshair;
+
+    [Header("Prefab")]
+    [SerializeField] private GameObject m_dogPingPrefabVFX;
 
     private Camera m_camera;
     private float m_xRotation = 0.0f;
@@ -24,12 +28,6 @@ public class Player_Camera : MonoBehaviour
     void Start()
     {
         m_camera = GetComponentInChildren<Camera>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
     public void ShootGun()
     {
@@ -97,5 +95,18 @@ public class Player_Camera : MonoBehaviour
 
         m_camera.transform.localRotation = Quaternion.Euler(m_xRotation, 0.0f, 0.0f);
         transform.Rotate(Vector3.up, horizontalMove);
+    }
+    public void CommandDog()
+    {
+        RaycastHit[] hits = Physics.RaycastAll(transform.position, m_camera.transform.forward, 1000.0f, m_commandTargetLayerMask);
+
+        if (hits.Length != 0)
+        {
+            Instantiate(m_dogPingPrefabVFX, hits[0].point, Quaternion.identity);
+
+            Vector3 dogSpawn = transform.position;
+            dogSpawn.y = 0.0f;
+            Dog.CreateDogToLoc(dogSpawn, hits[0].point);
+        }
     }
 }
