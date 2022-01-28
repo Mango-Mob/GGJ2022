@@ -22,7 +22,9 @@ public class Player_Controller : MonoBehaviour
     void Start()
     {
         playerCamera = GetComponentInChildren<Player_Camera>();
+
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
         m_ammoCount = m_maxAmmo;
         m_maxDogCommands = m_dogCommands;
@@ -54,6 +56,12 @@ public class Player_Controller : MonoBehaviour
             m_ammoCount--;
             playerCamera.ShootGun();
         }
+
+        if (InputManager.Instance.GetMouseDown(MouseButton.MIDDLE))
+        {
+            playerCamera.CommandDog();
+        }
+
 
         // UI Update
         if (m_bulletCount != null)

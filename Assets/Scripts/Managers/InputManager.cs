@@ -944,7 +944,8 @@ public class InputManager : SingletonPersistent<InputManager>
                 return false;
             case MouseButton.LEFT:
                 return mouse.leftButton.wasPressedThisFrame;
-
+            case MouseButton.MIDDLE:
+                return mouse.middleButton.wasPressedThisFrame;
             case MouseButton.RIGHT:
                 return mouse.rightButton.wasPressedThisFrame;
         }
