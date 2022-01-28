@@ -21,7 +21,7 @@ namespace AudioSystem.Agents
 
         protected virtual void Awake()
         {
-            (AudioManager.Instance as AudioManager).agents.Add(this);
+            AudioManager.Instance.agents.Add(this);
 
             if (isMuted)
                 Debug.LogWarning($"Audio agent is muted on awake, location: {gameObject.name}.");
@@ -33,7 +33,7 @@ namespace AudioSystem.Agents
 
         protected virtual void OnDestroy()
         {
-            (AudioManager.Instance as AudioManager)?.agents.Remove(this);
+            AudioManager.Instance ?.agents.Remove(this);
         }
     }
 }

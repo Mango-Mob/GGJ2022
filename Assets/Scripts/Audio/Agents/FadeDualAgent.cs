@@ -34,7 +34,7 @@ namespace AudioSystem.Agents
 
         protected override void Update()
         {
-            AudioManager managerRef = (AudioManager.Instance as AudioManager);
+            AudioManager managerRef = AudioManager.Instance ;
 
             if (isMuted)
             {

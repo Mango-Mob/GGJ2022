@@ -35,7 +35,7 @@ public class Wolf : Sheep
     // Start is called before the first frame update
     protected override void Start()
     {
-        m_targetPack = GameManager.Instance.GetNearestPack(transform.position);
+        m_targetPack = this.GetClosest<SheepPack>(GameManager.Instance.m_packOfSheep);
 
         m_target = Vector3.zero;
         m_myLegs.speed = m_unblendSpeed;
@@ -135,7 +135,7 @@ public class Wolf : Sheep
         {
             case AIState.MovingToPack:
                 m_myLegs.speed = m_unblendSpeed;
-                m_targetPack = GameManager.Instance.GetNearestPack(transform.position);
+                m_targetPack = this.GetClosest<SheepPack>(GameManager.Instance.m_packOfSheep);
                 m_target = Vector3.zero;
                 m_myLegs.SetDestination(m_targetPack.GetAveragePosition());
                 m_timeTillKill = Random.Range(m_KillTimeMin, m_KillTimeMax);

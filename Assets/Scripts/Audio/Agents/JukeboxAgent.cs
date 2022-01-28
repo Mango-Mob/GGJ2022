@@ -34,7 +34,7 @@ namespace AudioSystem.Agents
         {
             base.Awake();
             player = new AudioPlayer(gameObject, null);
-            player.SetVolume((AudioManager.Instance as AudioManager).GetVolume(type, this) * localVolume);
+            player.SetVolume(AudioManager.Instance .GetVolume(type, this) * localVolume);
             backPlayer = new AudioPlayer(gameObject, null);
             currentList = new List<AudioClip>();
             foreach (var clip in audioClips)
@@ -72,8 +72,8 @@ namespace AudioSystem.Agents
             }
             else
             {
-                player.SetVolume((AudioManager.Instance as AudioManager).GetVolume(type, this) * localVolume);
-                backPlayer.SetVolume((AudioManager.Instance as AudioManager).GetVolume(type, this) * localVolume);
+                player.SetVolume(AudioManager.Instance .GetVolume(type, this) * localVolume);
+                backPlayer.SetVolume(AudioManager.Instance .GetVolume(type, this) * localVolume);
             }
 
         }

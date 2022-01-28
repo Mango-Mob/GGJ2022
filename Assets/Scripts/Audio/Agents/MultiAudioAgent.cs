@@ -47,7 +47,7 @@ namespace AudioSystem.Agents
                 if (isMuted)
                     player.SetVolume(0.0f);
                 else
-                    player.SetVolume((AudioManager.Instance as AudioManager).GetVolume(channel, this) * localVolume);
+                    player.SetVolume(AudioManager.Instance .GetVolume(channel, this) * localVolume);
 
                 player.Update();
             }

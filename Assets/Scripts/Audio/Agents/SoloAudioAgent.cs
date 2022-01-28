@@ -43,7 +43,7 @@ namespace AudioSystem.Agents
             if (isMuted)
                 player.SetVolume(0.0f);
             else
-                player.SetVolume((AudioManager.Instance as AudioManager).GetVolume(channel, this) * localVolume);
+                player.SetVolume(AudioManager.Instance .GetVolume(channel, this) * localVolume);
 
             player.Update();
         }
@@ -72,7 +72,7 @@ namespace AudioSystem.Agents
         /// </summary>
         public void PlaySolo()
         {
-            (AudioManager.Instance as AudioManager).MakeSolo(this);
+            AudioManager.Instance .MakeSolo(this);
         }
 
         /// <summary>

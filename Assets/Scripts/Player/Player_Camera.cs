@@ -58,6 +58,7 @@ public class Player_Camera : MonoBehaviour
         if (hits.Length == 1)
         {
             hitCollider = hits[0].collider;
+            hitPosition = hits[0].point;
         }
         else
         {

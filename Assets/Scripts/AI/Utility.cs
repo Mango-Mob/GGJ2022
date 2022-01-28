@@ -1,8 +1,10 @@
 ﻿using UnityEngine.AI;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Collections;
 
-public static class AIUtilityFunctions
+public static class Utility
 {
     public static bool IsNearDestination(this NavMeshAgent agent, float range = 1.0f)
     {
@@ -32,6 +34,16 @@ public static class AIUtilityFunctions
         {
             //Do nothing
         }
+    }
+
+    public static Vector3 GetDirectionTo(this Vector3 from, Vector3 to, bool removeYAxis = false)
+    {
+        Vector3 direct = to - from;
+
+        if(removeYAxis)
+            direct.y = 0;
+
+        return direct.normalized;
     }
 
     public static T GetClosest<T>(this MonoBehaviour mono, List<T> _list) where T : MonoBehaviour

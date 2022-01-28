@@ -27,7 +27,7 @@ public class AudioPlayer
     public AudioPlayer(GameObject owner, AudioClip clip)
     {
         source = owner.AddComponent<AudioSource>();
-        source.pitch = (AudioManager.Instance as AudioManager).m_globalPitch * m_localPitch;
+        source.pitch = AudioManager.Instance .m_globalPitch * m_localPitch;
         source.playOnAwake = false;
         source.clip = clip;
     }
@@ -42,14 +42,14 @@ public class AudioPlayer
     public void SetPitch(float pitch) 
     {
         m_localPitch = pitch;
-        source.pitch = (AudioManager.Instance as AudioManager).m_globalPitch * m_localPitch;
+        source.pitch = AudioManager.Instance .m_globalPitch * m_localPitch;
     }
 
     #endregion
 
     public void Update()
     {
-        source.pitch = (AudioManager.Instance as AudioManager).m_globalPitch * m_localPitch;
+        source.pitch = AudioManager.Instance .m_globalPitch * m_localPitch;
     }
 
     /// <summary>

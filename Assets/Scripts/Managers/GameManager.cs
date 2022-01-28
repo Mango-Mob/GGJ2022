@@ -26,27 +26,19 @@ public class GameManager : Singleton<GameManager>
         
     }
 
-    public SheepPack GetNearestPack(Vector3 position)
-    {
-        SheepPack closest = null;
-
-        float dist = float.MaxValue;
-        foreach (var item in m_packOfSheep)
-        {
-            float newDist = Vector3.Distance(position, item.GetAveragePosition());
-            if(newDist < dist)
-            {
-                closest = item;
-                dist = newDist;
-            }
-        }
-
-        return closest;
-    }
-
     public void NotifyAnimalsOfShot(Vector3 hitLoc)
     {
-
+        foreach (var wolf in m_wolfList)
+        {
+            wolf.ReactToGunFire(hitLoc);
+        }
+        foreach (var pack in m_packOfSheep)
+        {
+            foreach (var sheep in pack.m_sheepList)
+            {
+                sheep.ReactToGunFire(hitLoc);
+            }
+        }
     }
 
     public int GetSheepCount()
