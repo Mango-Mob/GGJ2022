@@ -21,9 +21,9 @@ namespace AudioSystem.Agents
         protected Dictionary<string, AudioClip> audioLibrary;
         protected AudioPlayer[] players;
 
-        protected override void Awake()
+        protected override void Start()
         {
-            base.Awake();
+            base.Start();
             audioLibrary = new Dictionary<string, AudioClip>();
 
             foreach (var item in audioClips)
