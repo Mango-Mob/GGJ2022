@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum ScreenState { Victory, Defeat };
+
 public class GameOverScreen : MonoBehaviour
 {
-    public enum ScreenState { Victory, Defeat };
+    
     
     public Text m_title;
     public Text m_subTitle;
@@ -26,7 +28,7 @@ public class GameOverScreen : MonoBehaviour
         {
             case ScreenState.Victory:
                 m_title.text = "Victory";
-                m_subTitle.enabled = false;
+                m_subTitle.text = m_stateReason;
                 m_remainingStat.text = "Remaining Sheep: ";
                 m_timeStat.text = "Time: ";
                 break;
