@@ -122,10 +122,13 @@ public class Wolf : Sheep
             case AIState.Blend:
                 if(m_targetPack == null)
                 {
-                    SetTarget();
+                    SetTarget(GetRoamLocation());
                 }
-                m_targetPack.GenerateRoamLocation(this);
-                m_timeTillKill = Random.Range(m_KillTimeMin, m_KillTimeMax);
+                else
+                {
+                    m_targetPack.GenerateRoamLocation(this);
+                    m_timeTillKill = Random.Range(m_KillTimeMin, m_KillTimeMax);
+                }
                 m_myLegs.speed = m_blendSpeed;
                 break;
             case AIState.Hunt:
