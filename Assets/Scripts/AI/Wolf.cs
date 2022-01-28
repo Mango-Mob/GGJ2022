@@ -42,7 +42,7 @@ public class Wolf : Sheep
     // Update is called once per frame
     protected override void Update()
     {
-        Vector3 moveTarget = m_targetPack.GetAveragePosition();
+        Vector3 moveTarget = m_targetPack != null ? m_targetPack.GetAveragePosition() : m_target;
         isBeingWatched = IsVisibleByCamera();
 
         switch (m_currentState)
@@ -66,18 +66,33 @@ public class Wolf : Sheep
                 break;
             case AIState.Blend:
                 base.Update();
-                if(m_isWaitingForDestination || m_myLegs.IsNearDestination(m_targetPack.m_roamRangeMax))
+                if(m_targetPack != null)
                 {
-                    m_targetPack.GenerateRoamLocation(this);
-                }
-                if(!isBeingWatched)
-                {
-                    m_timeTillKill -= Time.deltaTime;
-                    if(m_timeTillKill <= 0)
+                    if (m_isWaitingForDestination || m_myLegs.IsNearDestination(m_rangeTillBlend))
                     {
-                        TransitionTo(AIState.Hunt);
+                        m_targetPack.GenerateRoamLocation(this);
+                    }
+                    if (!isBeingWatched)
+                    {
+                        m_timeTillKill -= Time.deltaTime;
+                        if (m_timeTillKill <= 0)
+                        {
+                            TransitionTo(AIState.Hunt);
+                        }
                     }
                 }
+                else
+                {
+                    if (m_isWaitingForDestination || m_myLegs.IsNearDestination(m_rangeTillBlend))
+                    {
+                        SetTarget(GetRoamLocation());
+                    }
+                    if (!isBeingWatched)
+                    {
+                        TransitionTo(AIState.MovingToPack);
+                    }
+                }
+                
                 break;
             case AIState.Hunt:
                 m_myLegs.SetDestination(m_targetSheep.transform.position);
