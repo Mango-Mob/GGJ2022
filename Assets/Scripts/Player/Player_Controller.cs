@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using AudioSystem.Agents;
 
 public class Player_Controller : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Player_Controller : MonoBehaviour
     [SerializeField] private int m_maxDogCommands = 3;
 
     private Player_Camera playerCamera;
+    public MultiAudioAgent audioAgent { get; private set; }
     private int m_ammoCount;
     private int m_dogCommands;
 
@@ -21,6 +23,7 @@ public class Player_Controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioAgent = GetComponent<MultiAudioAgent>();
         playerCamera = GetComponentInChildren<Player_Camera>();
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -55,6 +58,8 @@ public class Player_Controller : MonoBehaviour
             Debug.Log("Pew Pew");
             m_ammoCount--;
             playerCamera.ShootGun();
+
+            audioAgent.Play("Gunshot");
         }
 
         if (GameManager.Instance.m_dog == null && InputManager.Instance.GetMouseDown(MouseButton.MIDDLE))
