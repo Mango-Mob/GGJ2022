@@ -39,7 +39,9 @@ public class Player_Camera : MonoBehaviour
     [SerializeField] private float m_verticalRecoil = 1.0f;
     [SerializeField] private float m_horizontalRecoil = 1.0f;
     [SerializeField] private float m_recoilSmoothTime = 0.3f;
+    [SerializeField] private Vector2 m_targetRecoilDown = new Vector2(0.0f, -10.0f);
     private Vector2 m_recoilVelocity = Vector2.zero;
+    private float m_recoilAcceleration = 0.0f;
     private Vector2 m_recoilDampVelocity = Vector2.zero;
 
     // Start is called before the first frame update
@@ -52,10 +54,10 @@ public class Player_Camera : MonoBehaviour
     private void Update()
     {
         // Recoil process
-        AdjustCamera(m_recoilVelocity.x, m_recoilVelocity.y);
+        AdjustCamera(m_recoilVelocity.x * Time.deltaTime, m_recoilVelocity.y * Time.deltaTime);
 
-        m_recoilVelocity = Vector2.SmoothDamp(m_recoilVelocity, Vector2.zero, ref m_recoilDampVelocity, m_recoilSmoothTime);
-    
+        m_recoilVelocity = Vector2.SmoothDamp(m_recoilVelocity, (m_recoilVelocity.y > 0.0f ? m_targetRecoilDown : Vector2.zero), ref m_recoilDampVelocity, m_recoilSmoothTime);
+
         if (m_usedDogFlag && GameManager.Instance.m_dog == null)
         {
             m_dogCDTimer = m_dogCD;
@@ -67,6 +69,7 @@ public class Player_Camera : MonoBehaviour
         else
             m_dogCDTimer = 0.0f;
     }
+
 
     public void ShootGun()
     {
