@@ -221,7 +221,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 50, y: 24}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -578,7 +578,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 77e901d24cc0b514197d90911227ba0b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 623cebda0294b2e4e9cc4c7541913dd2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2178,7 +2178,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 50, y: 24}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2876,7 +2876,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 50, y: 24}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3062,7 +3062,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 77e901d24cc0b514197d90911227ba0b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 623cebda0294b2e4e9cc4c7541913dd2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3288,16 +3288,14 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1021907645627748963}
-  - {fileID: 6532115992880097438}
+  m_Children: []
   m_Father: {fileID: 3461062253939902407}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 48.6}
-  m_SizeDelta: {x: 1000, y: 700}
+  m_AnchoredPosition: {x: 0, y: 24}
+  m_SizeDelta: {x: 1100, y: 650}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2936803632109479357
 CanvasRenderer:
@@ -3326,7 +3324,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ec6c4c53679ca4345bd4d85c4f8d1fc4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 536afd07b382fc440b0eefd60dcff7f5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3365,13 +3363,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: -43.87191}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 5621563324140154262}
+  m_Father: {fileID: 3461062253939902407}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 205, y: 85.699974}
-  m_SizeDelta: {x: -430, y: -301.40002}
+  m_AnchoredPosition: {x: 274, y: 98.70001}
+  m_SizeDelta: {x: -1250, y: -731.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1466264136890908168
 CanvasRenderer:
@@ -3415,12 +3413,12 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: '
 
-    (Menu/HUD Sprites & VFX)
+    (Modelling & UI)
 
     (AI/Gameplay Programmer)
 
-    (Modeling,
-    VFX & Animation)
+    (Animation,
+    Modeling & VFX )
 
     (Level Designer)
 
@@ -3429,7 +3427,7 @@ MonoBehaviour:
     (Player/Gameplay
     Programmer)
 
-    (Modeling & Animation)
+    (Animation & Modeling)
 
 '
 --- !u!1 &1476000741200667037
@@ -3466,7 +3464,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -10}
+  m_AnchoredPosition: {x: 11, y: -10}
   m_SizeDelta: {x: -70, y: -50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5758891527184287612
@@ -3511,8 +3509,8 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "Controls:\n[W/A/S/D] to move\n[Left Mouse] to Shoot\n[Middle Mouse] to
     Send dog\n[Space] to Jump\n[L. Shift] to Sprint\n\nGoal:\nFind and kill all the
-    disguised wolves before \nthey kill all of your the sheep.\n\nTips:\nWolves act
-    like sheep when you are watching.\nSend your dog to investigate nearby sheep.\nOnce
+    disguised wolves \nbefore they kill all of your the sheep.\n\nTips:\nWolves act
+    like sheep when you're watching.\nSend your dog to investigate nearby sheep.\nOnce
     you run out of bullets, you lose.\nReplenish bullets when you kill a wolf.\n"
 --- !u!1 &2023445228568650187
 GameObject:
@@ -3737,13 +3735,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: -43.87191}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 5621563324140154262}
-  m_RootOrder: 0
+  m_Father: {fileID: 3461062253939902407}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -10}
-  m_SizeDelta: {x: -90, y: -110}
+  m_AnchoredPosition: {x: 69, y: 3}
+  m_SizeDelta: {x: -910, y: -540}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7314528552048754645
 CanvasRenderer:
@@ -3787,7 +3785,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: " Team\n - Fiona Cheung            \n - Michael Jordan       \n - Peter
     Nguyen         \n - Roger Painting       \n - Sabrina Li      \n - William De
-    Beer \n - William Lawrence\n\nMusic\n - \"Tomato farm\" by Chillpeach                        
+    Beer \n - William Lawrence\n\nMusic\n - \"Tomato Farm\" by Chillpeach                        
     (YT)\n - \"The Old County Farm\" by Darren Curtis     (YT)\n"
 --- !u!1 &3200624187708428570
 GameObject:
@@ -3820,11 +3818,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3461062253939902407}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -717, y: -340}
+  m_AnchoredPosition: {x: -760, y: -297}
   m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &555550124780703368
@@ -3914,11 +3912,11 @@ RectTransform:
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3461062253939902407}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 699, y: -340}
+  m_AnchoredPosition: {x: 760, y: -297}
   m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &488123545701435366
@@ -4085,6 +4083,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5621563324140154262}
+  - {fileID: 6532115992880097438}
+  - {fileID: 1021907645627748963}
   - {fileID: 3915500629104434157}
   - {fileID: 2013315760360094682}
   - {fileID: 5939411611731225556}
@@ -4554,11 +4554,11 @@ RectTransform:
   m_LocalScale: {x: 0.64586, y: 0.64586, z: 0.64586}
   m_Children: []
   m_Father: {fileID: 3461062253939902407}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -408}
+  m_AnchoredPosition: {x: 0, y: -389.7}
   m_SizeDelta: {x: 450, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6906956137652570603
@@ -4621,7 +4621,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.7843138, g: 0.7843138, b: 0.7843138, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -4867,11 +4867,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3461062253939902407}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 456}
+  m_AnchoredPosition: {x: 0, y: 418}
   m_SizeDelta: {x: 1920, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7686229127926840031
