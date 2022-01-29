@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AudioSystem.Agents;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,6 +32,7 @@ public class GameManager : Singleton<GameManager>
 
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Default"), LayerMask.NameToLayer("Projectile"));
     }
+
     private void Start()
     {
         m_startTime = DateTime.Now;
@@ -50,6 +52,7 @@ public class GameManager : Singleton<GameManager>
 
             if (spawnOption.Count == 0)
                 break;
+
         }
 
         spawnOption = new List<SheepPack>(m_packOfSheep);
@@ -70,6 +73,10 @@ public class GameManager : Singleton<GameManager>
                 count++;
                 m_wolfList.Add(wolf);
             }
+
+            if (count >= m_wolfSpawnCount)
+                break;
+
             spawnOption.Remove(pack);
         }
     }
