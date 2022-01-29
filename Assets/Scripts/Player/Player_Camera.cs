@@ -35,6 +35,7 @@ public class Player_Camera : MonoBehaviour
 
     // Recoil
     [Header("Recoil")]
+    [SerializeField] [Range(0.0f, 1.0f)] private float m_scopedRecoilMult = 0.3f;
     [SerializeField] private float m_verticalRecoil = 1.0f;
     [SerializeField] private float m_horizontalRecoil = 1.0f;
     [SerializeField] private float m_recoilSmoothTime = 0.3f;
@@ -69,8 +70,8 @@ public class Player_Camera : MonoBehaviour
 
     public void ShootGun()
     {
-        m_recoilVelocity.y += m_verticalRecoil;
-        m_recoilVelocity.x += Random.Range(-m_horizontalRecoil, m_horizontalRecoil);
+        m_recoilVelocity.y += m_verticalRecoil * (m_isScoped ? m_scopedRecoilMult : 1.0f);
+        m_recoilVelocity.x += Random.Range(-m_horizontalRecoil, m_horizontalRecoil) * (m_isScoped ? m_scopedRecoilMult : 1.0f);
 
         RaycastHit[] hits = Physics.RaycastAll(m_camera.transform.position, m_camera.transform.forward, 1000.0f, m_gunTargetLayerMask);
         
