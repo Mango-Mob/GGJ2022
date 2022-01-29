@@ -3457,14 +3457,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Controls:
-
-    [W/A/S/D] to move
-
-    [Left Mouse] to Shoot
-
-    [Middle
-    Mouse] to Send dog'
+  m_Text: "Controls:\n[W/A/S/D] to move\n[Left Mouse] to Shoot\n[Middle Mouse] to
+    Send dog\n[Space] to Jump\n\nGoal:\nFind and kill all the disguised \n"
 --- !u!1 &3174957240250137872
 GameObject:
   m_ObjectHideFlags: 0

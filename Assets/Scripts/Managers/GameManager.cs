@@ -70,6 +70,10 @@ public class GameManager : Singleton<GameManager>
                 count++;
                 m_wolfList.Add(wolf);
             }
+
+            if (count >= m_wolfSpawnCount)
+                break;
+
             spawnOption.Remove(pack);
         }
     }
