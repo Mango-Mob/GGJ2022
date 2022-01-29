@@ -118,36 +118,32 @@ public class GameManager : Singleton<GameManager>
             }
         }
 #endif
-        if (m_endConditionMet)
-        {
-            LevelManager.Instance.LoadNewLevel("EndScreen");
-        }
+
 
         if (!m_endConditionMet)
         {
             if (m_wolfList.Count == 0)
             {
-                m_endConditionMet = true;
-
                 //Victory!
                 GameOverScreen.SetScene(ScreenState.Victory, "Wolves are defeated", GetSheepCount(), m_startTime);
+                LevelManager.Instance.LoadNewLevel("EndScreen");
+                m_endConditionMet = true;
                 return;
             }
             if (m_packOfSheep.Count == 0)
             {
-                m_endConditionMet = true;
-
                 //Defeat :(
                 GameOverScreen.SetScene(ScreenState.Defeat, "Wolves have killed all the sheep", m_wolfList.Count, m_startTime);
+                LevelManager.Instance.LoadNewLevel("EndScreen");
+                m_endConditionMet = true;
                 return;
             }
             if (m_ammoCount <= 0)
             {
-                m_endConditionMet = true;
-
                 //Defeat :(
                 GameOverScreen.SetScene(ScreenState.Defeat, "You have ran out of ammo", m_wolfList.Count, m_startTime);
-
+                LevelManager.Instance.LoadNewLevel("EndScreen", LevelManager.Transition.OUTOFAMMO);
+                m_endConditionMet = true;
                 return;
             }
         }

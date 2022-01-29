@@ -7,6 +7,7 @@ using UnityEngine.AI;
 public class Sheep : MonoBehaviour
 {
     protected NavMeshAgent m_myLegs;
+    protected Animator m_sheepAnimControl;
 
     [Header("Sheep Stats")]
     public float m_roamDist = 5f;
@@ -15,6 +16,7 @@ public class Sheep : MonoBehaviour
     public float m_waitMax = 2.0f;
     public float m_shotReactRange = 5.0f;
     public float m_maxReactDist = 5.0f;
+    public float m_chanceToFidget = 0.05f;
 
     private Coroutine m_currentScaredRoutine;
     private float m_scaredDuration;
@@ -26,9 +28,13 @@ public class Sheep : MonoBehaviour
     public string m_name = "Sheep";
 
     private float m_timer;
+    private float m_defaultAcc;
+
     protected virtual void Awake()
     {
         m_myLegs = GetComponentInChildren<NavMeshAgent>();
+        m_sheepAnimControl = GetComponentInChildren<Animator>();
+        m_defaultAcc = m_myLegs.acceleration;
     }
 
     // Start is called before the first frame update
@@ -41,7 +47,7 @@ public class Sheep : MonoBehaviour
 
     // Update is called once per frame
     protected virtual void Update()
-    {        
+    {
         if (m_myLegs.IsNearDestination(m_stoppingDistance))
         {
             if(m_timer < m_waitTime)
@@ -51,6 +57,26 @@ public class Sheep : MonoBehaviour
             else if(m_timer >= m_waitTime)
             {
                 m_isWaitingForDestination = true;
+            }
+        }
+
+        if(!(this is Wolf))
+        {
+            AnimationUpdate();
+        }
+    }
+
+    protected virtual void AnimationUpdate()
+    {
+        m_sheepAnimControl.SetBool("IsMoving", m_myLegs.velocity.magnitude > 0.25f);
+        float mod = (m_myLegs.acceleration - m_defaultAcc) / m_defaultAcc;
+        m_sheepAnimControl.SetFloat("velocityMod", mod);
+
+        if (m_timer < m_waitTime)
+        {
+            if (Random.Range(0, 1000f) < m_chanceToFidget * 1000)
+            {
+                m_sheepAnimControl.SetTrigger("IsFidget");
             }
         }
     }
