@@ -23,8 +23,10 @@ public class Player_Camera : MonoBehaviour
 
     [Header("Objects")]
     [SerializeField] private GameObject m_crosshair;
+    [SerializeField] private Transform m_gunBarrelEnd;
 
     [Header("Prefab")]
+    [SerializeField] private GameObject m_bulletPrefabVFX;
     [SerializeField] private GameObject m_dogPingPrefabVFX;
 
     private Camera m_camera;
@@ -95,7 +97,13 @@ public class Player_Camera : MonoBehaviour
         }
 
         if (hitCollider == null)
+        {
+            GameObject missBulletVFX = Instantiate(m_bulletPrefabVFX, m_gunBarrelEnd.position, m_camera.transform.rotation);
             return;
+        }
+
+        GameObject bulletVFX = Instantiate(m_bulletPrefabVFX, m_gunBarrelEnd.position, Quaternion.identity);
+        bulletVFX.transform.forward = (hitPosition - m_gunBarrelEnd.position).normalized;
 
         GameManager.Instance.NotifyAnimalsOfShot(hitPosition);
 
@@ -105,6 +113,10 @@ public class Player_Camera : MonoBehaviour
             Debug.Log("Target Hit");
             target.Kill(true);
         }
+
+
+
+        m_bulletPrefabVFX.transform.forward = m_camera.transform.forward;
     }
     public void ToggleScope(bool _active)
     {

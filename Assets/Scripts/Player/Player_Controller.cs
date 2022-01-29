@@ -14,13 +14,14 @@ public class Player_Controller : MonoBehaviour
     public MultiAudioAgent audioAgent { get; private set; }
     private int m_dogCommands;
 
+    private bool m_reloading = false;
+
     [Header("UI")]
     [SerializeField] private UI_DogStatus m_dogStatus;
     [SerializeField] private UI_AmmoCount m_ammoCount;
     [SerializeField] private UI_BulletCount m_bulletCount;
     [SerializeField] private TextMeshProUGUI m_sheepCount;
     [SerializeField] private TextMeshProUGUI m_wolfCount;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -49,19 +50,20 @@ public class Player_Controller : MonoBehaviour
         playerCamera.MoveCamera(mouseMove * Time.deltaTime);
 
         // Scope
-        if (InputManager.Instance.GetMouseDown(MouseButton.RIGHT))
+        if (!m_reloading && InputManager.Instance.GetMouseDown(MouseButton.RIGHT))
         {
             playerCamera.ToggleScope(!playerCamera.m_isScoped);
         }
 
         // Shoot Gun
-        if (GameManager.Instance.m_ammoCount > 0 && InputManager.Instance.GetMouseDown(MouseButton.LEFT))
+        if (!m_reloading && GameManager.Instance.m_ammoCount > 0 && InputManager.Instance.GetMouseDown(MouseButton.LEFT))
         {
-            Debug.Log("Pew Pew");
             GameManager.Instance.m_ammoCount--;
             playerCamera.ShootGun();
 
+
             audioAgent.Play("Gunshot");
+            StartCoroutine(ReloadRifle());
         }
 
         if (InputManager.Instance.GetMouseDown(MouseButton.MIDDLE))
@@ -95,6 +97,16 @@ public class Player_Controller : MonoBehaviour
         {
             m_wolfCount.text = $"{GameManager.Instance.m_wolfList.Count} Wolves";
         }
+    }
+    IEnumerator ReloadRifle()
+    {
+        m_reloading = true;
+        yield return new WaitForSecondsRealtime(0.5f);
+
+        playerCamera.ToggleScope(false);
+        audioAgent.Play("RifleLoad");
+
+        m_reloading = false;
     }
 
     static Vector2 GetMovementAxis()
