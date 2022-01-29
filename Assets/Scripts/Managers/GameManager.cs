@@ -16,7 +16,7 @@ public class GameManager : Singleton<GameManager>
 
     public Camera m_playerCamera { get; private set; }
 
-    private DateTime m_startTime;
+    public DateTime m_startTime { get; private set; }
 	
     public int m_ammoCount = 8;
 
