@@ -12,7 +12,6 @@ public class Dog : MonoBehaviour
         NavMeshPath temp = new NavMeshPath();
         if(NavMesh.CalculatePath(player.position, scoutLocation, NavMesh.AllAreas, temp))
         {
-            scoutLocation.y = 0;
             GameObject dogObject = GameObject.Instantiate(GameManager.Instance.m_dogPrefab, player.position, Quaternion.LookRotation((scoutLocation - player.position).normalized, Vector3.up));
             dogObject.GetComponent<Dog>().Awake();
             dogObject.GetComponent<Dog>().owner = player;
