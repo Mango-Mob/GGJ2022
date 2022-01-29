@@ -114,6 +114,9 @@ public class Player_Camera : MonoBehaviour
         {
             Debug.Log("Target Hit");
             target.Kill(true);
+
+            if (target.GetComponent<Wolf>())
+                GameManager.Instance.m_ammoCount++;
         }
 
         m_bulletPrefabVFX.transform.forward = m_camera.transform.forward;
