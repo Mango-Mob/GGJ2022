@@ -6,6 +6,7 @@ using UnityEngine.AI;
 
 public class Wolf : Sheep
 {
+    //Wolf names
     public enum AIState
     {
         MovingToPack,
@@ -38,6 +39,7 @@ public class Wolf : Sheep
     public GameObject m_poofVFX;
     private MultiAudioAgent m_audioAgent;
 
+    public string m_fakeName;
     protected override void Awake()
     {
         base.Awake();
@@ -52,6 +54,14 @@ public class Wolf : Sheep
         m_myLegs.speed = m_unblendSpeed;
         if (m_targetPack != null)
             m_myLegs.SetDestination(m_targetPack.GetAveragePosition());
+
+        int selection = Random.Range(0, GameManager.Instance.m_wolfNames.Count);
+        m_name = GameManager.Instance.m_wolfNames[selection];
+        GameManager.Instance.m_wolfNames.RemoveAt(selection);
+
+        selection = Random.Range(0, GameManager.Instance.m_sheepNames.Count);
+        m_fakeName = GameManager.Instance.m_sheepNames[selection];
+        GameManager.Instance.m_sheepNames.RemoveAt(selection);
     }
 
     // Update is called once per frame
@@ -144,7 +154,7 @@ public class Wolf : Sheep
             case AIState.Berserk:
                 if (m_targetSheep == null)
                 {
-                    if (m_targetPack != null)
+                    if (m_targetPack != null && m_targetPack.m_sheepList.Count > 0)
                         m_targetSheep = m_targetPack.GetClosestSheep(transform.position);
                     else if (GameManager.Instance.m_packOfSheep.Count > 0)
                         m_targetPack = this.GetClosest<SheepPack>(GameManager.Instance.m_packOfSheep);
@@ -154,7 +164,6 @@ public class Wolf : Sheep
                         return;
                     }
                 }
-
                 m_myLegs.SetDestination(m_targetSheep.transform.position);
 
                 m_timeTillKill -= Time.deltaTime;

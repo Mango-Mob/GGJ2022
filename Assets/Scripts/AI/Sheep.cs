@@ -23,6 +23,8 @@ public class Sheep : MonoBehaviour
 
     public bool m_isWaitingForDestination = true;
 
+    public string m_name = "Sheep";
+
     private float m_timer;
     protected virtual void Awake()
     {
@@ -32,7 +34,9 @@ public class Sheep : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        
+        int selection = Random.Range(0, GameManager.Instance.m_sheepNames.Count);
+        m_name = GameManager.Instance.m_sheepNames[selection];
+        GameManager.Instance.m_sheepNames.RemoveAt(selection);
     }
 
     // Update is called once per frame
