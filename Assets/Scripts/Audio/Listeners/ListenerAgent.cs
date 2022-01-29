@@ -17,11 +17,14 @@ namespace AudioSystem.Listeners
         private void Start()
         {
             AudioManager.Instance.listeners.Add(this);
+
+            if (softRange < hardRange)
+                softRange = hardRange;
         }
 
         private void OnDestroy()
         {
-            AudioManager.Instance .listeners.Remove(this);
+            AudioManager.Instance.listeners.Remove(this);
         }
 
         public float CalculateHearingVol(Vector3 audioPos)
