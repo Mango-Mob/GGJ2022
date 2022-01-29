@@ -32,14 +32,13 @@ public class LevelManager : SingletonPersistent<LevelManager>
     protected override void Awake()
     {
         base.Awake();
-        //transitionPrefab = Resources.Load<GameObject>("Transitions/TransitionCanvas");
-        //youdiedPrefab = Resources.Load<GameObject>("Transitions/YouDiedCanvas");
-        //youwinPrefab = Resources.Load<GameObject>("Transitions/YouWinCanvas");
+        transitionPrefab = Resources.Load<GameObject>("Transitions/TransitionCanvas");
+        youdiedPrefab = Resources.Load<GameObject>("Transitions/YouDiedCanvas");
+        youwinPrefab = Resources.Load<GameObject>("Transitions/YouWinCanvas");
     }
 
     private void Start()
-    {
-        DontDestroyOnLoad(this.gameObject);
+    { 
         loadingNextArea = false;
     }
 

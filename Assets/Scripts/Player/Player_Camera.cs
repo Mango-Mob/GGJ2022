@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class Player_Camera : MonoBehaviour
 {
+    private Player_Controller playerController;
+
     [Header("General")]
     [SerializeField] [Range(1.0f, 120.0f)] private float m_lookFOV = 90.0f;
     [SerializeField] [Range(1.0f, 120.0f)] private float m_aimFOV = 45.0f;
     [SerializeField] private LayerMask m_gunTargetLayerMask;
     [SerializeField] private LayerMask m_commandTargetLayerMask;
+    
+    // Dog things
+    public float m_dogCD = 10.0f;
+    public float m_dogCDTimer = 0.0f;
+    private bool m_usedDogFlag = false;
 
     [Header("Player Settings")]
     [SerializeField] private Vector2 m_lookSensitivity = new Vector2(5.0f, 5.0f);
@@ -36,6 +43,7 @@ public class Player_Camera : MonoBehaviour
     void Start()
     {
         m_camera = GetComponentInChildren<Camera>();
+        playerController = GetComponentInParent<Player_Controller>();
     }
 
     private void Update()
@@ -44,6 +52,17 @@ public class Player_Camera : MonoBehaviour
         AdjustCamera(m_recoilVelocity.x, m_recoilVelocity.y);
 
         m_recoilVelocity = Vector2.SmoothDamp(m_recoilVelocity, Vector2.zero, ref m_recoilDampVelocity, m_recoilSmoothTime);
+    
+        if (m_usedDogFlag && GameManager.Instance.m_dog == null)
+        {
+            m_dogCDTimer = m_dogCD;
+            m_usedDogFlag = false;
+        }
+
+        if (m_dogCDTimer > 0.0f)
+            m_dogCDTimer -= Time.deltaTime;
+        else
+            m_dogCDTimer = 0.0f;
     }
 
     public void ShootGun()
@@ -51,7 +70,7 @@ public class Player_Camera : MonoBehaviour
         m_recoilVelocity.y += m_verticalRecoil;
         m_recoilVelocity.x += Random.Range(-m_horizontalRecoil, m_horizontalRecoil);
 
-        RaycastHit[] hits = Physics.RaycastAll(transform.position, m_camera.transform.forward, 1000.0f, m_gunTargetLayerMask);
+        RaycastHit[] hits = Physics.RaycastAll(m_camera.transform.position, m_camera.transform.forward, 1000.0f, m_gunTargetLayerMask);
         
         Collider hitCollider = null;
         Vector3 hitPosition = Vector3.zero;
@@ -65,7 +84,7 @@ public class Player_Camera : MonoBehaviour
             float closestDistance = Mathf.Infinity;
             foreach (var hit in hits)
             {
-                float distance = Vector3.Distance(transform.position, hit.point);
+                float distance = Vector3.Distance(m_camera.transform.position, hit.point);
                 if (distance < closestDistance)
                 {
                     hitCollider = hit.collider;
@@ -129,9 +148,10 @@ public class Player_Camera : MonoBehaviour
         {
             Instantiate(m_dogPingPrefabVFX, hits[0].point, Quaternion.identity);
 
-            Vector3 dogSpawn = transform.position;
-            dogSpawn.y = 0.0f;
-            Dog.CreateDogToLoc(dogSpawn, hits[0].point);
+            Dog.CreateDogToLoc(transform, hits[0].point);
+
+            m_usedDogFlag = true;
+
             return true;
         }
 

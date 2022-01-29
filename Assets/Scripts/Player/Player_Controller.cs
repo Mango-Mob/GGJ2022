@@ -9,11 +9,13 @@ public class Player_Controller : MonoBehaviour
     [Header("General")]
     [SerializeField] private int m_maxDogCommands = 3;
 
-    private Player_Camera playerCamera;
+    public Player_Camera playerCamera { get; private set; }
+    public Player_Movement playerMovement { get; private set; }
     public MultiAudioAgent audioAgent { get; private set; }
     private int m_dogCommands;
 
     [Header("UI")]
+    [SerializeField] private UI_DogStatus m_dogStatus;
     [SerializeField] private UI_AmmoCount m_ammoCount;
     [SerializeField] private UI_BulletCount m_bulletCount;
     [SerializeField] private TextMeshProUGUI m_sheepCount;
@@ -24,6 +26,7 @@ public class Player_Controller : MonoBehaviour
     {
         audioAgent = GetComponent<MultiAudioAgent>();
         playerCamera = GetComponentInChildren<Player_Camera>();
+        playerMovement = GetComponentInChildren<Player_Movement>();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -61,19 +64,29 @@ public class Player_Controller : MonoBehaviour
             audioAgent.Play("Gunshot");
         }
 
-        if (GameManager.Instance.m_dog == null && InputManager.Instance.GetMouseDown(MouseButton.MIDDLE))
+        if (InputManager.Instance.GetMouseDown(MouseButton.MIDDLE))
         {
-            if (playerCamera.CommandDog())
+            if (playerCamera.m_dogCDTimer <= 0.0f && GameManager.Instance.m_dog == null)
             {
-                audioAgent.Play("DogCall");
-            }
-            else
-            {
+                if (playerCamera.CommandDog())
+                {
+                    audioAgent.Play("DogCall");
+                }
+                else
+                {
 
+                }
             }
         }
 
+        Vector2 move = GetMovementAxis();
+        playerMovement.Move(move.x, move.y);
+
         // UI Update
+        if (m_dogStatus != null)
+        {
+            m_dogStatus.UpdateDogCooldown(playerCamera.m_dogCDTimer / playerCamera.m_dogCD);
+        }
         if (m_sheepCount != null)
         {
             m_sheepCount.text = $"{GameManager.Instance.GetSheepCount()} Sheep";
@@ -83,4 +96,15 @@ public class Player_Controller : MonoBehaviour
             m_wolfCount.text = $"{GameManager.Instance.m_wolfList.Count} Wolves";
         }
     }
+
+    static Vector2 GetMovementAxis()
+    {
+        Vector2 move = Vector2.zero;
+
+        move.x = (InputManager.Instance.IsKeyPressed(KeyType.D) ? 1.0f : 0.0f) - (InputManager.Instance.IsKeyPressed(KeyType.A) ? 1.0f : 0.0f);
+        move.y = (InputManager.Instance.IsKeyPressed(KeyType.W) ? 1.0f : 0.0f) - (InputManager.Instance.IsKeyPressed(KeyType.S) ? 1.0f : 0.0f);
+
+        return move;
+    }
+
 }

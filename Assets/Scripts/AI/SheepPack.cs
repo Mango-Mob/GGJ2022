@@ -15,21 +15,42 @@ public class SheepPack : MonoBehaviour
 
     public float m_timeTillNextSound = 0.0f;
 
+    public int m_maxSheep;
+    public GameObject[] m_sheepPrefabs;
+
     private MultiAudioAgent m_soundAgent;
     public void Awake()
     {
-        m_sheepList = new List<Sheep>(GetComponentsInChildren<Sheep>());
+        m_sheepList = new List<Sheep>();
         m_soundAgent = GetComponent<MultiAudioAgent>();
         float delay = m_soundDelay + m_soundDelayPerSheep * m_sheepList.Count;
         m_timeTillNextSound = Random.Range(delay * 0.85f, delay * 1.25f);
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public int AddSheep(int count)
     {
-        
-    }
+        int before = m_sheepList.Count;
+        for (int i = 0; i < count; i++)
+        {
+            Vector3 loc = Random.insideUnitSphere;
+            loc.y = 0;
+            loc = transform.position + loc.normalized * Random.Range(m_roamRangeMin, m_roamRangeMax);
 
+            if (Physics.OverlapSphere(loc, 1.5f, 1 << LayerMask.NameToLayer("Sheep")).Length > 0)
+            {
+                i--;
+            }
+            else
+            {
+                GameObject nextSheep = Instantiate(m_sheepPrefabs[Random.Range(0, m_sheepPrefabs.Length)], transform);
+                nextSheep.transform.position = loc;
+                nextSheep.transform.eulerAngles = new Vector3(0, Random.Range(0f, 360f), 0);
+                m_sheepList.Add(nextSheep.GetComponent<Sheep>());
+            }
+        }
+
+        return m_sheepList.Count - before;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -99,14 +120,17 @@ public class SheepPack : MonoBehaviour
     public void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
-        Vector3 pos = GetAveragePosition();
-        Gizmos.DrawSphere(pos, 0.25f);
+        Vector3 pos = (m_sheepList.Count > 0) ? GetAveragePosition() : transform.position;
+        Gizmos.DrawSphere(pos, 0.5f);
+
+        RaycastHit hit;
+        Physics.Raycast(pos, Vector3.down * transform.position.y, out hit, 1 << LayerMask.NameToLayer("Ground"));
 
         Handles.color = Color.green;
-        Handles.DrawWireDisc(pos, Vector3.up, m_roamRangeMin);
+        Handles.DrawWireDisc(pos, hit.normal, m_roamRangeMin);
 
         Handles.color = Color.red;
-        Handles.DrawWireDisc(pos, Vector3.up, m_roamRangeMax);
+        Handles.DrawWireDisc(pos, hit.normal, m_roamRangeMax);
     }
 
     public void Destroy(Sheep sheep)
