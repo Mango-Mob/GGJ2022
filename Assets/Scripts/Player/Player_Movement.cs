@@ -10,7 +10,6 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] private float m_gravitySpeed = 9.81f;
     [SerializeField] [Range(0.0f, 1.0f)] private float m_scopeMoveMult = 0.3f;
 
-
     private CharacterController characterController;
     private Player_Controller playerController;
     float m_yVelocity = 0.0f;
@@ -34,7 +33,7 @@ public class Player_Movement : MonoBehaviour
     }
     public void Move(float _x, float _z)
     {
-        if (InputManager.Instance.IsKeyDown(KeyType.SPACE) && characterController.isGrounded)
+        if (InputManager.Instance.IsKeyPressed(KeyType.SPACE) && characterController.isGrounded)
         {
             m_yVelocity = m_jumpSpeed;
         }
