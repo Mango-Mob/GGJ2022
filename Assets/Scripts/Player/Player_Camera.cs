@@ -22,6 +22,8 @@ public class Player_Camera : MonoBehaviour
     [SerializeField] private Vector2 m_aimSensitivity = new Vector2(5.0f, 5.0f);
 
     [Header("Objects")]
+    [SerializeField] private Camera m_camera;
+    [SerializeField] private Camera m_clippingCamera;
     [SerializeField] private GameObject m_crosshair;
     [SerializeField] private Transform m_gunBarrelEnd;
 
@@ -29,7 +31,6 @@ public class Player_Camera : MonoBehaviour
     [SerializeField] private GameObject m_bulletPrefabVFX;
     [SerializeField] private GameObject m_dogPingPrefabVFX;
 
-    private Camera m_camera;
     private float m_xRotation = 0.0f;
     public bool m_isScoped { get; private set; } = false;
 
@@ -39,23 +40,24 @@ public class Player_Camera : MonoBehaviour
     [SerializeField] private float m_verticalRecoil = 1.0f;
     [SerializeField] private float m_horizontalRecoil = 1.0f;
     [SerializeField] private float m_recoilSmoothTime = 0.3f;
+    [SerializeField] private Vector2 m_targetRecoilDown = new Vector2(0.0f, -10.0f);
     private Vector2 m_recoilVelocity = Vector2.zero;
+    private float m_recoilAcceleration = 0.0f;
     private Vector2 m_recoilDampVelocity = Vector2.zero;
 
     // Start is called before the first frame update
     void Start()
     {
-        m_camera = GetComponentInChildren<Camera>();
         playerController = GetComponentInParent<Player_Controller>();
     }
 
     private void Update()
     {
         // Recoil process
-        AdjustCamera(m_recoilVelocity.x, m_recoilVelocity.y);
+        AdjustCamera(m_recoilVelocity.x * Time.deltaTime, m_recoilVelocity.y * Time.deltaTime);
 
-        m_recoilVelocity = Vector2.SmoothDamp(m_recoilVelocity, Vector2.zero, ref m_recoilDampVelocity, m_recoilSmoothTime);
-    
+        m_recoilVelocity = Vector2.SmoothDamp(m_recoilVelocity, (m_recoilVelocity.y > 0.0f ? m_targetRecoilDown : Vector2.zero), ref m_recoilDampVelocity, m_recoilSmoothTime);
+
         if (m_usedDogFlag && GameManager.Instance.m_dog == null)
         {
             m_dogCDTimer = m_dogCD;
@@ -67,6 +69,7 @@ public class Player_Camera : MonoBehaviour
         else
             m_dogCDTimer = 0.0f;
     }
+
 
     public void ShootGun()
     {
@@ -96,15 +99,15 @@ public class Player_Camera : MonoBehaviour
                 }
             }
         }
-
+        
         if (hitCollider == null)
         {
-            GameObject missBulletVFX = Instantiate(m_bulletPrefabVFX, m_gunBarrelEnd.position, m_camera.transform.rotation);
+            GameObject missBulletVFX = Instantiate(m_bulletPrefabVFX, (m_isScoped ? transform.position : m_gunBarrelEnd.position), m_camera.transform.rotation);
             return;
         }
 
-        GameObject bulletVFX = Instantiate(m_bulletPrefabVFX, m_gunBarrelEnd.position, Quaternion.identity);
-        bulletVFX.transform.forward = (hitPosition - m_gunBarrelEnd.position).normalized;
+        GameObject bulletVFX = Instantiate(m_bulletPrefabVFX, (m_isScoped ? transform.position : m_gunBarrelEnd.position), Quaternion.identity);
+        bulletVFX.transform.forward = (hitPosition - (m_isScoped ? transform.position : m_gunBarrelEnd.position)).normalized;
         bulletVFX.GetComponent<BulletVFX>().SetEndPoint(hitPosition);
 
         GameManager.Instance.NotifyAnimalsOfShot(hitPosition);
@@ -113,7 +116,12 @@ public class Player_Camera : MonoBehaviour
         if (target)
         {
             Debug.Log("Target Hit");
-            target.Kill(true);
+            
+            string name = target.Kill(true);
+            if (name != string.Empty)
+            {
+                KillFeedManager.Instance.DisplayPlayerKill(name);
+            }
 
             if (target.GetComponent<Wolf>())
                 GameManager.Instance.m_ammoCount++;
@@ -124,6 +132,8 @@ public class Player_Camera : MonoBehaviour
     public void ToggleScope(bool _active)
     {
         m_isScoped = _active;
+
+        m_clippingCamera.enabled = !_active;
 
         if (m_crosshair != null)
             m_crosshair.SetActive(m_isScoped);

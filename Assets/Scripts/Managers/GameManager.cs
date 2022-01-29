@@ -1,5 +1,7 @@
-﻿using System;
+﻿using AudioSystem.Agents;
+using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
@@ -20,6 +22,12 @@ public class GameManager : Singleton<GameManager>
     public DateTime m_startTime { get; private set; }
 	
     public int m_ammoCount = 8;
+    MultiAudioAgent m_music;
+
+    public List<string> m_sheepNames { get; private set; }
+    public List<string> m_wolfNames { get; private set; }
+
+    private bool m_endConditionMet = false;
 
     protected override void Awake()
     {
@@ -30,9 +38,29 @@ public class GameManager : Singleton<GameManager>
         m_playerCamera = FindObjectOfType<Camera>();
 
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Default"), LayerMask.NameToLayer("Projectile"));
+
+        m_sheepNames = CreateNamesList("Names/SheepNames");
+        m_wolfNames = CreateNamesList("Names/WolfNames");
     }
+
+    private List<string> CreateNamesList(string filename)
+    {
+        TextAsset file = Resources.Load<TextAsset>(filename);
+
+        if(file != null)
+        {
+            string fs = file.text;
+            return new List<string>(Regex.Split(fs, "\n"));
+        }
+        return new List<string>();
+    }
+
     private void Start()
     {
+        m_music = GetComponent<MultiAudioAgent>();
+
+        m_music.Play("The Old Country Farm MP3", true);
+
         m_startTime = DateTime.Now;
 
         List<SheepPack> spawnOption = new List<SheepPack>(m_packOfSheep);
@@ -50,6 +78,7 @@ public class GameManager : Singleton<GameManager>
 
             if (spawnOption.Count == 0)
                 break;
+
         }
 
         spawnOption = new List<SheepPack>(m_packOfSheep);
@@ -80,26 +109,47 @@ public class GameManager : Singleton<GameManager>
 
     protected virtual void Update()
     {
-        if(m_wolfList.Count == 0)
+#if UNITY_EDITOR
+        if(InputManager.Instance.IsKeyDown(KeyType.P))
         {
-            //Victory!
-            GameOverScreen.SetScene(ScreenState.Victory, "Wolves are defeated", GetSheepCount(), m_startTime);
-            LevelManager.Instance.LoadNewLevel("EndScreen");
-            return;
+            foreach (var item in m_wolfList)
+            {
+                item.Reveal();
+            }
         }
-        if(m_packOfSheep.Count == 0)
+#endif
+        if (m_endConditionMet)
         {
-            //Defeat :(
-            GameOverScreen.SetScene(ScreenState.Defeat, "Wolves have killed all the sheep", m_wolfList.Count, m_startTime);
             LevelManager.Instance.LoadNewLevel("EndScreen");
-            return;
         }
-        if(m_ammoCount <= 0)
+
+        if (!m_endConditionMet)
         {
-            //Defeat :(
-            GameOverScreen.SetScene(ScreenState.Defeat, "You have ran out of ammo", m_wolfList.Count, m_startTime);
-            LevelManager.Instance.LoadNewLevel("EndScreen");
-            return;
+            if (m_wolfList.Count == 0)
+            {
+                m_endConditionMet = true;
+
+                //Victory!
+                GameOverScreen.SetScene(ScreenState.Victory, "Wolves are defeated", GetSheepCount(), m_startTime);
+                return;
+            }
+            if (m_packOfSheep.Count == 0)
+            {
+                m_endConditionMet = true;
+
+                //Defeat :(
+                GameOverScreen.SetScene(ScreenState.Defeat, "Wolves have killed all the sheep", m_wolfList.Count, m_startTime);
+                return;
+            }
+            if (m_ammoCount <= 0)
+            {
+                m_endConditionMet = true;
+
+                //Defeat :(
+                GameOverScreen.SetScene(ScreenState.Defeat, "You have ran out of ammo", m_wolfList.Count, m_startTime);
+
+                return;
+            }
         }
     }
 
@@ -132,5 +182,26 @@ public class GameManager : Singleton<GameManager>
     {
         if(pack != null)
             m_packOfSheep.Remove(pack);
+    }
+
+    public Sheep GetClosestSheep(Vector3 position)
+    {
+        Sheep closest = null;
+        float distance = float.MaxValue;
+
+        foreach (var pack in m_packOfSheep)
+        {
+            foreach (var sheep in pack.m_sheepList)
+            {
+                float curr = Vector3.Distance(position, sheep.transform.position);
+
+                if(curr < distance)
+                {
+                    distance = curr;
+                    closest = sheep;
+                }
+            }
+        }
+        return closest;
     }
 }
