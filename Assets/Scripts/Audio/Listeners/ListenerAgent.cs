@@ -24,7 +24,8 @@ namespace AudioSystem.Listeners
 
         private void OnDestroy()
         {
-            AudioManager.Instance.listeners.Remove(this);
+            if(AudioManager.Instance != null)
+                AudioManager.Instance.listeners.Remove(this);
         }
 
         public float CalculateHearingVol(Vector3 audioPos)
