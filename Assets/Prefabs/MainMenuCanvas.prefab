@@ -3457,8 +3457,35 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Controls:\n[W/A/S/D] to move\n[Left Mouse] to Shoot\n[Middle Mouse] to
-    Send dog\n[Space] to Jump\n\nGoal:\nFind and kill all the disguised \n"
+  m_Text: 'Controls:
+
+    [W/A/S/D] to move
+
+    [Left Mouse] to Shoot
+
+    [Middle
+    Mouse] to Send dog
+
+    [Space] to Jump
+
+
+    Goal:
+
+    - Find and kill all
+    the disguised wolves before they kill all of your the sheep.
+
+    - Wolves act
+    like sheep when you are watching.
+
+    - Send your dog to investigate nearby
+    sheep.
+
+    - Once you run out of bullets, you lose.
+
+    - Replenish bullets
+    when you kill a wolf.
+
+'
 --- !u!1 &3174957240250137872
 GameObject:
   m_ObjectHideFlags: 0
