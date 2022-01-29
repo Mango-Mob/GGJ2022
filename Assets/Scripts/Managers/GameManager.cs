@@ -8,6 +8,8 @@ public class GameManager : Singleton<GameManager>
 
     public List<SheepPack> m_packOfSheep { get; private set; }
 
+    public static int m_sheepSpawnCount = 20;
+
     public List<Wolf> m_wolfList { get; private set; }
 
     public Dog m_dog { get; set; }
@@ -22,12 +24,27 @@ public class GameManager : Singleton<GameManager>
     {
         base.Awake();
         m_packOfSheep = new List<SheepPack>(FindObjectsOfType<SheepPack>());
+
         m_wolfList = new List<Wolf>(FindObjectsOfType<Wolf>());
         m_playerCamera = FindObjectOfType<Camera>();
     }
     private void Start()
     {
         m_startTime = DateTime.Now;
+
+        List<SheepPack> spawnOption = new List<SheepPack>(m_packOfSheep);
+        int count = 0;
+
+        while (count < m_sheepSpawnCount)
+        {
+            SheepPack pack = spawnOption[UnityEngine.Random.Range(0, spawnOption.Count)];
+            count += pack.AddSheep(Mathf.Min(2, pack.m_maxSheep - pack.m_sheepList.Count, m_sheepSpawnCount - count));
+
+            if (pack.m_sheepList.Count > pack.m_maxSheep)
+            {
+                spawnOption.Remove(pack);
+            }
+        }
     }
 
     protected virtual void Update()
