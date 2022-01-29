@@ -9,11 +9,15 @@ public class Dog : MonoBehaviour
 {
     public static void CreateDogToLoc(Transform player, Vector3 scoutLocation)
     {
-        scoutLocation.y = 0;
-        GameObject dogObject = GameObject.Instantiate(GameManager.Instance.m_dogPrefab, player.position, Quaternion.LookRotation((scoutLocation - player.position).normalized, Vector3.up));
-        dogObject.GetComponent<Dog>().Awake();
-        dogObject.GetComponent<Dog>().owner = player;
-        dogObject.GetComponent<Dog>().SetTargetDestination(scoutLocation);
+        NavMeshPath temp = new NavMeshPath();
+        if(NavMesh.CalculatePath(player.position, scoutLocation, 0, temp))
+        {
+            scoutLocation.y = 0;
+            GameObject dogObject = GameObject.Instantiate(GameManager.Instance.m_dogPrefab, player.position, Quaternion.LookRotation((scoutLocation - player.position).normalized, Vector3.up));
+            dogObject.GetComponent<Dog>().Awake();
+            dogObject.GetComponent<Dog>().owner = player;
+            dogObject.GetComponent<Dog>().SetTargetDestination(scoutLocation);
+        }
     }
 
     public Transform owner;

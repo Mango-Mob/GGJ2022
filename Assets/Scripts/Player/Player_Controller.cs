@@ -57,7 +57,6 @@ public class Player_Controller : MonoBehaviour
         // Shoot Gun
         if (GameManager.Instance.m_ammoCount > 0 && InputManager.Instance.GetMouseDown(MouseButton.LEFT))
         {
-            Debug.Log("Pew Pew");
             GameManager.Instance.m_ammoCount--;
             playerCamera.ShootGun();
 

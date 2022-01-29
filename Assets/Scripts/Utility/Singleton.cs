@@ -32,7 +32,12 @@ public abstract class SingletonPersistent<T> : Singleton<T> where T : MonoBehavi
     protected override void Awake()
     {
         if (Instance != null) Destroy(gameObject);
-        DontDestroyOnLoad(gameObject);
+
+        if(transform.parent != null)
+            DontDestroyOnLoad(transform.parent);
+        else
+            DontDestroyOnLoad(gameObject);
+
         base.Awake();
     }
 }

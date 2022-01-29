@@ -107,9 +107,14 @@ public class Wolf : Sheep
                 
                 break;
             case AIState.Hunt:
-                m_myLegs.SetDestination(m_targetSheep.transform.position);
+                if(m_targetSheep != null)
+                    m_myLegs.SetDestination(m_targetSheep.transform.position);
+                else if (m_targetPack != null)
+                    m_targetSheep = m_targetPack.GetClosestSheep(transform.position);
+                else
+                    TransitionTo(AIState.MovingToPack);
 
-                if(isBeingWatched)
+                if (isBeingWatched)
                     TransitionTo(AIState.Blend);
 
                 if (m_myLegs.IsNearDestination(m_killRange))
