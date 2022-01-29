@@ -321,7 +321,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4713469823803029115}
   - component: {fileID: 7599987541451621333}
-  - component: {fileID: 298590015583854168}
   - component: {fileID: 5519082183419930323}
   m_Layer: 0
   m_Name: ClippingCamera
@@ -387,14 +386,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &298590015583854168
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1383204034934228049}
-  m_Enabled: 1
 --- !u!114 &5519082183419930323
 MonoBehaviour:
   m_ObjectHideFlags: 0

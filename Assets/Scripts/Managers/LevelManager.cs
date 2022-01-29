@@ -13,7 +13,8 @@ public class LevelManager : SingletonPersistent<LevelManager>
     {
         CROSSFADE,
         YOUDIED,
-        YOUWIN
+        YOUWIN,
+        OUTOFAMMO,
     }
     
     public static bool cheatsEnabled = false;
@@ -91,7 +92,8 @@ public class LevelManager : SingletonPersistent<LevelManager>
 
     IEnumerator LoadLevel(string _name, Transition _transition = Transition.CROSSFADE)
     {
-        float timeMult = 1.0f;
+        float startTimeMult = 1.0f;
+        float endTimeMult = 1.0f;
         isTransitioning = true;
 
         switch (_transition)
@@ -99,26 +101,38 @@ public class LevelManager : SingletonPersistent<LevelManager>
             case Transition.CROSSFADE:
                 transition = Instantiate(transitionPrefab, transform).GetComponent<Animator>();
                 break;
+            case Transition.OUTOFAMMO:
+                transition = Instantiate(transitionPrefab, transform).GetComponent<Animator>();
+                startTimeMult = 10.0f;
+                endTimeMult = 1.0f;
+                break;
             case Transition.YOUDIED:
                 transition = Instantiate(youdiedPrefab, transform).GetComponent<Animator>();
-                timeMult = 5.0f;
+                startTimeMult = 5.0f;
+                endTimeMult = 5.0f;
                 break;
             case Transition.YOUWIN:
                 transition = Instantiate(youwinPrefab, transform).GetComponent<Animator>();
-                timeMult = 3.5f;
+                startTimeMult = 3.5f;
+                endTimeMult = 3.5f;
                 break;
         }
 
-        transition.speed = 1.0f / timeMult;
+        transition.speed = 1.0f / startTimeMult;
 
         if (transition != null)
         {
             // Wait to let animation finish playing
-            yield return new WaitForSeconds(transitionTime * timeMult);
+            yield return new WaitForSeconds(transitionTime * startTimeMult);
         }
+
+
+        transition.speed = 1.0f / endTimeMult;
+
         //Load Scene
         SceneManager.LoadScene(_name);
-        yield return new WaitForSeconds(transitionTime * timeMult);
+
+        yield return new WaitForSeconds(transitionTime * endTimeMult);
 
         if (transition != null)
         {
