@@ -22,6 +22,8 @@ public class Player_Camera : MonoBehaviour
     [SerializeField] private Vector2 m_aimSensitivity = new Vector2(5.0f, 5.0f);
 
     [Header("Objects")]
+    [SerializeField] private Camera m_camera;
+    [SerializeField] private Camera m_clippingCamera;
     [SerializeField] private GameObject m_crosshair;
     [SerializeField] private Transform m_gunBarrelEnd;
 
@@ -29,7 +31,6 @@ public class Player_Camera : MonoBehaviour
     [SerializeField] private GameObject m_bulletPrefabVFX;
     [SerializeField] private GameObject m_dogPingPrefabVFX;
 
-    private Camera m_camera;
     private float m_xRotation = 0.0f;
     public bool m_isScoped { get; private set; } = false;
 
@@ -47,7 +48,6 @@ public class Player_Camera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_camera = GetComponentInChildren<Camera>();
         playerController = GetComponentInParent<Player_Controller>();
     }
 
@@ -99,15 +99,15 @@ public class Player_Camera : MonoBehaviour
                 }
             }
         }
-
+        
         if (hitCollider == null)
         {
-            GameObject missBulletVFX = Instantiate(m_bulletPrefabVFX, m_gunBarrelEnd.position, m_camera.transform.rotation);
+            GameObject missBulletVFX = Instantiate(m_bulletPrefabVFX, (m_isScoped ? transform.position : m_gunBarrelEnd.position), m_camera.transform.rotation);
             return;
         }
 
-        GameObject bulletVFX = Instantiate(m_bulletPrefabVFX, m_gunBarrelEnd.position, Quaternion.identity);
-        bulletVFX.transform.forward = (hitPosition - m_gunBarrelEnd.position).normalized;
+        GameObject bulletVFX = Instantiate(m_bulletPrefabVFX, (m_isScoped ? transform.position : m_gunBarrelEnd.position), Quaternion.identity);
+        bulletVFX.transform.forward = (hitPosition - (m_isScoped ? transform.position : m_gunBarrelEnd.position)).normalized;
         bulletVFX.GetComponent<BulletVFX>().SetEndPoint(hitPosition);
 
         GameManager.Instance.NotifyAnimalsOfShot(hitPosition);
@@ -127,6 +127,8 @@ public class Player_Camera : MonoBehaviour
     public void ToggleScope(bool _active)
     {
         m_isScoped = _active;
+
+        m_clippingCamera.enabled = !_active;
 
         if (m_crosshair != null)
             m_crosshair.SetActive(m_isScoped);
