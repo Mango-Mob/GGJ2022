@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using AudioSystem.Agents;
 
 public class Player_Controller : MonoBehaviour
 {
     [Header("General")]
-    [SerializeField] private int m_maxAmmo = 8;
     [SerializeField] private int m_maxDogCommands = 3;
 
-    private Player_Camera playerCamera;
-    private int m_ammoCount;
+    public Player_Camera playerCamera { get; private set; }
+    public Player_Movement playerMovement { get; private set; }
+    public MultiAudioAgent audioAgent { get; private set; }
     private int m_dogCommands;
 
     [Header("UI")]
+    [SerializeField] private UI_DogStatus m_dogStatus;
+    [SerializeField] private UI_AmmoCount m_ammoCount;
     [SerializeField] private UI_BulletCount m_bulletCount;
     [SerializeField] private TextMeshProUGUI m_sheepCount;
     [SerializeField] private TextMeshProUGUI m_wolfCount;
@@ -21,16 +24,20 @@ public class Player_Controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioAgent = GetComponent<MultiAudioAgent>();
         playerCamera = GetComponentInChildren<Player_Camera>();
-        Cursor.lockState = CursorLockMode.Locked;
+        playerMovement = GetComponentInChildren<Player_Movement>();
 
-        m_ammoCount = m_maxAmmo;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         m_maxDogCommands = m_dogCommands;
 
-        if (m_bulletCount != null)
-        {
-            m_bulletCount.SetupMaxAmmo(m_maxAmmo);
-        }
+        //m_ammoCount = m_maxAmmo;
+        //if (m_bulletCount != null)
+        //{
+        //    m_bulletCount.SetupMaxAmmo(m_maxAmmo);
+        //}
 
     }
 
@@ -48,17 +55,37 @@ public class Player_Controller : MonoBehaviour
         }
 
         // Shoot Gun
-        if (m_ammoCount > 0 && InputManager.Instance.GetMouseDown(MouseButton.LEFT))
+        if (GameManager.Instance.m_ammoCount > 0 && InputManager.Instance.GetMouseDown(MouseButton.LEFT))
         {
             Debug.Log("Pew Pew");
-            m_ammoCount--;
+            GameManager.Instance.m_ammoCount--;
             playerCamera.ShootGun();
+
+            audioAgent.Play("Gunshot");
         }
 
-        // UI Update
-        if (m_bulletCount != null)
+        if (InputManager.Instance.GetMouseDown(MouseButton.MIDDLE))
         {
-            m_bulletCount.SetAmmoCount(m_ammoCount);
+            if (playerCamera.m_dogCDTimer <= 0.0f && GameManager.Instance.m_dog == null)
+            {
+                if (playerCamera.CommandDog())
+                {
+                    audioAgent.Play("DogCall");
+                }
+                else
+                {
+
+                }
+            }
+        }
+
+        Vector2 move = GetMovementAxis();
+        playerMovement.Move(move.x, move.y);
+
+        // UI Update
+        if (m_dogStatus != null)
+        {
+            m_dogStatus.UpdateDogCooldown(playerCamera.m_dogCDTimer / playerCamera.m_dogCD);
         }
         if (m_sheepCount != null)
         {
@@ -69,4 +96,15 @@ public class Player_Controller : MonoBehaviour
             m_wolfCount.text = $"{GameManager.Instance.m_wolfList.Count} Wolves";
         }
     }
+
+    static Vector2 GetMovementAxis()
+    {
+        Vector2 move = Vector2.zero;
+
+        move.x = (InputManager.Instance.IsKeyPressed(KeyType.D) ? 1.0f : 0.0f) - (InputManager.Instance.IsKeyPressed(KeyType.A) ? 1.0f : 0.0f);
+        move.y = (InputManager.Instance.IsKeyPressed(KeyType.W) ? 1.0f : 0.0f) - (InputManager.Instance.IsKeyPressed(KeyType.S) ? 1.0f : 0.0f);
+
+        return move;
+    }
+
 }

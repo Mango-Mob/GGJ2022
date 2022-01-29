@@ -17,7 +17,7 @@ namespace AudioSystem.Managers
     /// Note: Agents/Listeners are incharge of being added/removed when they are awake/destroyed. 
     /// </summary>
     /// 
-    public class AudioManager : SingletonPersistent<MonoBehaviour>
+    public class AudioManager : SingletonPersistent<AudioManager>
     {
 
         //Agent and listener lists:
@@ -48,6 +48,9 @@ namespace AudioSystem.Managers
             {
                 volumes[i] = PlayerPrefs.GetFloat($"volume{i}", 1.0f);
             }
+
+            agents = new List<AudioAgent>();
+            listeners = new List<ListenerAgent>();
         }
 
         public void SaveData()
