@@ -1,6 +1,7 @@
 ﻿using AudioSystem.Agents;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
@@ -23,6 +24,10 @@ public class GameManager : Singleton<GameManager>
     public int m_ammoCount = 8;
     MultiAudioAgent m_music;
 
+    public List<string> m_sheepNames { get; private set; }
+    public List<string> m_wolfNames { get; private set; }
+
+
     protected override void Awake()
     {
         base.Awake();
@@ -32,6 +37,21 @@ public class GameManager : Singleton<GameManager>
         m_playerCamera = FindObjectOfType<Camera>();
 
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Default"), LayerMask.NameToLayer("Projectile"));
+
+        m_sheepNames = CreateNamesList("Names/SheepNames");
+        m_wolfNames = CreateNamesList("Names/WolfNames");
+    }
+
+    private List<string> CreateNamesList(string filename)
+    {
+        TextAsset file = Resources.Load<TextAsset>(filename);
+
+        if(file != null)
+        {
+            string fs = file.text;
+            return new List<string>(Regex.Split(fs, "\n"));
+        }
+        return new List<string>();
     }
 
     private void Start()

@@ -19,6 +19,8 @@ namespace AudioSystem.Agents
         [Tooltip("Mutes this agent completely.")]
         public bool isMuted = false;
 
+        public bool IsGlobal = false;
+
         protected virtual void Start()
         {
             AudioManager.Instance.agents.Add(this);
