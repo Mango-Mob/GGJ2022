@@ -63,6 +63,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   localVolume: 1
   isMuted: 0
-  audioClips: []
+  audioClips:
+  - {fileID: 8300000, guid: ca387826942a6ea48b5cefd27b36c45c, type: 3}
   audioPlayersCount: 5
   channel: 2
