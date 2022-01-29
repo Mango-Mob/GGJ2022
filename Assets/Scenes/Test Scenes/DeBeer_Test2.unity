@@ -439,16 +439,6 @@ PrefabInstance:
       propertyPath: m_bulletCount
       value: 
       objectReference: {fileID: 1104543120}
-    - target: {fileID: 4700332354007769540, guid: 3e4dc87f5eb1d8f4f87bdea20c593aac,
-        type: 3}
-      propertyPath: hardRange
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4700332354007769540, guid: 3e4dc87f5eb1d8f4f87bdea20c593aac,
-        type: 3}
-      propertyPath: softRange
-      value: 50
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e4dc87f5eb1d8f4f87bdea20c593aac, type: 3}
 --- !u!4 &312268475 stripped
