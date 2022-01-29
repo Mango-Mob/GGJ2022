@@ -125,7 +125,10 @@ public class Player_Controller : MonoBehaviour
         move.x = (InputManager.Instance.IsKeyPressed(KeyType.D) ? 1.0f : 0.0f) - (InputManager.Instance.IsKeyPressed(KeyType.A) ? 1.0f : 0.0f);
         move.y = (InputManager.Instance.IsKeyPressed(KeyType.W) ? 1.0f : 0.0f) - (InputManager.Instance.IsKeyPressed(KeyType.S) ? 1.0f : 0.0f);
 
-        return move;
+        if (move.magnitude > 0.0f)
+            return move.normalized;
+        else
+            return Vector2.zero;
     }
 
 }

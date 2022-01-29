@@ -105,6 +105,7 @@ public class Player_Camera : MonoBehaviour
 
         GameObject bulletVFX = Instantiate(m_bulletPrefabVFX, m_gunBarrelEnd.position, Quaternion.identity);
         bulletVFX.transform.forward = (hitPosition - m_gunBarrelEnd.position).normalized;
+        bulletVFX.GetComponent<BulletVFX>().SetEndPoint(hitPosition);
 
         GameManager.Instance.NotifyAnimalsOfShot(hitPosition);
 
@@ -114,8 +115,6 @@ public class Player_Camera : MonoBehaviour
             Debug.Log("Target Hit");
             target.Kill(true);
         }
-
-
 
         m_bulletPrefabVFX.transform.forward = m_camera.transform.forward;
     }
@@ -159,9 +158,12 @@ public class Player_Camera : MonoBehaviour
 
         if (hits.Length != 0)
         {
-            Instantiate(m_dogPingPrefabVFX, hits[0].point, Quaternion.identity);
+            if (!Dog.CreateDogToLoc(transform, hits[0].point))
+            {
+                return false;
+            }
 
-            Dog.CreateDogToLoc(transform, hits[0].point);
+            Instantiate(m_dogPingPrefabVFX, hits[0].point, Quaternion.identity);
 
             m_usedDogFlag = true;
 
