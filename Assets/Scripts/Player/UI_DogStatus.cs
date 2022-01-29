@@ -37,13 +37,13 @@ public class UI_DogStatus : MonoBehaviour
         switch (GameManager.Instance.m_dog.m_currentState)
         {
             case Dog.DogState.Scout:
-                m_stateImage.sprite = m_idleSprite;
+                m_stateImage.sprite = m_moveSprite;
                 break;
             case Dog.DogState.Wait:
                 m_stateImage.sprite = m_idleSprite;
                 break;
             case Dog.DogState.Follow:
-                m_stateImage.sprite = m_moveSprite;
+                m_stateImage.sprite = m_barkSprite;
                 break;
             case Dog.DogState.Return:
                 m_stateImage.sprite = m_moveSprite;
