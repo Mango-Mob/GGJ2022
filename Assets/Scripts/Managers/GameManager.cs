@@ -8,7 +8,8 @@ public class GameManager : Singleton<GameManager>
 
     public List<SheepPack> m_packOfSheep { get; private set; }
 
-    public static int m_sheepSpawnCount = 20;
+    public int m_sheepSpawnCount = 20;
+    public int m_wolfSpawnCount = 3;
 
     public List<Wolf> m_wolfList { get; private set; }
 
@@ -16,7 +17,7 @@ public class GameManager : Singleton<GameManager>
 
     public Camera m_playerCamera { get; private set; }
 
-    private DateTime m_startTime;
+    public DateTime m_startTime { get; private set; }
 	
     public int m_ammoCount = 8;
 
@@ -27,6 +28,8 @@ public class GameManager : Singleton<GameManager>
 
         m_wolfList = new List<Wolf>(FindObjectsOfType<Wolf>());
         m_playerCamera = FindObjectOfType<Camera>();
+
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Default"), LayerMask.NameToLayer("Projectile"));
     }
     private void Start()
     {
@@ -40,10 +43,34 @@ public class GameManager : Singleton<GameManager>
             SheepPack pack = spawnOption[UnityEngine.Random.Range(0, spawnOption.Count)];
             count += pack.AddSheep(Mathf.Min(2, pack.m_maxSheep - pack.m_sheepList.Count, m_sheepSpawnCount - count));
 
-            if (pack.m_sheepList.Count > pack.m_maxSheep)
+            if (pack.m_sheepList.Count >= pack.m_maxSheep)
             {
                 spawnOption.Remove(pack);
             }
+
+            if (spawnOption.Count == 0)
+                break;
+        }
+
+        spawnOption = new List<SheepPack>(m_packOfSheep);
+        count = 0;
+        while(count < m_wolfSpawnCount)
+        {
+            SheepPack pack = spawnOption[UnityEngine.Random.Range(0, spawnOption.Count)];
+
+            if(pack.m_sheepList.Count == 0)
+            {
+                spawnOption.Remove(pack);
+                continue;
+            }
+
+            Wolf wolf = pack.AddWolf();
+            if(wolf != null)
+            {
+                count++;
+                m_wolfList.Add(wolf);
+            }
+            spawnOption.Remove(pack);
         }
     }
 

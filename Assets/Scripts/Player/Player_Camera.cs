@@ -23,8 +23,10 @@ public class Player_Camera : MonoBehaviour
 
     [Header("Objects")]
     [SerializeField] private GameObject m_crosshair;
+    [SerializeField] private Transform m_gunBarrelEnd;
 
     [Header("Prefab")]
+    [SerializeField] private GameObject m_bulletPrefabVFX;
     [SerializeField] private GameObject m_dogPingPrefabVFX;
 
     private Camera m_camera;
@@ -33,6 +35,7 @@ public class Player_Camera : MonoBehaviour
 
     // Recoil
     [Header("Recoil")]
+    [SerializeField] [Range(0.0f, 1.0f)] private float m_scopedRecoilMult = 0.3f;
     [SerializeField] private float m_verticalRecoil = 1.0f;
     [SerializeField] private float m_horizontalRecoil = 1.0f;
     [SerializeField] private float m_recoilSmoothTime = 0.3f;
@@ -67,8 +70,8 @@ public class Player_Camera : MonoBehaviour
 
     public void ShootGun()
     {
-        m_recoilVelocity.y += m_verticalRecoil;
-        m_recoilVelocity.x += Random.Range(-m_horizontalRecoil, m_horizontalRecoil);
+        m_recoilVelocity.y += m_verticalRecoil * (m_isScoped ? m_scopedRecoilMult : 1.0f);
+        m_recoilVelocity.x += Random.Range(-m_horizontalRecoil, m_horizontalRecoil) * (m_isScoped ? m_scopedRecoilMult : 1.0f);
 
         RaycastHit[] hits = Physics.RaycastAll(m_camera.transform.position, m_camera.transform.forward, 1000.0f, m_gunTargetLayerMask);
         
@@ -95,7 +98,14 @@ public class Player_Camera : MonoBehaviour
         }
 
         if (hitCollider == null)
+        {
+            GameObject missBulletVFX = Instantiate(m_bulletPrefabVFX, m_gunBarrelEnd.position, m_camera.transform.rotation);
             return;
+        }
+
+        GameObject bulletVFX = Instantiate(m_bulletPrefabVFX, m_gunBarrelEnd.position, Quaternion.identity);
+        bulletVFX.transform.forward = (hitPosition - m_gunBarrelEnd.position).normalized;
+        bulletVFX.GetComponent<BulletVFX>().SetEndPoint(hitPosition);
 
         GameManager.Instance.NotifyAnimalsOfShot(hitPosition);
 
@@ -104,7 +114,12 @@ public class Player_Camera : MonoBehaviour
         {
             Debug.Log("Target Hit");
             target.Kill(true);
+
+            if (target.GetComponent<Wolf>())
+                GameManager.Instance.m_ammoCount++;
         }
+
+        m_bulletPrefabVFX.transform.forward = m_camera.transform.forward;
     }
     public void ToggleScope(bool _active)
     {
@@ -146,9 +161,12 @@ public class Player_Camera : MonoBehaviour
 
         if (hits.Length != 0)
         {
-            Instantiate(m_dogPingPrefabVFX, hits[0].point, Quaternion.identity);
+            if (!Dog.CreateDogToLoc(transform, hits[0].point))
+            {
+                return false;
+            }
 
-            Dog.CreateDogToLoc(transform, hits[0].point);
+            Instantiate(m_dogPingPrefabVFX, hits[0].point, Quaternion.identity);
 
             m_usedDogFlag = true;
 
