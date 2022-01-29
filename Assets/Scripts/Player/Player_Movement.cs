@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player_Movement : MonoBehaviour
 {
     [SerializeField] private float m_moveSpeed = 10.0f;
+    [SerializeField] private float m_jumpSpeed = 10.0f;
     [SerializeField] private float m_gravitySpeed = 9.81f;
     [SerializeField] [Range(0.0f, 1.0f)] private float m_scopeMoveMult = 0.3f;
 
@@ -25,13 +26,18 @@ public class Player_Movement : MonoBehaviour
     {
         if (!characterController.isGrounded)
             m_yVelocity -= m_gravitySpeed * Time.deltaTime;
-        else
+        else if (m_yVelocity <= 0.0f)
             m_yVelocity = -1.0f;
 
-        characterController.Move(Vector3.up * m_yVelocity);
+        characterController.Move(Vector3.up * m_yVelocity * Time.deltaTime);
     }
     public void Move(float _x, float _z)
     {
+        if (InputManager.Instance.IsKeyDown(KeyType.SPACE) && characterController.isGrounded)
+        {
+            m_yVelocity = m_jumpSpeed;
+        }
+
         Vector3 move = transform.right * _x + transform.forward * _z;
 
         characterController.Move(move * m_moveSpeed * Time.deltaTime * (playerController.playerCamera.m_isScoped ? m_scopeMoveMult : 1.0f));

@@ -182,7 +182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3355329126320892788}
   - component: {fileID: 3355329126320892747}
-  - component: {fileID: 3355329126320892746}
+  - component: {fileID: 8552250843281757180}
   m_Layer: 8
   m_Name: Sheep
   m_TagString: Untagged
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_shotReactRange: 5
   m_maxReactDist: 8
   m_isWaitingForDestination: 1
---- !u!195 &3355329126320892746
+--- !u!195 &8552250843281757180
 NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -258,6 +258,7 @@ GameObject:
   - component: {fileID: 3355329126344003473}
   - component: {fileID: 3355329126344003472}
   - component: {fileID: 3355329126344003479}
+  - component: {fileID: 5325048292299491900}
   m_Layer: 8
   m_Name: Body
   m_TagString: Untagged
@@ -345,6 +346,25 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &5325048292299491900
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3355329126344003477}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3d93e8adad0aa174aa6dd212f875d023, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3355329126522324208
 GameObject:
   m_ObjectHideFlags: 0
@@ -591,7 +611,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4952899062058122046}
-  - component: {fileID: 3697367539509944238}
+  - component: {fileID: 4151190820166288686}
   m_Layer: 8
   m_Name: Anchor
   m_TagString: Untagged
@@ -614,7 +634,7 @@ Transform:
   m_Father: {fileID: 3355329126320892788}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3697367539509944238
+--- !u!114 &4151190820166288686
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -623,6 +643,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8850305883343315489}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3442178401f9ec04fb182c76cd00ac57, type: 3}
+  m_Script: {fileID: 11500000, guid: b52945d97bd354d45a26ef75e66e016f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  terainMask:
+    serializedVersion: 2
+    m_Bits: 1024

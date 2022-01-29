@@ -26,7 +26,7 @@ public class Sheep : MonoBehaviour
     private float m_timer;
     protected virtual void Awake()
     {
-        m_myLegs = GetComponent<NavMeshAgent>();
+        m_myLegs = GetComponentInChildren<NavMeshAgent>();
     }
 
     // Start is called before the first frame update
@@ -37,8 +37,8 @@ public class Sheep : MonoBehaviour
 
     // Update is called once per frame
     protected virtual void Update()
-    {
-        if(m_myLegs.IsNearDestination(m_stoppingDistance))
+    {        
+        if (m_myLegs.IsNearDestination(m_stoppingDistance))
         {
             if(m_timer < m_waitTime)
             {
@@ -91,8 +91,11 @@ public class Sheep : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawSphere(m_target, 0.25f);
 
-        Gizmos.color = Color.green;
+        Gizmos.color = Color.blue;
         Gizmos.DrawLine(transform.position, transform.position + transform.forward * 5f);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(transform.position, transform.position + transform.up * 5f);
     }
 
     public void StartScaredRoutine(float magnitude)
