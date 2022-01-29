@@ -58,9 +58,25 @@ public class Player_Controller : MonoBehaviour
         playerCamera.MoveCamera(mouseMove * Time.deltaTime);
 
         // Scope
-        if (!m_reloading && InputManager.Instance.GetMouseDown(MouseButton.RIGHT))
+        if (PlayerPrefs.GetInt("ToggleAim") == 1)
         {
-            playerCamera.ToggleScope(!playerCamera.m_isScoped);
+            if (!m_reloading && InputManager.Instance.GetMouseDown(MouseButton.RIGHT))
+            {
+                playerCamera.ToggleScope(!playerCamera.m_isScoped);
+            }
+        }
+        else
+        {
+            if (InputManager.Instance.GetMousePress(MouseButton.RIGHT))
+            {
+                if (!playerCamera.m_isScoped && !m_reloading)
+                    playerCamera.ToggleScope(true);
+            }
+            else
+            {
+                if (playerCamera.m_isScoped)
+                    playerCamera.ToggleScope(false);
+            }
         }
 
         // Shoot Gun
