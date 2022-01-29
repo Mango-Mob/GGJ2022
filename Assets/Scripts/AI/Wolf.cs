@@ -128,12 +128,14 @@ public class Wolf : Sheep
                     if(m_targetPack.m_sheepList.Count > 1)
                     {
                         m_targetSheep.Kill(false);
+                        m_audioAgent.Play($"WolfAttack{Random.Range(1, 3)}", false, Random.Range(0.85f, 1.25f));
                         m_timeTillKill = Random.Range(m_KillTimeMin, m_KillTimeMax);
                         TransitionTo(AIState.Blend);
                     }
                     else
                     {
                         m_targetSheep.Kill(false);
+                        m_audioAgent.Play($"WolfAttack{Random.Range(1, 3)}", false, Random.Range(0.85f, 1.25f));
                         m_timeTillKill = Random.Range(m_KillTimeMin, m_KillTimeMax);
                         TransitionTo(AIState.MovingToPack);
                     }
@@ -158,6 +160,7 @@ public class Wolf : Sheep
                 if (m_myLegs.IsNearDestination(m_killRange))
                 {
                     m_targetSheep.Kill(false);
+                    m_audioAgent.Play($"WolfAttack{Random.Range(1, 3)}", false, Random.Range(0.85f, 1.25f));
                     if (m_targetPack.m_sheepList.Count == 0)
                     {
                         m_targetPack = null;
@@ -205,6 +208,7 @@ public class Wolf : Sheep
                 m_myLegs.speed = m_unblendSpeed;
                 break;
             case AIState.Berserk:
+                m_audioAgent.Play("WolfAngry");
                 m_myLegs.speed = m_unblendSpeed;
                 m_myLegs.angularSpeed *= 1.5f;
                 m_myLegs.acceleration *= 1.5f;
@@ -244,16 +248,20 @@ public class Wolf : Sheep
     public override void Kill(bool fromShot = false)
     {
         GameManager.Instance.m_wolfList.Remove(this);
+        Reveal(false);
         TransitionTo(AIState.Idle);
+        m_audioAgent.Play("WolfDeath");
         Destroy(gameObject, 5f);
     }
 
-    public void Reveal()
+    public void Reveal(bool berserk = true)
     {
         if(!m_wolfBody.activeInHierarchy)
         {
-            TransitionTo(AIState.Berserk);
+            if(berserk)
+                TransitionTo(AIState.Berserk);
             m_audioAgent.Play("WolfReveal");
+            m_poofVFX.SetActive(true);
             m_sheepBody.SetActive(false);
             m_wolfBody.SetActive(true);
         }
