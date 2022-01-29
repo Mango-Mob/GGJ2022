@@ -116,7 +116,12 @@ public class Player_Camera : MonoBehaviour
         if (target)
         {
             Debug.Log("Target Hit");
-            target.Kill(true);
+            
+            string name = target.Kill(true);
+            if (name != string.Empty)
+            {
+                KillFeedManager.Instance.DisplayPlayerKill(name);
+            }
 
             if (target.GetComponent<Wolf>())
                 GameManager.Instance.m_ammoCount++;

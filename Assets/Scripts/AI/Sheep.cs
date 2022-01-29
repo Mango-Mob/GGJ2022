@@ -65,9 +65,10 @@ public class Sheep : MonoBehaviour
         m_isWaitingForDestination = false;
     }
 
-    public virtual void Kill(bool fromShot = false)
+    public virtual string Kill(bool fromShot = false)
     {
         GetComponentInParent<SheepPack>().Destroy(this);
+        return m_name;
     }
 
     public virtual void ReactToGunFire(Vector3 shotLoc)
