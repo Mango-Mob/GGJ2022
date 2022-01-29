@@ -483,6 +483,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 716204191044742361, guid: 3e4dc87f5eb1d8f4f87bdea20c593aac,
         type: 3}
+      propertyPath: m_dogStatus
+      value: 
+      objectReference: {fileID: 1608043775}
+    - target: {fileID: 716204191044742361, guid: 3e4dc87f5eb1d8f4f87bdea20c593aac,
+        type: 3}
       propertyPath: m_wolfCount
       value: 
       objectReference: {fileID: 1104543122}
@@ -1276,6 +1281,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ccace62955d916e4fbc76e54e336ce1a, type: 3}
+--- !u!114 &1608043775 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5295614273555872153, guid: f7629f31ad8a4574982fc484d778cf96,
+    type: 3}
+  m_PrefabInstance: {fileID: 1104543118}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a817acc75da9f1f4f838139a70c23d1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1662127161 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7948857458647621308, guid: ccace62955d916e4fbc76e54e336ce1a,

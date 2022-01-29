@@ -15,6 +15,7 @@ public class Player_Controller : MonoBehaviour
     private int m_dogCommands;
 
     [Header("UI")]
+    [SerializeField] private UI_DogStatus m_dogStatus;
     [SerializeField] private UI_AmmoCount m_ammoCount;
     [SerializeField] private UI_BulletCount m_bulletCount;
     [SerializeField] private TextMeshProUGUI m_sheepCount;
@@ -63,15 +64,18 @@ public class Player_Controller : MonoBehaviour
             audioAgent.Play("Gunshot");
         }
 
-        if (GameManager.Instance.m_dog == null && InputManager.Instance.GetMouseDown(MouseButton.MIDDLE))
+        if (InputManager.Instance.GetMouseDown(MouseButton.MIDDLE))
         {
-            if (playerCamera.CommandDog())
+            if (playerCamera.m_dogCDTimer <= 0.0f && GameManager.Instance.m_dog == null)
             {
-                audioAgent.Play("DogCall");
-            }
-            else
-            {
+                if (playerCamera.CommandDog())
+                {
+                    audioAgent.Play("DogCall");
+                }
+                else
+                {
 
+                }
             }
         }
 
@@ -79,6 +83,10 @@ public class Player_Controller : MonoBehaviour
         playerMovement.Move(move.x, move.y);
 
         // UI Update
+        if (m_dogStatus != null)
+        {
+            m_dogStatus.UpdateDogCooldown(playerCamera.m_dogCDTimer / playerCamera.m_dogCD);
+        }
         if (m_sheepCount != null)
         {
             m_sheepCount.text = $"{GameManager.Instance.GetSheepCount()} Sheep";

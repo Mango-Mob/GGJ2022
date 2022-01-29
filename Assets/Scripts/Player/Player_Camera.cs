@@ -11,6 +11,11 @@ public class Player_Camera : MonoBehaviour
     [SerializeField] [Range(1.0f, 120.0f)] private float m_aimFOV = 45.0f;
     [SerializeField] private LayerMask m_gunTargetLayerMask;
     [SerializeField] private LayerMask m_commandTargetLayerMask;
+    
+    // Dog things
+    public float m_dogCD = 10.0f;
+    public float m_dogCDTimer = 0.0f;
+    private bool m_usedDogFlag = false;
 
     [Header("Player Settings")]
     [SerializeField] private Vector2 m_lookSensitivity = new Vector2(5.0f, 5.0f);
@@ -47,6 +52,17 @@ public class Player_Camera : MonoBehaviour
         AdjustCamera(m_recoilVelocity.x, m_recoilVelocity.y);
 
         m_recoilVelocity = Vector2.SmoothDamp(m_recoilVelocity, Vector2.zero, ref m_recoilDampVelocity, m_recoilSmoothTime);
+    
+        if (m_usedDogFlag && GameManager.Instance.m_dog == null)
+        {
+            m_dogCDTimer = m_dogCD;
+            m_usedDogFlag = false;
+        }
+
+        if (m_dogCDTimer > 0.0f)
+            m_dogCDTimer -= Time.deltaTime;
+        else
+            m_dogCDTimer = 0.0f;
     }
 
     public void ShootGun()
@@ -135,6 +151,9 @@ public class Player_Camera : MonoBehaviour
             Vector3 dogSpawn = transform.position;
             dogSpawn.y = 0.0f;
             Dog.CreateDogToLoc(dogSpawn, hits[0].point);
+
+            m_usedDogFlag = true;
+
             return true;
         }
 
