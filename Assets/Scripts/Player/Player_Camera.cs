@@ -148,9 +148,7 @@ public class Player_Camera : MonoBehaviour
         {
             Instantiate(m_dogPingPrefabVFX, hits[0].point, Quaternion.identity);
 
-            Vector3 dogSpawn = transform.position;
-            dogSpawn.y = 0.0f;
-            Dog.CreateDogToLoc(dogSpawn, hits[0].point);
+            Dog.CreateDogToLoc(transform, hits[0].point);
 
             m_usedDogFlag = true;
 
