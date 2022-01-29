@@ -184,6 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_maxDogCommands: 3
+  m_reloadDelay: 0.5
   m_dogStatus: {fileID: 0}
   m_ammoCount: {fileID: 0}
   m_bulletCount: {fileID: 0}
@@ -214,7 +215,7 @@ MonoBehaviour:
   m_lookSensitivity: {x: 5, y: 5}
   m_aimSensitivity: {x: 5, y: 5}
   m_crosshair: {fileID: 0}
-  m_gunBarrelEnd: {fileID: 716204190468210195}
+  m_gunBarrelEnd: {fileID: 716204191044742360}
   m_bulletPrefabVFX: {fileID: 7910785749039747768, guid: 705483dd955f7014fb663d7c998bebdb,
     type: 3}
   m_dogPingPrefabVFX: {fileID: 9207491869889546813, guid: 91197642e3363c740bbe467dd46fbef3,

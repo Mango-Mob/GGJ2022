@@ -15,6 +15,7 @@ public class Player_Controller : MonoBehaviour
     private int m_dogCommands;
 
     private bool m_reloading = false;
+    [SerializeField] private float m_reloadDelay = 0.5f;
 
     [Header("UI")]
     [SerializeField] private UI_DogStatus m_dogStatus;
@@ -45,6 +46,13 @@ public class Player_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+#if UNITY_EDITOR
+        if (InputManager.Instance.IsKeyDown(KeyType.R))
+        {
+            GameManager.Instance.m_ammoCount++;
+        }
+#endif
+
         // Aim Camera
         Vector2 mouseMove = InputManager.Instance.GetMouseDelta();
         playerCamera.MoveCamera(mouseMove * Time.deltaTime);
@@ -101,11 +109,12 @@ public class Player_Controller : MonoBehaviour
     IEnumerator ReloadRifle()
     {
         m_reloading = true;
-        yield return new WaitForSecondsRealtime(0.5f);
+        yield return new WaitForSecondsRealtime(m_reloadDelay);
 
         playerCamera.ToggleScope(false);
         audioAgent.Play("RifleLoad");
 
+        yield return new WaitForSecondsRealtime(0.3f);
         m_reloading = false;
     }
 
