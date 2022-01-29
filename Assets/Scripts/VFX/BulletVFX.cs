@@ -7,6 +7,8 @@ public class BulletVFX : MonoBehaviour
     [SerializeField] private float m_speed = 20.0f;
     [SerializeField] private Rigidbody m_rigidBody;
     [SerializeField] private GameObject m_trail;
+    [SerializeField] private VFXTimerScript m_timer;
+
     public LayerMask m_collisionMask;
 
     // Start is called before the first frame update
@@ -15,19 +17,21 @@ public class BulletVFX : MonoBehaviour
         m_rigidBody.velocity = transform.forward * m_speed;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetEndPoint(Vector3 _position)
     {
-        
+        float distanceToTravel = (transform.position - _position).magnitude;
+        m_timer.m_timer = distanceToTravel / m_speed;
     }
 
+    private void OnDestroy()
+    {
+        if (m_trail == null)
+            return;
+
+        m_trail.GetComponent<VFXTimerScript>().m_startedTimer = true;
+        m_trail.transform.SetParent(null);
+    }
     private void OnTriggerEnter(Collider other)
     {
-        if (((1 << other.gameObject.layer) & m_collisionMask) != 0)
-        {
-            m_trail.transform.SetParent(null);
-            m_trail.GetComponent<VFXTimerScript>();
-            Destroy(this);
-        }
     }
 }
