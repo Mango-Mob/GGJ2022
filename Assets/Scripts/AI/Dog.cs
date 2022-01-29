@@ -7,7 +7,7 @@ using UnityEngine.AI;
 
 public class Dog : MonoBehaviour
 {
-    public static void CreateDogToLoc(Transform player, Vector3 scoutLocation)
+    public static bool CreateDogToLoc(Transform player, Vector3 scoutLocation)
     {
         NavMeshPath temp = new NavMeshPath();
         if(NavMesh.CalculatePath(player.position, scoutLocation, NavMesh.AllAreas, temp))
@@ -17,7 +17,9 @@ public class Dog : MonoBehaviour
             dogObject.GetComponent<Dog>().Awake();
             dogObject.GetComponent<Dog>().owner = player;
             dogObject.GetComponent<Dog>().SetTargetDestination(scoutLocation);
+            return true;
         }
+        return false;
     }
 
     public Transform owner;
