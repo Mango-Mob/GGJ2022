@@ -28,10 +28,18 @@ public class BulletVFX : MonoBehaviour
         if (m_trail == null)
             return;
 
-        m_trail.GetComponent<VFXTimerScript>().m_startedTimer = true;
         m_trail.transform.SetParent(null);
+        m_trail.GetComponent<VFXTimerScript>().m_startedTimer = true;
+        m_trail.GetComponent<VFXTimerScript>().enabled = true;
     }
+
     private void OnTriggerEnter(Collider other)
     {
+        if (m_collisionMask == (m_collisionMask | (1 << other.gameObject.layer)))
+        {
+            m_trail.transform.SetParent(null);
+            m_trail.GetComponent<VFXTimerScript>().m_startedTimer = true;
+            m_trail.GetComponent<VFXTimerScript>().enabled = true;
+        }
     }
 }

@@ -50,10 +50,11 @@ MonoBehaviour:
   m_soundDelayPerSheep: -1.2
   m_soundDelay: 15
   m_timeTillNextSound: 0
-  m_minSheep: 3
   m_maxSheep: 6
   m_sheepPrefabs:
   - {fileID: 3355329126320892745, guid: aed3f8fa65b0ab84a9fbf4952ada79ee, type: 3}
+  m_wolfPrefabs:
+  - {fileID: 3681095919806284978, guid: d64de1734d557994ba54902daa0711f6, type: 3}
 --- !u!114 &7948857458647621311
 MonoBehaviour:
   m_ObjectHideFlags: 0
