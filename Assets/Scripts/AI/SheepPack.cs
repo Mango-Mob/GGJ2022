@@ -114,6 +114,9 @@ public class SheepPack : MonoBehaviour
             pos += item.transform.position;
         }
 
+        if(m_sheepList.Count == 0)
+            return transform.position;
+
         return pos / m_sheepList.Count;
     }
 
