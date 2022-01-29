@@ -22,6 +22,7 @@ public class GameManager : Singleton<GameManager>
     public DateTime m_startTime { get; private set; }
 	
     public int m_ammoCount = 8;
+    MultiAudioAgent m_music;
 
     public List<string> m_sheepNames { get; private set; }
     public List<string> m_wolfNames { get; private set; }
@@ -55,6 +56,10 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
+        m_music = GetComponent<MultiAudioAgent>();
+
+        m_music.Play("The Old Country Farm MP3", true);
+
         m_startTime = DateTime.Now;
 
         List<SheepPack> spawnOption = new List<SheepPack>(m_packOfSheep);
