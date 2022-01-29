@@ -167,7 +167,7 @@ public class Player_Camera : MonoBehaviour
     }
     public bool CommandDog()
     {
-        RaycastHit[] hits = Physics.RaycastAll(transform.position, m_camera.transform.forward, 1000.0f, m_commandTargetLayerMask);
+        RaycastHit[] hits = Physics.RaycastAll(m_camera.transform.position, m_camera.transform.forward, 1000.0f, m_commandTargetLayerMask);
 
         if (hits.Length != 0)
         {

@@ -9,6 +9,7 @@ public class Player_Controller : MonoBehaviour
     [Header("General")]
     [SerializeField] private int m_maxDogCommands = 3;
 
+    public Animator m_animator { get; private set; }
     public Player_Camera playerCamera { get; private set; }
     public Player_Movement playerMovement { get; private set; }
     public MultiAudioAgent audioAgent { get; private set; }
@@ -27,6 +28,7 @@ public class Player_Controller : MonoBehaviour
     void Start()
     {
         audioAgent = GetComponent<MultiAudioAgent>();
+        m_animator = GetComponentInChildren<Animator>();
         playerCamera = GetComponentInChildren<Player_Camera>();
         playerMovement = GetComponentInChildren<Player_Movement>();
 
@@ -58,36 +60,43 @@ public class Player_Controller : MonoBehaviour
         playerCamera.MoveCamera(mouseMove * Time.deltaTime);
 
         // Scope
-        if (PlayerPrefs.GetInt("ToggleAim") == 1)
+        if (!m_animator.GetBool("IsSprinting"))
         {
-            if (!m_reloading && InputManager.Instance.GetMouseDown(MouseButton.RIGHT))
+            if (PlayerPrefs.GetInt("ToggleAim") == 1)
             {
-                playerCamera.ToggleScope(!playerCamera.m_isScoped);
+                if (!m_reloading && InputManager.Instance.GetMouseDown(MouseButton.RIGHT))
+                {
+                    playerCamera.ToggleScope(!playerCamera.m_isScoped);
+                }
+            }
+            else
+            {
+                if (InputManager.Instance.GetMousePress(MouseButton.RIGHT))
+                {
+                    if (!playerCamera.m_isScoped && !m_reloading)
+                        playerCamera.ToggleScope(true);
+                }
+                else
+                {
+                    if (playerCamera.m_isScoped)
+                        playerCamera.ToggleScope(false);
+                }
+            }
+
+            // Shoot Gun
+            if (!m_reloading && GameManager.Instance.m_ammoCount > 0 && InputManager.Instance.GetMouseDown(MouseButton.LEFT))
+            {
+                GameManager.Instance.m_ammoCount--;
+                playerCamera.ShootGun();
+
+                audioAgent.Play("Gunshot");
+                StartCoroutine(ReloadRifle());
             }
         }
         else
         {
-            if (InputManager.Instance.GetMousePress(MouseButton.RIGHT))
-            {
-                if (!playerCamera.m_isScoped && !m_reloading)
-                    playerCamera.ToggleScope(true);
-            }
-            else
-            {
-                if (playerCamera.m_isScoped)
-                    playerCamera.ToggleScope(false);
-            }
-        }
-
-        // Shoot Gun
-        if (!m_reloading && GameManager.Instance.m_ammoCount > 0 && InputManager.Instance.GetMouseDown(MouseButton.LEFT))
-        {
-            GameManager.Instance.m_ammoCount--;
-            playerCamera.ShootGun();
-
-
-            audioAgent.Play("Gunshot");
-            StartCoroutine(ReloadRifle());
+            if (playerCamera.m_isScoped)
+                playerCamera.ToggleScope(false);
         }
 
         if (InputManager.Instance.GetMouseDown(MouseButton.MIDDLE))
