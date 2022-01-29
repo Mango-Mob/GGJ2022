@@ -9,7 +9,8 @@ public class Player_Controller : MonoBehaviour
     [Header("General")]
     [SerializeField] private int m_maxDogCommands = 3;
 
-    private Player_Camera playerCamera;
+    public Player_Camera playerCamera { get; private set; }
+    public Player_Movement playerMovement { get; private set; }
     public MultiAudioAgent audioAgent { get; private set; }
     private int m_dogCommands;
 
@@ -24,6 +25,7 @@ public class Player_Controller : MonoBehaviour
     {
         audioAgent = GetComponent<MultiAudioAgent>();
         playerCamera = GetComponentInChildren<Player_Camera>();
+        playerMovement = GetComponentInChildren<Player_Movement>();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -73,6 +75,9 @@ public class Player_Controller : MonoBehaviour
             }
         }
 
+        Vector2 move = GetMovementAxis();
+        playerMovement.Move(move.x, move.y);
+
         // UI Update
         if (m_sheepCount != null)
         {
@@ -83,4 +88,15 @@ public class Player_Controller : MonoBehaviour
             m_wolfCount.text = $"{GameManager.Instance.m_wolfList.Count} Wolves";
         }
     }
+
+    static Vector2 GetMovementAxis()
+    {
+        Vector2 move = Vector2.zero;
+
+        move.x = (InputManager.Instance.IsKeyPressed(KeyType.D) ? 1.0f : 0.0f) - (InputManager.Instance.IsKeyPressed(KeyType.A) ? 1.0f : 0.0f);
+        move.y = (InputManager.Instance.IsKeyPressed(KeyType.W) ? 1.0f : 0.0f) - (InputManager.Instance.IsKeyPressed(KeyType.S) ? 1.0f : 0.0f);
+
+        return move;
+    }
+
 }

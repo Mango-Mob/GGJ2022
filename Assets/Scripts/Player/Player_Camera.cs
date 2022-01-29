@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player_Camera : MonoBehaviour
 {
+    private Player_Controller playerController;
+
     [Header("General")]
     [SerializeField] [Range(1.0f, 120.0f)] private float m_lookFOV = 90.0f;
     [SerializeField] [Range(1.0f, 120.0f)] private float m_aimFOV = 45.0f;
@@ -36,6 +38,7 @@ public class Player_Camera : MonoBehaviour
     void Start()
     {
         m_camera = GetComponentInChildren<Camera>();
+        playerController = GetComponentInParent<Player_Controller>();
     }
 
     private void Update()
@@ -51,7 +54,7 @@ public class Player_Camera : MonoBehaviour
         m_recoilVelocity.y += m_verticalRecoil;
         m_recoilVelocity.x += Random.Range(-m_horizontalRecoil, m_horizontalRecoil);
 
-        RaycastHit[] hits = Physics.RaycastAll(transform.position, m_camera.transform.forward, 1000.0f, m_gunTargetLayerMask);
+        RaycastHit[] hits = Physics.RaycastAll(m_camera.transform.position, m_camera.transform.forward, 1000.0f, m_gunTargetLayerMask);
         
         Collider hitCollider = null;
         Vector3 hitPosition = Vector3.zero;
@@ -65,7 +68,7 @@ public class Player_Camera : MonoBehaviour
             float closestDistance = Mathf.Infinity;
             foreach (var hit in hits)
             {
-                float distance = Vector3.Distance(transform.position, hit.point);
+                float distance = Vector3.Distance(m_camera.transform.position, hit.point);
                 if (distance < closestDistance)
                 {
                     hitCollider = hit.collider;
