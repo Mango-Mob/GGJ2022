@@ -166,5 +166,11 @@ public class SheepPack : MonoBehaviour
         m_soundAgent.Play("SheepDeath", false, Random.Range(0.85f, 1.25f));
         m_sheepList.Remove(sheep);
         Destroy(sheep.gameObject);
+
+        if (m_sheepList.Count == 0)
+        {
+            GameManager.Instance.RemovePack(this);
+            Destroy(gameObject);
+        }
     }
 }

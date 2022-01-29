@@ -103,6 +103,15 @@ public class GameManager : Singleton<GameManager>
 
     protected virtual void Update()
     {
+#if UNITY_EDITOR
+        if(InputManager.Instance.IsKeyDown(KeyType.P))
+        {
+            foreach (var item in m_wolfList)
+            {
+                item.Reveal();
+            }
+        }
+#endif
         if(m_wolfList.Count == 0)
         {
             //Victory!
