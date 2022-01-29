@@ -12,9 +12,11 @@ public class Dog : MonoBehaviour
         scoutLocation.y = 0;
         GameObject dogObject = GameObject.Instantiate(GameManager.Instance.m_dogPrefab, player.position, Quaternion.LookRotation((scoutLocation - player.position).normalized, Vector3.up));
         dogObject.GetComponent<Dog>().Awake();
+        dogObject.GetComponent<Dog>().owner = player;
         dogObject.GetComponent<Dog>().SetTargetDestination(scoutLocation);
     }
 
+    public Transform owner;
     protected NavMeshAgent m_myLegs;
     protected Animator m_myAnimator;
     private MultiAudioAgent m_audioAgent;
@@ -41,7 +43,6 @@ public class Dog : MonoBehaviour
 
     private Vector3 m_scoutLoc;
     private float m_timer = 0;
-    private Vector3 m_spawnLoc;
     private bool m_hasFoundWolf = false;
     private Wolf m_wolfBody = null;
 
@@ -52,7 +53,6 @@ public class Dog : MonoBehaviour
         m_myAnimator = GetComponentInChildren<Animator>();
         m_audioAgent = GetComponent<MultiAudioAgent>();
         m_myLegs.updateRotation = false;
-        m_spawnLoc = transform.position;
         TransitionTo(DogState.Scout);
     }
 
@@ -114,8 +114,8 @@ public class Dog : MonoBehaviour
                 }
                 break;
             case DogState.Return:
-                m_myLegs.SetDestination(m_spawnLoc);
-                SetTargetRotationTo(m_spawnLoc);
+                m_myLegs.SetDestination(owner.transform.position);
+                SetTargetRotationTo(owner.transform.position);
                 if (m_myLegs.IsNearDestination(m_stopRange))
                 {
                     GameManager.Instance.m_dog = null;
