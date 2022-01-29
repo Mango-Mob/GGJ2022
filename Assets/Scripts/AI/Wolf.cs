@@ -162,10 +162,12 @@ public class Wolf : Sheep
             case AIState.Berserk:
                 if (m_targetSheep == null)
                 {
-                    if (m_targetPack != null && m_targetPack.m_sheepList.Count > 0)
-                        m_targetSheep = m_targetPack.GetClosestSheep(transform.position);
-                    else if (GameManager.Instance.m_packOfSheep.Count > 0)
-                        m_targetPack = this.GetClosest<SheepPack>(GameManager.Instance.m_packOfSheep);
+                    Sheep nextTarget = GameManager.Instance.GetClosestSheep(transform.position);
+                    
+                    if(nextTarget != null)
+                    {
+                        m_targetSheep = nextTarget;
+                    }
                     else
                     {
                         TransitionTo(AIState.Idle);
@@ -186,7 +188,7 @@ public class Wolf : Sheep
                     }
 
                     m_audioAgent.Play($"WolfAttack{Random.Range(1, 3)}", false, Random.Range(0.85f, 1.25f));
-                    if (m_targetPack.m_sheepList.Count == 0)
+                    if (m_targetPack != null && m_targetPack.m_sheepList.Count == 0)
                     {
                         m_targetPack = null;
                     }

@@ -109,6 +109,15 @@ public class GameManager : Singleton<GameManager>
 
     protected virtual void Update()
     {
+#if UNITY_EDITOR
+        if(InputManager.Instance.IsKeyDown(KeyType.P))
+        {
+            foreach (var item in m_wolfList)
+            {
+                item.Reveal();
+            }
+        }
+#endif
         if (m_endConditionMet)
         {
             LevelManager.Instance.LoadNewLevel("EndScreen");
@@ -173,5 +182,26 @@ public class GameManager : Singleton<GameManager>
     {
         if(pack != null)
             m_packOfSheep.Remove(pack);
+    }
+
+    public Sheep GetClosestSheep(Vector3 position)
+    {
+        Sheep closest = null;
+        float distance = float.MaxValue;
+
+        foreach (var pack in m_packOfSheep)
+        {
+            foreach (var sheep in pack.m_sheepList)
+            {
+                float curr = Vector3.Distance(position, sheep.transform.position);
+
+                if(curr < distance)
+                {
+                    distance = curr;
+                    closest = sheep;
+                }
+            }
+        }
+        return closest;
     }
 }
