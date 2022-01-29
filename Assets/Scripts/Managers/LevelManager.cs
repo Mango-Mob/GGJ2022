@@ -7,7 +7,7 @@ using UnityEngine.UI;
 /// <summary>
 /// William de Beer
 /// </summary>
-public class LevelManager : SingletonPersistent<MonoBehaviour>
+public class LevelManager : SingletonPersistent<LevelManager>
 {
     public enum Transition
     {
@@ -32,14 +32,13 @@ public class LevelManager : SingletonPersistent<MonoBehaviour>
     protected override void Awake()
     {
         base.Awake();
-        //transitionPrefab = Resources.Load<GameObject>("Transitions/TransitionCanvas");
-        //youdiedPrefab = Resources.Load<GameObject>("Transitions/YouDiedCanvas");
-        //youwinPrefab = Resources.Load<GameObject>("Transitions/YouWinCanvas");
+        transitionPrefab = Resources.Load<GameObject>("Transitions/TransitionCanvas");
+        youdiedPrefab = Resources.Load<GameObject>("Transitions/YouDiedCanvas");
+        youwinPrefab = Resources.Load<GameObject>("Transitions/YouWinCanvas");
     }
 
     private void Start()
-    {
-        DontDestroyOnLoad(this.gameObject);
+    { 
         loadingNextArea = false;
     }
 

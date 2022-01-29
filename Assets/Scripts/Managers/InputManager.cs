@@ -44,7 +44,7 @@ public enum StickType
 
 #endregion
 
-public class InputManager : SingletonPersistent<MonoBehaviour>
+public class InputManager : SingletonPersistent<InputManager>
 {
     protected Mouse mouse;
     protected Keyboard keyboard = Keyboard.current;
@@ -89,15 +89,18 @@ public class InputManager : SingletonPersistent<MonoBehaviour>
     private Dictionary<string, Bind[]> m_binds;
 
     public bool isInGamepadMode { get; private set; } = false;
-    private void InitialFunc()
+
+
+    protected override void Awake()
     {
+        base.Awake();
         mouse = Mouse.current;
         Debug.Log($"{mouse.displayName} has connected as a PRIMARY_MOUSE to the InputManager.");
         keyboard = Keyboard.current;
         Debug.Log($"{keyboard.displayName} has connected as a PRIMARY_KEYBOARD to the InputManager.");
         gamepadCount = Gamepad.all.Count;
 
-        if(gamepadCount > 0)
+        if (gamepadCount > 0)
         {
             for (int i = 0; i < gamepadCount; i++)
             {
@@ -107,7 +110,7 @@ public class InputManager : SingletonPersistent<MonoBehaviour>
 
         m_binds = new Dictionary<string, Bind[]>();
         int keyCount = PlayerPrefs.GetInt("BindCount", 0);
-        if(keyCount == 0)
+        if (keyCount == 0)
         {
             SetDefaultKeyBinds();
         }
@@ -115,6 +118,7 @@ public class InputManager : SingletonPersistent<MonoBehaviour>
         {
             LoadBinds();
         }
+        
     }
 
     private void Update()
@@ -940,7 +944,8 @@ public class InputManager : SingletonPersistent<MonoBehaviour>
                 return false;
             case MouseButton.LEFT:
                 return mouse.leftButton.wasPressedThisFrame;
-
+            case MouseButton.MIDDLE:
+                return mouse.middleButton.wasPressedThisFrame;
             case MouseButton.RIGHT:
                 return mouse.rightButton.wasPressedThisFrame;
         }
