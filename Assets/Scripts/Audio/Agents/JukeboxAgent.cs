@@ -30,9 +30,9 @@ namespace AudioSystem.Agents
         protected AudioPlayer player;
         protected AudioPlayer backPlayer;
 
-        protected override void Start()
+        protected override void Awake()
         {
-            base.Start();
+            base.Awake();
             player = new AudioPlayer(gameObject, null);
             player.SetVolume(AudioManager.Instance .GetVolume(type, this) * localVolume);
             backPlayer = new AudioPlayer(gameObject, null);
