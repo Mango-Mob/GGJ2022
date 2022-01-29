@@ -885,6 +885,12 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 223099860427965733, guid: 6909873de4633954bac30b1b41cd98ea,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 623cebda0294b2e4e9cc4c7541913dd2,
+        type: 3}
     - target: {fileID: 223099861445599532, guid: 6909873de4633954bac30b1b41cd98ea,
         type: 3}
       propertyPath: m_Name
@@ -1004,6 +1010,118 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 223099861882019235, guid: 6909873de4633954bac30b1b41cd98ea,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 623cebda0294b2e4e9cc4c7541913dd2,
+        type: 3}
+    - target: {fileID: 1021907645627748963, guid: 6909873de4633954bac30b1b41cd98ea,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 69
+      objectReference: {fileID: 0}
+    - target: {fileID: 1021907645627748963, guid: 6909873de4633954bac30b1b41cd98ea,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -39.700012
+      objectReference: {fileID: 0}
+    - target: {fileID: 2013315760360094682, guid: 6909873de4633954bac30b1b41cd98ea,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -389.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3307897255033495292, guid: 6909873de4633954bac30b1b41cd98ea,
+        type: 3}
+      propertyPath: m_Text
+      value: '
+
+        (Modelling & UI)
+
+        (AI/Gameplay Programmer)
+
+        (Animation,
+        Modeling & VFX )
+
+        (Level Designer)
+
+        (Modeling/Texturing &
+        VFX)
+
+        (Player/Gameplay Programmer)
+
+        (Animation & Modeling)
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3594550703730624602, guid: 6909873de4633954bac30b1b41cd98ea,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3916214069465679248, guid: 6909873de4633954bac30b1b41cd98ea,
+        type: 3}
+      propertyPath: m_Text
+      value: " Team\n - Fiona Cheung            \n - Michael Jordan       \n - Peter
+        Nguyen         \n - Roger Painting       \n - Sabrina Li      \n - William
+        De Beer \n - William Lawrence\n\nMusic\n - \"Tomato Farm\" by Chillpeach                        
+        (YT)\n - \"The Old County Farm\" by Darren Curtis     (YT)\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4875811429174106054, guid: 6909873de4633954bac30b1b41cd98ea,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 760
+      objectReference: {fileID: 0}
+    - target: {fileID: 4875811429174106054, guid: 6909873de4633954bac30b1b41cd98ea,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -297
+      objectReference: {fileID: 0}
+    - target: {fileID: 5438948769088231146, guid: 6909873de4633954bac30b1b41cd98ea,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5621563324140154262, guid: 6909873de4633954bac30b1b41cd98ea,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5939411611731225556, guid: 6909873de4633954bac30b1b41cd98ea,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -760
+      objectReference: {fileID: 0}
+    - target: {fileID: 5939411611731225556, guid: 6909873de4633954bac30b1b41cd98ea,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -297
+      objectReference: {fileID: 0}
+    - target: {fileID: 5942622222376949720, guid: 6909873de4633954bac30b1b41cd98ea,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 5942622222376949720, guid: 6909873de4633954bac30b1b41cd98ea,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 5942622222376949720, guid: 6909873de4633954bac30b1b41cd98ea,
+        type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532115992880097438, guid: 6909873de4633954bac30b1b41cd98ea,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 274
+      objectReference: {fileID: 0}
+    - target: {fileID: 6532115992880097438, guid: 6909873de4633954bac30b1b41cd98ea,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 56
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6909873de4633954bac30b1b41cd98ea, type: 3}
