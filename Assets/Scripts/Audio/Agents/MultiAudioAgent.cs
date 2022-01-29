@@ -177,18 +177,6 @@ namespace AudioSystem.Agents
             Debug.LogError($"MultiAudioAgent on gameObject: \"{gameObject.name}\" doesn't contain \"{clipName}\".");
             return false;
         }
-
-        public AudioPlayer GetPlayerWhich(string clipName)
-        {
-            foreach (var player in players)
-            {
-                if(player.IsPlaying() && player.currentClip.name == clipName)
-                {
-                    return player;
-                }
-            }
-            return null;
-        }
     }
 
 }
