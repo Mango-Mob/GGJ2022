@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
@@ -13,6 +14,8 @@ public class GameManager : Singleton<GameManager>
 
     public Camera m_playerCamera { get; private set; }
 
+    private DateTime m_startTime;
+	
     public int m_ammoCount = 8;
 
     protected override void Awake()
@@ -22,10 +25,30 @@ public class GameManager : Singleton<GameManager>
         m_wolfList = new List<Wolf>(FindObjectsOfType<Wolf>());
         m_playerCamera = FindObjectOfType<Camera>();
     }
+    private void Start()
+    {
+        m_startTime = DateTime.Now;
+    }
 
     protected virtual void Update()
     {
-        
+        if(m_wolfList.Count == 0)
+        {
+            //Victory!
+            GameOverScreen.SetScene(ScreenState.Victory, "Wolves are defeated", GetSheepCount(), m_startTime);
+            return;
+        }
+        if(m_packOfSheep.Count == 0)
+        {
+            //Defeat :(
+            GameOverScreen.SetScene(ScreenState.Defeat, "Wolves have killed all the sheep", m_wolfList.Count, m_startTime);
+            return;
+        }
+        if(false)
+        {
+            GameOverScreen.SetScene(ScreenState.Defeat, "You have ran out of ammo", m_wolfList.Count, m_startTime);
+            return;
+        }
     }
 
     public void NotifyAnimalsOfShot(Vector3 hitLoc)

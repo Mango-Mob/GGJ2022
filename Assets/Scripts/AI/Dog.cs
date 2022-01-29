@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using AudioSystem.Agents;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -16,7 +17,8 @@ public class Dog : MonoBehaviour
 
     protected NavMeshAgent m_myLegs;
     protected Animator m_myAnimator;
-    
+    private MultiAudioAgent m_audioAgent;
+
     [SerializeField] private GameObject m_detectVFX;
 
     public enum DogState
@@ -48,6 +50,7 @@ public class Dog : MonoBehaviour
         GameManager.Instance.m_dog = this;
         m_myLegs = GetComponent<NavMeshAgent>();
         m_myAnimator = GetComponentInChildren<Animator>();
+        m_audioAgent = GetComponent<MultiAudioAgent>();
         m_myLegs.updateRotation = false;
         m_spawnLoc = transform.position;
         TransitionTo(DogState.Scout);
@@ -191,5 +194,10 @@ public class Dog : MonoBehaviour
             Handles.color = Color.yellow;
             Handles.DrawWireDisc(transform.position, Vector3.up, m_detectRange);
         }
+    }
+
+    public void Bark()
+    {
+        m_audioAgent.Play($"DogBark{Random.Range(1, 5)}", false, Random.Range(0.85f, 1.25f));
     }
 }
