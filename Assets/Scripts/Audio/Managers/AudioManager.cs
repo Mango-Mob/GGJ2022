@@ -126,6 +126,9 @@ namespace AudioSystem.Managers
             if (agent == null) //Edge case
                 return 1.0f;
 
+            if (agent.IsGlobal)
+                return 1.0f;
+            
             float max = 0.0f;
             foreach (var listener in listeners)
             {
