@@ -69,7 +69,7 @@ public class SheepPack : MonoBehaviour
             }
             else
             {
-                GameObject wolf = Instantiate(m_wolfPrefabs[Random.Range(0, m_sheepPrefabs.Length)], loc, Quaternion.Euler(new Vector3(0, Random.Range(0f, 360f), 0)));
+                GameObject wolf = Instantiate(m_wolfPrefabs[Random.Range(0, m_wolfPrefabs.Length)], loc, Quaternion.Euler(new Vector3(0, Random.Range(0f, 360f), 0)));
                 return wolf.GetComponent<Wolf>();
             }
         }

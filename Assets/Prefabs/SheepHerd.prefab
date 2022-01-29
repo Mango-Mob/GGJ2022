@@ -53,6 +53,9 @@ MonoBehaviour:
   m_maxSheep: 6
   m_sheepPrefabs:
   - {fileID: 3355329126320892745, guid: aed3f8fa65b0ab84a9fbf4952ada79ee, type: 3}
+  - {fileID: 3355329126320892745, guid: 312445e71e8f35640801edcf96227b78, type: 3}
+  - {fileID: 3355329126320892745, guid: 5c8137bc1cf066042bd5a41d4c0f4869, type: 3}
+  - {fileID: 3355329126320892745, guid: 4e5c322be65599a47b5b5b93f762158e, type: 3}
   m_wolfPrefabs:
   - {fileID: 3681095919806284978, guid: d64de1734d557994ba54902daa0711f6, type: 3}
 --- !u!114 &7948857458647621311
@@ -69,6 +72,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   localVolume: 0.5
   isMuted: 0
+  IsGlobal: 0
   audioClips:
   - {fileID: 8300000, guid: 574fac102aa71ab4093cef90dcafa774, type: 3}
   - {fileID: 8300000, guid: 9b11146573689394c9259e596286cfa7, type: 3}
