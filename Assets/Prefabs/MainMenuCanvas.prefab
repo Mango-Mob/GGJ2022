@@ -3466,8 +3466,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -70, y: -70}
+  m_AnchoredPosition: {x: 0, y: -10}
+  m_SizeDelta: {x: -70, y: -50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5758891527184287612
 CanvasRenderer:
@@ -3510,10 +3510,10 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "Controls:\n[W/A/S/D] to move\n[Left Mouse] to Shoot\n[Middle Mouse] to
-    Send dog\n[Space] to Jump\n\nGoal:\nFind and kill all the disguised wolves before
-    \nthey kill all of your the sheep.\n\nTips:\nWolves act like sheep when you are
-    watching.\nSend your dog to investigate nearby sheep.\nOnce you run out of bullets,
-    you lose.\nReplenish bullets when you kill a wolf.\n"
+    Send dog\n[Space] to Jump\n[L. Shift] to Sprint\n\nGoal:\nFind and kill all the
+    disguised wolves before \nthey kill all of your the sheep.\n\nTips:\nWolves act
+    like sheep when you are watching.\nSend your dog to investigate nearby sheep.\nOnce
+    you run out of bullets, you lose.\nReplenish bullets when you kill a wolf.\n"
 --- !u!1 &2023445228568650187
 GameObject:
   m_ObjectHideFlags: 0
