@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using AudioSystem.Agents;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -9,10 +10,18 @@ public class SheepPack : MonoBehaviour
 
     public float m_roamRangeMin = 5f;
     public float m_roamRangeMax = 10f;
+    public float m_soundDelayPerSheep = -1.5f;
+    public float m_soundDelay = 10.0f;
 
+    public float m_timeTillNextSound = 0.0f;
+
+    private MultiAudioAgent m_soundAgent;
     public void Awake()
     {
         m_sheepList = new List<Sheep>(GetComponentsInChildren<Sheep>());
+        m_soundAgent = GetComponent<MultiAudioAgent>();
+        float delay = m_soundDelay + m_soundDelayPerSheep * m_sheepList.Count;
+        m_timeTillNextSound = Random.Range(delay * 0.85f, delay * 1.25f);
     }
 
     // Start is called before the first frame update
@@ -36,6 +45,15 @@ public class SheepPack : MonoBehaviour
         {
             (GameManager.Instance as GameManager).RemovePack(this);
             Destroy(gameObject);
+        }
+
+        m_timeTillNextSound -= Time.deltaTime;
+        if (m_timeTillNextSound <= 0f)
+        {
+            m_soundAgent.Play("SheepIdle", false, Random.Range(0.85f, 1.25f));
+
+            float delay = m_soundDelay + m_soundDelayPerSheep * m_sheepList.Count;
+            m_timeTillNextSound = Random.Range(delay * 0.85f, delay * 1.25f);
         }
     }
 
@@ -93,6 +111,7 @@ public class SheepPack : MonoBehaviour
 
     public void Destroy(Sheep sheep)
     {
+        m_soundAgent.Play("SheepDeath", false, Random.Range(0.85f, 1.25f));
         m_sheepList.Remove(sheep);
         Destroy(sheep.gameObject);
     }

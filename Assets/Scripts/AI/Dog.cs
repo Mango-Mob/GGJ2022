@@ -41,7 +41,7 @@ public class Dog : MonoBehaviour
     private float m_timer = 0;
     private Vector3 m_spawnLoc;
     private bool m_hasFoundWolf = false;
-    private GameObject m_wolfBody = null;
+    private Wolf m_wolfBody = null;
 
     protected virtual void Awake()
     {
@@ -90,7 +90,7 @@ public class Dog : MonoBehaviour
                             m_waitTime = m_wolfTrackTime;
                         }
 
-                        m_wolfBody = this.GetClosest<Wolf>(localWolves).gameObject;
+                        m_wolfBody = this.GetClosest<Wolf>(localWolves);
                         TransitionTo(DogState.Follow);
                     }
                 }
@@ -100,6 +100,9 @@ public class Dog : MonoBehaviour
                 }
                 break;
             case DogState.Follow:
+                if(!GameManager.Instance.m_wolfList.Contains(m_wolfBody))
+                    TransitionTo(DogState.Return);
+
                 m_myLegs.SetDestinationNear(m_wolfBody.transform.position, 0.75f, 1.25f);
                 SetTargetRotationTo(m_wolfBody.transform.position);
                 if (m_timer <= 0)

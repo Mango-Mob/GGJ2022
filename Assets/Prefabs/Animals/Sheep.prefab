@@ -221,6 +221,8 @@ MonoBehaviour:
   m_stoppingDistance: 1
   m_waitMin: 3
   m_waitMax: 5
+  m_shotReactRange: 5
+  m_maxReactDist: 8
   m_isWaitingForDestination: 1
 --- !u!195 &3355329126320892746
 NavMeshAgent:

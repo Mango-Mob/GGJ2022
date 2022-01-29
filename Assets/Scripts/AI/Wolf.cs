@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using AudioSystem.Agents;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -32,10 +33,17 @@ public class Wolf : Sheep
     public float m_KillTimeMax = 15.0f;
     public float m_killRange = 2.0f;
 
+    private MultiAudioAgent m_audioAgent;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        m_audioAgent = GetComponent<MultiAudioAgent>();
+    }
     // Start is called before the first frame update
     protected override void Start()
     {
-        m_targetPack = GameManager.Instance.GetNearestPack(transform.position);
+        m_targetPack = this.GetClosest<SheepPack>(GameManager.Instance.m_packOfSheep);
 
         m_target = Vector3.zero;
         m_myLegs.speed = m_unblendSpeed;
@@ -135,7 +143,7 @@ public class Wolf : Sheep
         {
             case AIState.MovingToPack:
                 m_myLegs.speed = m_unblendSpeed;
-                m_targetPack = GameManager.Instance.GetNearestPack(transform.position);
+                m_targetPack = this.GetClosest<SheepPack>(GameManager.Instance.m_packOfSheep);
                 m_target = Vector3.zero;
                 m_myLegs.SetDestination(m_targetPack.GetAveragePosition());
                 m_timeTillKill = Random.Range(m_KillTimeMin, m_KillTimeMax);
@@ -195,7 +203,11 @@ public class Wolf : Sheep
 
     public void Reveal()
     {
-        m_sheepBody.SetActive(false);
-        m_wolfBody.SetActive(true);
+        if(!m_wolfBody.activeInHierarchy)
+        {
+            m_audioAgent.Play("WolfReveal");
+            m_sheepBody.SetActive(false);
+            m_wolfBody.SetActive(true);
+        }
     }
 }

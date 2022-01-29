@@ -20,9 +20,9 @@ namespace AudioSystem.Agents
 
         protected float timeA, timeB;
 
-        protected override void Awake()
+        protected override void Start()
         {
-            base.Awake();
+            base.Start();
             playerA = new AudioPlayer(gameObject, audioClipA);
             playerB = new AudioPlayer(gameObject, audioClipB);
 
@@ -34,7 +34,7 @@ namespace AudioSystem.Agents
 
         protected override void Update()
         {
-            AudioManager managerRef = (AudioManager.Instance as AudioManager);
+            AudioManager managerRef = AudioManager.Instance ;
 
             if (isMuted)
             {
