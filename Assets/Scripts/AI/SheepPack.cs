@@ -17,6 +17,7 @@ public class SheepPack : MonoBehaviour
 
     public int m_maxSheep;
     public GameObject[] m_sheepPrefabs;
+    public GameObject[] m_wolfPrefabs;
 
     private MultiAudioAgent m_soundAgent;
     public void Awake()
@@ -51,6 +52,30 @@ public class SheepPack : MonoBehaviour
 
         return m_sheepList.Count - before;
     }
+
+    public Wolf AddWolf()
+    {
+        int limit = 10;
+        while(limit > 0)
+        {
+            Vector3 loc = Random.insideUnitSphere;
+            loc.y = 0;
+            loc = transform.position + loc.normalized * Random.Range(m_roamRangeMin, m_roamRangeMax);
+
+            if (Physics.OverlapSphere(loc, 1.5f, 1 << LayerMask.NameToLayer("Sheep")).Length > 0)
+            {
+                //Try again
+                limit--;
+            }
+            else
+            {
+                GameObject wolf = Instantiate(m_wolfPrefabs[Random.Range(0, m_sheepPrefabs.Length)], loc, Quaternion.Euler(new Vector3(0, Random.Range(0f, 360f), 0)));
+                return wolf.GetComponent<Wolf>();
+            }
+        }
+        return null;
+    }
+
     // Update is called once per frame
     void Update()
     {
