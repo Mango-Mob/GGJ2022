@@ -47,7 +47,8 @@ public class Wolf : Sheep
 
         m_target = Vector3.zero;
         m_myLegs.speed = m_unblendSpeed;
-        m_myLegs.SetDestination(m_targetPack.GetAveragePosition());
+        if (m_targetPack != null)
+            m_myLegs.SetDestination(m_targetPack.GetAveragePosition());
     }
 
     // Update is called once per frame
@@ -145,7 +146,10 @@ public class Wolf : Sheep
                 m_myLegs.speed = m_unblendSpeed;
                 m_targetPack = this.GetClosest<SheepPack>(GameManager.Instance.m_packOfSheep);
                 m_target = Vector3.zero;
-                m_myLegs.SetDestination(m_targetPack.GetAveragePosition());
+
+                if(m_targetPack != null)
+                    m_myLegs.SetDestination(m_targetPack.GetAveragePosition());
+
                 m_timeTillKill = Random.Range(m_KillTimeMin, m_KillTimeMax);
                 break;
             case AIState.Blend:

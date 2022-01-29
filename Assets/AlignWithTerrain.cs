@@ -4,11 +4,27 @@ using UnityEngine;
 
 public class AlignWithTerrain : MonoBehaviour
 {
-    private void Update()
-    {
-        RaycastHit hit;
-        Physics.Raycast(transform.position, Vector3.down * 10f, out hit, 1 << LayerMask.NameToLayer("Ground"));
+    RaycastHit hit;
+    Vector3 theRay;
 
-        transform.up = hit.normal;
+    public LayerMask terainMask;
+
+    void FixedUpdate()
+    {
+        Align();
+    }
+
+    private void Align()
+    {
+        theRay = -transform.up;
+
+        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z),
+            theRay, out hit, 20, terainMask))
+        {
+
+            Quaternion targetRotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.parent.rotation;
+
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime / 0.15f);
+        }
     }
 }
