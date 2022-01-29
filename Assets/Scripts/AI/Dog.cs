@@ -10,7 +10,7 @@ public class Dog : MonoBehaviour
     public static void CreateDogToLoc(Transform player, Vector3 scoutLocation)
     {
         scoutLocation.y = 0;
-        GameObject dogObject = GameObject.Instantiate(GameManager.Instance.m_dogPrefab, player.position, Quaternion.LookRotation((scoutLocation - spawnLoc).normalized, Vector3.up));
+        GameObject dogObject = GameObject.Instantiate(GameManager.Instance.m_dogPrefab, player.position, Quaternion.LookRotation((scoutLocation - player.position).normalized, Vector3.up));
         dogObject.GetComponent<Dog>().Awake();
         dogObject.GetComponent<Dog>().SetTargetDestination(scoutLocation);
     }
