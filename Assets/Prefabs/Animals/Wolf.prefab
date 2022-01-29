@@ -987,7 +987,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20c936e73eec43a43969c7948e51a2a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  localVolume: 1
+  localVolume: 0.85
   isMuted: 0
   audioClips:
   - {fileID: 8300000, guid: c8994d778b4e9a34bbadfd37b7f3dea0, type: 3}

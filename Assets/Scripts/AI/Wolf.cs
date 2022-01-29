@@ -157,8 +157,11 @@ public class Wolf : Sheep
 
                 m_myLegs.SetDestination(m_targetSheep.transform.position);
 
-                if (m_myLegs.IsNearDestination(m_killRange))
+                m_timeTillKill -= Time.deltaTime;
+
+                if (m_myLegs.IsNearDestination(m_killRange) && m_timeTillKill < 0)
                 {
+                    m_timeTillKill = 1.5f;
                     m_targetSheep.Kill(false);
                     m_audioAgent.Play($"WolfAttack{Random.Range(1, 3)}", false, Random.Range(0.85f, 1.25f));
                     if (m_targetPack.m_sheepList.Count == 0)
@@ -250,7 +253,7 @@ public class Wolf : Sheep
         GameManager.Instance.m_wolfList.Remove(this);
         Reveal(false);
         TransitionTo(AIState.Idle);
-        m_audioAgent.Play("WolfDeath");
+        m_audioAgent.Play("WolfReveal");
         Destroy(gameObject, 5f);
     }
 
