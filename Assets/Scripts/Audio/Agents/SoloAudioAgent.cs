@@ -57,6 +57,15 @@ namespace AudioSystem.Agents
             player.SetLooping(isLooping);
             player.Play();
         }
+        public void PlayOnce()
+        {
+            if (player.IsPlaying())
+                return;
+
+            player.SetClip(mainClip);
+            player.SetLooping(isLooping);
+            player.Play();
+        }
 
         /// <summary>
         /// Play the audio clip in a looping

@@ -36,17 +36,21 @@ public class GameManager : Singleton<GameManager>
         {
             //Victory!
             GameOverScreen.SetScene(ScreenState.Victory, "Wolves are defeated", GetSheepCount(), m_startTime);
+            LevelManager.Instance.LoadNewLevel("EndScreen");
             return;
         }
         if(m_packOfSheep.Count == 0)
         {
             //Defeat :(
             GameOverScreen.SetScene(ScreenState.Defeat, "Wolves have killed all the sheep", m_wolfList.Count, m_startTime);
+            LevelManager.Instance.LoadNewLevel("EndScreen");
             return;
         }
-        if(false)
+        if(m_ammoCount <= 0)
         {
+            //Defeat :(
             GameOverScreen.SetScene(ScreenState.Defeat, "You have ran out of ammo", m_wolfList.Count, m_startTime);
+            LevelManager.Instance.LoadNewLevel("EndScreen");
             return;
         }
     }

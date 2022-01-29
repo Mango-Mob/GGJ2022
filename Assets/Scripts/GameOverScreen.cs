@@ -8,8 +8,6 @@ public enum ScreenState { Victory, Defeat };
 
 public class GameOverScreen : MonoBehaviour
 {
-    
-    
     public Text m_title;
     public Text m_subTitle;
     public Text m_remainingStat;
