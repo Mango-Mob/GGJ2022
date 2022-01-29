@@ -9,6 +9,7 @@ public class Player_Controller : MonoBehaviour
     [Header("General")]
     [SerializeField] private int m_maxDogCommands = 3;
 
+    public Animator m_animator { get; private set; }
     public Player_Camera playerCamera { get; private set; }
     public Player_Movement playerMovement { get; private set; }
     public MultiAudioAgent audioAgent { get; private set; }
@@ -27,6 +28,7 @@ public class Player_Controller : MonoBehaviour
     void Start()
     {
         audioAgent = GetComponent<MultiAudioAgent>();
+        m_animator = GetComponentInChildren<Animator>();
         playerCamera = GetComponentInChildren<Player_Camera>();
         playerMovement = GetComponentInChildren<Player_Movement>();
 
