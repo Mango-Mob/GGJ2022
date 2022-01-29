@@ -27,6 +27,7 @@ public class GameManager : Singleton<GameManager>
     public List<string> m_sheepNames { get; private set; }
     public List<string> m_wolfNames { get; private set; }
 
+    private bool m_endConditionMet = false;
 
     protected override void Awake()
     {
@@ -108,26 +109,38 @@ public class GameManager : Singleton<GameManager>
 
     protected virtual void Update()
     {
-        if(m_wolfList.Count == 0)
+        if (m_endConditionMet)
         {
-            //Victory!
-            GameOverScreen.SetScene(ScreenState.Victory, "Wolves are defeated", GetSheepCount(), m_startTime);
             LevelManager.Instance.LoadNewLevel("EndScreen");
-            return;
         }
-        if(m_packOfSheep.Count == 0)
+
+        if (!m_endConditionMet)
         {
-            //Defeat :(
-            GameOverScreen.SetScene(ScreenState.Defeat, "Wolves have killed all the sheep", m_wolfList.Count, m_startTime);
-            LevelManager.Instance.LoadNewLevel("EndScreen");
-            return;
-        }
-        if(m_ammoCount <= 0)
-        {
-            //Defeat :(
-            GameOverScreen.SetScene(ScreenState.Defeat, "You have ran out of ammo", m_wolfList.Count, m_startTime);
-            LevelManager.Instance.LoadNewLevel("EndScreen");
-            return;
+            if (m_wolfList.Count == 0)
+            {
+                m_endConditionMet = true;
+
+                //Victory!
+                GameOverScreen.SetScene(ScreenState.Victory, "Wolves are defeated", GetSheepCount(), m_startTime);
+                return;
+            }
+            if (m_packOfSheep.Count == 0)
+            {
+                m_endConditionMet = true;
+
+                //Defeat :(
+                GameOverScreen.SetScene(ScreenState.Defeat, "Wolves have killed all the sheep", m_wolfList.Count, m_startTime);
+                return;
+            }
+            if (m_ammoCount <= 0)
+            {
+                m_endConditionMet = true;
+
+                //Defeat :(
+                GameOverScreen.SetScene(ScreenState.Defeat, "You have ran out of ammo", m_wolfList.Count, m_startTime);
+
+                return;
+            }
         }
     }
 
