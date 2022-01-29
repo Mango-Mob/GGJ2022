@@ -57,6 +57,13 @@ public class GameManager : Singleton<GameManager>
         while(count < m_wolfSpawnCount)
         {
             SheepPack pack = spawnOption[UnityEngine.Random.Range(0, spawnOption.Count)];
+
+            if(pack.m_sheepList.Count == 0)
+            {
+                spawnOption.Remove(pack);
+                continue;
+            }
+
             Wolf wolf = pack.AddWolf();
             if(wolf != null)
             {
