@@ -90,6 +90,7 @@ public class Player_Controller : MonoBehaviour
         }
 
         Vector2 move = GetMovementAxis();
+
         playerMovement.Move(move.x, move.y);
 
         // UI Update
