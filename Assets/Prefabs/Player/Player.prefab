@@ -236,8 +236,8 @@ MonoBehaviour:
   m_dogPingPrefabVFX: {fileID: 9207491869889546813, guid: 91197642e3363c740bbe467dd46fbef3,
     type: 3}
   m_scopedRecoilMult: 0.3
-  m_verticalRecoil: 0.5
-  m_horizontalRecoil: 0.2
+  m_verticalRecoil: 50
+  m_horizontalRecoil: 20
   m_recoilSmoothTime: 0.1
 --- !u!114 &7171610242077350867
 MonoBehaviour:
