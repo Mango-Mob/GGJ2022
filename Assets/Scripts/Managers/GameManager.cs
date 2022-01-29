@@ -40,10 +40,13 @@ public class GameManager : Singleton<GameManager>
             SheepPack pack = spawnOption[UnityEngine.Random.Range(0, spawnOption.Count)];
             count += pack.AddSheep(Mathf.Min(2, pack.m_maxSheep - pack.m_sheepList.Count, m_sheepSpawnCount - count));
 
-            if (pack.m_sheepList.Count > pack.m_maxSheep)
+            if (pack.m_sheepList.Count >= pack.m_maxSheep)
             {
                 spawnOption.Remove(pack);
             }
+
+            if (spawnOption.Count == 0)
+                break;
         }
     }
 

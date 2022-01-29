@@ -228,7 +228,7 @@ PrefabInstance:
     - target: {fileID: 3681095919806284943, guid: d64de1734d557994ba54902daa0711f6,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -34.5
+      value: -44.5
       objectReference: {fileID: 0}
     - target: {fileID: 3681095919806284943, guid: d64de1734d557994ba54902daa0711f6,
         type: 3}
@@ -270,6 +270,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wolf (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3681095919806284978, guid: d64de1734d557994ba54902daa0711f6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d64de1734d557994ba54902daa0711f6, type: 3}
 --- !u!4 &264398612 stripped
@@ -303,7 +308,7 @@ PrefabInstance:
     - target: {fileID: 3681095919806284943, guid: d64de1734d557994ba54902daa0711f6,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -20.25
+      value: -30.25
       objectReference: {fileID: 0}
     - target: {fileID: 3681095919806284943, guid: d64de1734d557994ba54902daa0711f6,
         type: 3}
@@ -344,6 +349,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wolf (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3681095919806284978, guid: d64de1734d557994ba54902daa0711f6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d64de1734d557994ba54902daa0711f6, type: 3}
@@ -485,6 +495,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SheepHerd
       objectReference: {fileID: 0}
+    - target: {fileID: 7948857458647621282, guid: ccace62955d916e4fbc76e54e336ce1a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7948857458647621308, guid: ccace62955d916e4fbc76e54e336ce1a,
         type: 3}
       propertyPath: m_RootOrder
@@ -606,7 +621,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &691335752
 PrefabInstance:
@@ -619,6 +634,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SheepHerd
+      objectReference: {fileID: 0}
+    - target: {fileID: 7948857458647621282, guid: ccace62955d916e4fbc76e54e336ce1a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7948857458647621308, guid: ccace62955d916e4fbc76e54e336ce1a,
         type: 3}
@@ -937,6 +957,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SheepHerd
       objectReference: {fileID: 0}
+    - target: {fileID: 7948857458647621282, guid: ccace62955d916e4fbc76e54e336ce1a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7948857458647621308, guid: ccace62955d916e4fbc76e54e336ce1a,
         type: 3}
       propertyPath: m_RootOrder
@@ -1163,6 +1188,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SheepHerd
+      objectReference: {fileID: 0}
+    - target: {fileID: 7948857458647621282, guid: ccace62955d916e4fbc76e54e336ce1a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7948857458647621308, guid: ccace62955d916e4fbc76e54e336ce1a,
         type: 3}
@@ -1395,7 +1425,7 @@ PrefabInstance:
     - target: {fileID: 3681095919806284943, guid: d64de1734d557994ba54902daa0711f6,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -25.5
+      value: -41.75
       objectReference: {fileID: 0}
     - target: {fileID: 3681095919806284943, guid: d64de1734d557994ba54902daa0711f6,
         type: 3}
@@ -1436,6 +1466,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wolf
+      objectReference: {fileID: 0}
+    - target: {fileID: 3681095919806284978, guid: d64de1734d557994ba54902daa0711f6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d64de1734d557994ba54902daa0711f6, type: 3}
@@ -1523,7 +1558,7 @@ PrefabInstance:
     - target: {fileID: 6784995081425566887, guid: 44440c0616e532948a6be901ccdb71ae,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6784995081425566887, guid: 44440c0616e532948a6be901ccdb71ae,
         type: 3}
@@ -1588,6 +1623,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SheepHerd
+      objectReference: {fileID: 0}
+    - target: {fileID: 7948857458647621282, guid: ccace62955d916e4fbc76e54e336ce1a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7948857458647621308, guid: ccace62955d916e4fbc76e54e336ce1a,
         type: 3}
