@@ -199,7 +199,17 @@ public class Wolf : Sheep
                 break;
         }
     }
-    
+
+
+    protected override void AnimationUpdate()
+    {
+        if(m_sheepBody.activeInHierarchy)
+            base.AnimationUpdate();
+        else
+        {
+            
+        }
+    }
     private void TransitionTo(AIState state)
     {
         if (m_currentState == state)
