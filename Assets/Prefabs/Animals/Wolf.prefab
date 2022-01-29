@@ -421,6 +421,7 @@ GameObject:
   - component: {fileID: 2003810851}
   - component: {fileID: 2003810850}
   - component: {fileID: 2003810849}
+  - component: {fileID: 245518273950661768}
   m_Layer: 8
   m_Name: WolfBody
   m_TagString: Untagged
@@ -508,6 +509,25 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &245518273950661768
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2003810847}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1ca7ca894e2fb314e89f6c4beebd1711, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3681095919222174522
 GameObject:
   m_ObjectHideFlags: 0
@@ -757,6 +777,7 @@ GameObject:
   - component: {fileID: 3681095919644762218}
   - component: {fileID: 3681095919644762219}
   - component: {fileID: 3681095919644762220}
+  - component: {fileID: 6237590692741440107}
   m_Layer: 8
   m_Name: SheepBody
   m_TagString: Untagged
@@ -844,6 +865,25 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &6237590692741440107
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3681095919644762222}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3d93e8adad0aa174aa6dd212f875d023, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3681095919806284978
 GameObject:
   m_ObjectHideFlags: 0
