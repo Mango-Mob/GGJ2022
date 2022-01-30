@@ -42,6 +42,8 @@ public class Wolf : Sheep
 
     private bool m_isAttacking = false;
     public string m_fakeName;
+    public GameObject[] m_eyeVFX;
+
     protected override void Awake()
     {
         base.Awake();
@@ -232,6 +234,11 @@ public class Wolf : Sheep
 
         m_currentState = state;
 
+        foreach (var item in m_eyeVFX)
+        {
+            item.SetActive(false);
+        }
+
         switch (m_currentState)
         {
             case AIState.MovingToPack:
@@ -260,6 +267,10 @@ public class Wolf : Sheep
                 m_myLegs.speed = m_unblendSpeed;
                 break;
             case AIState.Berserk:
+                foreach (var item in m_eyeVFX)
+                {
+                    item.SetActive(true);
+                }
                 m_audioAgent.Play("WolfAngry");
                 m_myLegs.speed = m_unblendSpeed;
                 m_myLegs.angularSpeed *= 1.5f;

@@ -145,7 +145,7 @@ public class GameManager : Singleton<GameManager>
             if (m_ammoCount <= 0)
             {
                 //Defeat :(
-                GameOverScreen.SetScene(ScreenState.Defeat, "You've ran out of ammo!", m_wolfList.Count, m_startTime);
+                GameOverScreen.SetScene(ScreenState.Defeat, "You ran out of ammo!", m_wolfList.Count, m_startTime);
                 LevelManager.Instance.LoadNewLevel("EndScreen", LevelManager.Transition.OUTOFAMMO);
                 m_endConditionMet = true;
                 AudioManager.Instance.FadeGlobalVolume(10.0f, 0.0f);
