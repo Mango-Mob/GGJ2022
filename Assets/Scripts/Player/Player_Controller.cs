@@ -99,7 +99,8 @@ public class Player_Controller : MonoBehaviour
             // Shoot Gun
             if (!m_reloading && GameManager.Instance.m_ammoCount > 0 && InputManager.Instance.GetMouseDown(MouseButton.LEFT))
             {
-                GameManager.Instance.m_ammoCount--;
+                if (PlayerPrefs.GetInt("InfiniteAmmo") != 1)
+                    GameManager.Instance.m_ammoCount--;
                 playerCamera.ShootGun();
 
                 audioAgent.Play("Gunshot");
