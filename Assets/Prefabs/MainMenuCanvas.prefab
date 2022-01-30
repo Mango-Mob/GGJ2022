@@ -3420,14 +3420,12 @@ MonoBehaviour:
     (Animation,
     Modeling & VFX )
 
-    (Level Designer)
-
     (Modeling/Texturing & VFX)
 
-    (Player/Gameplay
-    Programmer)
+    (Player/Gameplay Programmer)
 
-    (Animation & Modeling)
+    (Animation
+    & Modeling)
 
 '
 --- !u!1 &1476000741200667037
@@ -3784,9 +3782,9 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: " Team\n - Fiona Cheung            \n - Michael Jordan       \n - Peter
-    Nguyen         \n - Roger Painting       \n - Sabrina Li      \n - William De
-    Beer \n - William Lawrence\n\nMusic\n - \"Tomato Farm\" by Chillpeach                        
-    (YT)\n - \"The Old County Farm\" by Darren Curtis     (YT)\n"
+    Nguyen              \n - Sabrina Li      \n - William De Beer \n - William Lawrence\n\nMusic\n
+    - \"Tomato Farm\" by Chillpeach                         (YT)\n - \"The Old County
+    Farm\" by Darren Curtis     (YT)\n"
 --- !u!1 &3200624187708428570
 GameObject:
   m_ObjectHideFlags: 0

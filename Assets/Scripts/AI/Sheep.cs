@@ -31,6 +31,7 @@ public class Sheep : MonoBehaviour
     private float m_timer;
     private float m_defaultAcc;
 
+    public GameObject m_shotVFXPrefab;
     protected virtual void Awake()
     {
         m_myLegs = GetComponentInChildren<NavMeshAgent>();
@@ -106,6 +107,7 @@ public class Sheep : MonoBehaviour
         if (fromShot)
         {
             m_sheepAnimControl.gameObject.SetActive(false);
+            Instantiate(m_shotVFXPrefab, transform.position + transform.up * 0.5f, transform.rotation);
         }
         else
         {
