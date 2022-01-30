@@ -146,13 +146,13 @@ public class Player_Camera : MonoBehaviour
         float verticalMove;
         if (!m_isScoped)
         {
-            horizontalMove = _mouseMove.x * m_lookSensitivity.x;
-            verticalMove = _mouseMove.y * m_lookSensitivity.x;
+            horizontalMove = _mouseMove.x * m_lookSensitivity.x * PlayerPrefs.GetFloat("AimSens", 10.0f) / 10.0f;
+            verticalMove = _mouseMove.y * m_lookSensitivity.y * PlayerPrefs.GetFloat("AimSens", 10.0f) / 10.0f; 
         }
         else 
         {
-            horizontalMove = _mouseMove.x * m_aimSensitivity.x;
-            verticalMove = _mouseMove.y * m_aimSensitivity.x;
+            horizontalMove = _mouseMove.x * m_aimSensitivity.x * PlayerPrefs.GetFloat("ScopeSens", 10.0f) / 10.0f;
+            verticalMove = _mouseMove.y * m_aimSensitivity.y * PlayerPrefs.GetFloat("ScopeSens", 10.0f) / 10.0f;
         }
 
         AdjustCamera(horizontalMove, verticalMove);
