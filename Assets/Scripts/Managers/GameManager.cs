@@ -11,8 +11,11 @@ public class GameManager : Singleton<GameManager>
 
     public List<SheepPack> m_packOfSheep { get; private set; }
 
-    public int m_sheepSpawnCount = 20;
-    public int m_wolfSpawnCount = 3;
+    public static LevelData m_lastLevel;
+
+    public static int m_sheepSpawnCount = 20;
+    public static int m_wolfSpawnCount = 3;
+    public static int m_ammoMax = 8;
 
     public List<Wolf> m_wolfList { get; private set; }
 
@@ -42,6 +45,7 @@ public class GameManager : Singleton<GameManager>
 
         m_sheepNames = CreateNamesList("Names/SheepNames");
         m_wolfNames = CreateNamesList("Names/WolfNames");
+        m_ammoCount = (m_ammoMax > 0) ? m_ammoMax : 8;
     }
 
     private List<string> CreateNamesList(string filename)

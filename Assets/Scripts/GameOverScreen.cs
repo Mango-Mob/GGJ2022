@@ -47,7 +47,7 @@ public class GameOverScreen : MonoBehaviour
     }
     public void Play()
     {
-        LevelManager.Instance.LoadNewLevel("Main");
+        LevelManager.Instance.LoadNewLevel(GameManager.m_lastLevel.m_sceneName);
     }
 
     public void Return()

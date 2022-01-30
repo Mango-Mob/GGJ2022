@@ -32,11 +32,17 @@ public class Sheep : MonoBehaviour
     private float m_defaultAcc;
 
     public GameObject m_shotVFXPrefab;
+
+    public GameObject m_namePlate;
+    protected TextMesh m_namePlateText;
+    public float m_softPlateDist = 10;
+    public float m_hardPlateDist = 5;
     protected virtual void Awake()
     {
         m_myLegs = GetComponentInChildren<NavMeshAgent>();
         m_sheepAnimControl = GetComponentInChildren<Animator>();
         m_defaultAcc = m_myLegs.acceleration;
+        m_namePlateText = m_namePlate.GetComponentInChildren<TextMesh>();
     }
 
     // Start is called before the first frame update
@@ -45,17 +51,24 @@ public class Sheep : MonoBehaviour
         int selection = Random.Range(0, GameManager.Instance.m_sheepNames.Count);
         m_name = GameManager.Instance.m_sheepNames[selection];
         GameManager.Instance.m_sheepNames.RemoveAt(selection);
+        
     }
 
     // Update is called once per frame
     protected virtual void Update()
     {
-        if(m_isDead)
+        if (!(this is Wolf))
         {
-            m_myLegs.isStopped = true;
-            return;
+            if (PauseUpdate())
+                return;
         }
-            
+
+        if (m_isDead)
+        {
+            m_sheepAnimControl.SetBool("IsDead", m_isDead);
+            m_myLegs.isStopped = true;
+        }
+
         if (m_myLegs.IsNearDestination(m_stoppingDistance))
         {
             if(m_timer < m_waitTime)
@@ -70,12 +83,50 @@ public class Sheep : MonoBehaviour
 
         if(!(this is Wolf))
         {
+            if (PauseUpdate())
+                return;
             AnimationUpdate();
+            UpdateNamePlate(m_name);
+        }
+    }
+
+    protected void UpdateNamePlate(string name)
+    {
+        if(PlayerPrefs.GetInt("GameJamMode", 1) == 1)
+        {
+            m_namePlate.SetActive(false);
+            return;
+        }
+
+        m_namePlateText.text = name;
+
+        float playerDist = Vector3.Distance(transform.position, GameManager.Instance.m_playerCamera.transform.position);
+        bool zoomed = GameManager.Instance.m_playerCamera.GetComponentInParent<Player_Camera>().m_isScoped;
+        m_namePlate.SetActive(playerDist <= m_softPlateDist || zoomed);
+        float alpha = 1.0f;
+
+        if (m_namePlate.activeInHierarchy)
+        {
+            if (zoomed)
+            {
+                alpha = Mathf.Clamp((playerDist - m_hardPlateDist) / (m_softPlateDist - m_hardPlateDist), 0.0f, 1.0f);
+            }
+            else
+            {
+                alpha = Mathf.Clamp(1.0f - (playerDist - m_hardPlateDist) / (m_softPlateDist - m_hardPlateDist), 0.0f, 1.0f);
+            }
+                
+
+            foreach (var item in m_namePlate.GetComponentsInChildren<Renderer>())
+            {
+                item.material.color = new Color(1, 1, 1, alpha);
+            }
         }
     }
 
     protected virtual void AnimationUpdate()
     {
+        m_sheepAnimControl.SetBool("IsDead", m_isDead);
         m_sheepAnimControl.SetBool("IsMoving", m_myLegs.velocity.magnitude > 0.25f);
         float mod = (m_myLegs.acceleration - m_defaultAcc) / m_defaultAcc;
         m_sheepAnimControl.SetFloat("velocityMod", mod);
@@ -184,5 +235,13 @@ public class Sheep : MonoBehaviour
             m_myLegs.speed /= 1.5f;
             m_myLegs.acceleration = endAccel;
         }
+    }
+
+    protected virtual bool PauseUpdate()
+    {
+        m_myLegs.isStopped = PauseMenu.isPaused;
+
+        m_sheepAnimControl.speed = (PauseMenu.isPaused) ? 0.0f : 1.0f;
+        return PauseMenu.isPaused;
     }
 }

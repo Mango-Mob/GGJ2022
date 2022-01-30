@@ -24,6 +24,7 @@ public class Player_Controller : MonoBehaviour
     [SerializeField] private UI_BulletCount m_bulletCount;
     [SerializeField] private TextMeshProUGUI m_sheepCount;
     [SerializeField] private TextMeshProUGUI m_wolfCount;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +49,9 @@ public class Player_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PauseMenu.isPaused)
+            return;
+
 #if UNITY_EDITOR
         if (InputManager.Instance.IsKeyDown(KeyType.R))
         {
@@ -99,7 +103,7 @@ public class Player_Controller : MonoBehaviour
             // Shoot Gun
             if (!m_reloading && GameManager.Instance.m_ammoCount > 0 && InputManager.Instance.GetMouseDown(MouseButton.LEFT))
             {
-                if (PlayerPrefs.GetInt("InfiniteAmmo") != 1)
+                if (GameManager.m_ammoMax != -1)
                     GameManager.Instance.m_ammoCount--;
                 playerCamera.ShootGun();
 

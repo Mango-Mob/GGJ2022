@@ -71,7 +71,12 @@ public class Wolf : Sheep
     // Update is called once per frame
     protected override void Update()
     {
+        if (PauseUpdate())
+            return;
+
         AnimationUpdate();
+        UpdateNamePlate((m_wolfBody.activeInHierarchy) ? m_name : m_fakeName);
+
         if (m_isDead)
             return;
 
@@ -333,10 +338,21 @@ public class Wolf : Sheep
         {
             if(berserk)
                 TransitionTo(AIState.Berserk);
+
+            if(m_name.Length > 9)
+            {
+                m_namePlate.GetComponentInChildren<SpriteRenderer>().gameObject.transform.localScale = new Vector3(0.45f, 0.05f, 1);
+            }
+
             m_audioAgent.Play("WolfReveal");
             m_poofVFX.SetActive(true);
             m_sheepBody.SetActive(false);
             m_wolfBody.SetActive(true);
         }
+    }
+    protected override bool PauseUpdate()
+    {
+        m_wolfAnimControl.speed = (PauseMenu.isPaused) ? 0.0f : 1.0f;
+        return base.PauseUpdate();
     }
 }
