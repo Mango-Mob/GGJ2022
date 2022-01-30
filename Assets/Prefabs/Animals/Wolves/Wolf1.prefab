@@ -122,7 +122,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6911656556819106564}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherLLeg2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2110546131396871375}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherHeadBone003Bone001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -213,7 +213,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2569722753074981246}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherRLeg1 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,7 +275,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1128477146062465080}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherLLegPalm 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -366,7 +366,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9203050440644026161}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherNeck1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -397,7 +397,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5611484805152465842}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherRibcage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -528,7 +528,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5329200389926658458}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherLLegPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -558,7 +558,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7342814057224664980}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherLLeg1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -590,7 +590,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8359007344876684947}
   - component: {fileID: 5120733620075026932}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCylinder9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -705,7 +705,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6151225416643988761}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherSpine1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -797,7 +797,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5645034596065135784}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherRLeg2 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -859,7 +859,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1611974798293837897}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherLLegCollarbone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -890,7 +890,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4935090830955387793}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherRLegPalm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -921,7 +921,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8824009489098639395}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherLLegDigit11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -952,7 +952,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1011231473202611064}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Panther
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -982,7 +982,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2330508590913402277}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherSpine5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1162,7 +1162,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8082499343444527780}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherPelvis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1196,7 +1196,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2833583531011046898}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherRLegPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1226,7 +1226,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3853556508089156081}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherSpine2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1257,7 +1257,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1495384773344336852}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherRLeg2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1288,7 +1288,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2624655241550378916}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherNeck2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1319,7 +1319,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 432988897626829098}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherHeadBone002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1349,7 +1349,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3296737704796041946}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherTail3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1446,7 +1446,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1545133976692928872}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherHeadBone003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1477,7 +1477,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 421156855109941018}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherRLegDigit11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1508,7 +1508,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5779102352468789946}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherLLegPalm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1539,7 +1539,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6342664901671617944}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherRLegPlatform 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1573,7 +1573,7 @@ GameObject:
   - component: {fileID: 4250166786866023416}
   - component: {fileID: 757001708077951252}
   - component: {fileID: 625712856741832377}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WolfAnchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1627,9 +1627,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 1
-  m_Height: 7.25
+  m_Height: 5.5
   m_Direction: 2
-  m_Center: {x: 0, y: 3.4, z: 0}
+  m_Center: {x: 0, y: 1.9, z: 0.18}
 --- !u!95 &757001708077951252
 Animator:
   serializedVersion: 3
@@ -1708,7 +1708,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1942856241901902584}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherLLegPlatform 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1770,7 +1770,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4670780193200309364}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherHeadBone001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1830,7 +1830,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2733795896412693367}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherLLegDigit12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1861,7 +1861,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8032642093308214455}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherSpine6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1893,7 +1893,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5825441614138480431}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherHeadBone004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1955,7 +1955,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1500143884011814382}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1989,7 +1989,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1089734536903486244}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherTail1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2020,7 +2020,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 226598074104066495}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherSpine3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2083,7 +2083,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2523547709868613189}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherRLegPalm 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2113,7 +2113,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2772690923596883670}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherSpine4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2145,7 +2145,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 249344569096005492}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherRLeg1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2176,7 +2176,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4424130523039420866}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherRLegDigit12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2207,7 +2207,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5184835527997947322}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherHeadBone003Bone001 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2237,7 +2237,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 78434293401614357}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherLLeg2 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2268,7 +2268,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6437036151026915733}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherTail2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2299,7 +2299,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3437693095658018465}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherLLeg1 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2330,7 +2330,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1497549338103398177}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PantherRLegCollarbone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
