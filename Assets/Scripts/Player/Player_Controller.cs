@@ -90,6 +90,7 @@ public class Player_Controller : MonoBehaviour
                 playerCamera.ShootGun();
 
                 audioAgent.Play("Gunshot");
+                m_animator.SetTrigger("Shoot");
                 StartCoroutine(ReloadRifle());
             }
         }
