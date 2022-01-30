@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -3530,6 +3530,11 @@ PrefabInstance:
       propertyPath: m_bulletCount
       value: 
       objectReference: {fileID: 1303986022}
+    - target: {fileID: 4731087355394301953, guid: 3e4dc87f5eb1d8f4f87bdea20c593aac,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 71309100f7caa8a428ca8f33ef8affff, type: 2}
     - target: {fileID: 7171610242077350867, guid: 3e4dc87f5eb1d8f4f87bdea20c593aac,
         type: 3}
       propertyPath: m_moveSpeed
