@@ -12,7 +12,6 @@ public class Dog : MonoBehaviour
         NavMeshPath temp = new NavMeshPath();
         if(NavMesh.CalculatePath(player.position, scoutLocation, NavMesh.AllAreas, temp))
         {
-            scoutLocation.y = 0;
             GameObject dogObject = GameObject.Instantiate(GameManager.Instance.m_dogPrefab, player.position, Quaternion.LookRotation((scoutLocation - player.position).normalized, Vector3.up));
             dogObject.GetComponent<Dog>().Awake();
             dogObject.GetComponent<Dog>().owner = player;
@@ -25,7 +24,7 @@ public class Dog : MonoBehaviour
     public Transform owner;
     protected NavMeshAgent m_myLegs;
     protected Animator m_myAnimator;
-    private MultiAudioAgent m_audioAgent;
+    [SerializeField] private MultiAudioAgent m_audioAgent;
 
     [SerializeField] private GameObject m_detectVFX;
 
@@ -57,9 +56,13 @@ public class Dog : MonoBehaviour
         GameManager.Instance.m_dog = this;
         m_myLegs = GetComponent<NavMeshAgent>();
         m_myAnimator = GetComponentInChildren<Animator>();
-        m_audioAgent = GetComponent<MultiAudioAgent>();
         m_myLegs.updateRotation = false;
         TransitionTo(DogState.Scout);
+    }
+    
+    protected virtual void Start()
+    {
+        m_audioAgent.Play("DogSqueak", true);
     }
 
     // Update is called once per frame

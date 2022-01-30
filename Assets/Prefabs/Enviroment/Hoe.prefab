@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 5168569954352104100}
   - component: {fileID: 8076547772979154177}
   - component: {fileID: 6336949648962746827}
+  - component: {fileID: 6143271879379788636}
+  - component: {fileID: 1429395183273698515}
   m_Layer: 0
   m_Name: Hoe
   m_TagString: Untagged
@@ -79,3 +81,33 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!208 &6143271879379788636
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5544391087853557790}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.001, y: 0.006, z: 0.002}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.006, z: 0.001}
+  m_TimeToStationary: 0.5
+--- !u!64 &1429395183273698515
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5544391087853557790}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3388466853955239842, guid: 5c84d60ce4de79243ac9c0a04b894300, type: 3}

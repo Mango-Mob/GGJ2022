@@ -21,9 +21,9 @@ namespace AudioSystem.Agents
         protected Dictionary<string, AudioClip> audioLibrary;
         protected AudioPlayer[] players;
 
-        protected override void Start()
+        protected override void Awake()
         {
-            base.Start();
+            base.Awake();
             audioLibrary = new Dictionary<string, AudioClip>();
 
             foreach (var item in audioClips)
@@ -52,6 +52,7 @@ namespace AudioSystem.Agents
                 player.Update();
             }
         }
+
         public bool Play(string clipName, bool isLooping = false, float pitch = 1.0f)
         {
             AudioClip clip;

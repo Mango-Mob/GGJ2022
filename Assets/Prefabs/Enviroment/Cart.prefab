@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 6129043044634871747}
   - component: {fileID: 7107075728390572134}
   - component: {fileID: 4991555129935510700}
+  - component: {fileID: 5336024635635312162}
+  - component: {fileID: 3614411678792672773}
+  - component: {fileID: 4013838235378826064}
   m_Layer: 0
   m_Name: Cart
   m_TagString: Untagged
@@ -79,3 +82,45 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &5336024635635312162
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6792954916583906681}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.2078133, y: 1.7377105, z: 2.960297}
+  m_Center: {x: 0, y: 0.86885524, z: -1.2452643}
+--- !u!65 &3614411678792672773
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6792954916583906681}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.2078133, y: 0.9729049, z: 2.5032957}
+  m_Center: {x: 0, y: 0.48645246, z: 1.473765}
+--- !u!208 &4013838235378826064
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6792954916583906681}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.1040001, y: 0.869, z: 2.7250001}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.869, z: 0}
+  m_TimeToStationary: 0.5

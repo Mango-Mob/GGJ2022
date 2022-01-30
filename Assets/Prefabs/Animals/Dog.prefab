@@ -126,6 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
+  m_audioAgent: {fileID: 7916743651031249973}
   m_detectVFX: {fileID: 87725408432292944}
   m_currentState: 0
   m_stopRange: 1
@@ -154,7 +155,7 @@ NavMeshAgent:
   m_Height: 0.75
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!114 &7916743651031249973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,14 +168,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20c936e73eec43a43969c7948e51a2a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  localVolume: 1
+  localVolume: 0.5
   isMuted: 0
+  IsGlobal: 0
   audioClips:
   - {fileID: 8300000, guid: 38c271b990f1e9a46bf1a324fbbe9ed4, type: 3}
   - {fileID: 8300000, guid: 5e9f063c6526de5448d0b16f3cb5a6fa, type: 3}
   - {fileID: 8300000, guid: a844aaad3284d7a438aca1056f867e10, type: 3}
   - {fileID: 8300000, guid: 4a23d6d1b3720704192559d3f6c5a741, type: 3}
   - {fileID: 8300000, guid: cc20c4ca237ca394b953624376194a01, type: 3}
+  - {fileID: 8300000, guid: 97eb275ab04c6264d9bba2a340706f44, type: 3}
   audioPlayersCount: 5
   channel: 1
 --- !u!1 &729794953402260626

@@ -2,6 +2,7 @@
 using AudioSystem.Listeners;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace AudioSystem.Managers
@@ -27,7 +28,9 @@ namespace AudioSystem.Managers
         //private array of volumes
         public float[] volumes;
         public float m_globalPitch = 1.0f;
+        public float m_globalVolume = 1.0f;
 
+        private bool m_isMutating = false;
         //Volume types: 
         //(Add more to dynamically expand the above array)
         public enum VolumeChannel
@@ -75,9 +78,9 @@ namespace AudioSystem.Managers
         public float GetVolume(VolumeChannel type, AudioAgent agent)
         {
             if (type == VolumeChannel.MASTER)
-                return volumes[(int)VolumeChannel.MASTER] * CalculateHearingVolume(agent);
+                return m_globalVolume * volumes[(int)VolumeChannel.MASTER] * CalculateHearingVolume(agent);
 
-            return volumes[(int)VolumeChannel.MASTER] * volumes[(int)type] * CalculateHearingVolume(agent);
+            return m_globalVolume * volumes[(int)VolumeChannel.MASTER] * volumes[(int)type] * CalculateHearingVolume(agent);
         }
 
         /// <summary>
@@ -145,6 +148,28 @@ namespace AudioSystem.Managers
             VFXAudioAgent agent = temp.AddComponent<VFXAudioAgent>();
             agent.channel = _channel;
             agent.Play(_clip);
+        }
+
+        public async void FadeGlobalVolume(float duration, float finalVal)
+        {
+            if (!m_isMutating)
+            {
+                m_isMutating = true;
+
+                float time = 0;
+                float startValue = m_globalVolume;
+
+                while (time < duration)
+                {
+                    m_globalVolume = Mathf.Clamp(Mathf.Lerp(startValue, finalVal, time / duration), 0f, 1f);
+                    time += Time.unscaledDeltaTime;
+                    await Task.Yield(); //return yield null aka wait till next frame
+                }
+
+                m_globalVolume = finalVal;
+
+                m_isMutating = false;
+            }
         }
     }
 

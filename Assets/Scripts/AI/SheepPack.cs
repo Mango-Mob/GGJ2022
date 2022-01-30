@@ -69,7 +69,7 @@ public class SheepPack : MonoBehaviour
             }
             else
             {
-                GameObject wolf = Instantiate(m_wolfPrefabs[Random.Range(0, m_sheepPrefabs.Length)], loc, Quaternion.Euler(new Vector3(0, Random.Range(0f, 360f), 0)));
+                GameObject wolf = Instantiate(m_wolfPrefabs[Random.Range(0, m_wolfPrefabs.Length)], loc, Quaternion.Euler(new Vector3(0, Random.Range(0f, 360f), 0)));
                 return wolf.GetComponent<Wolf>();
             }
         }
@@ -161,11 +161,13 @@ public class SheepPack : MonoBehaviour
         Handles.DrawWireDisc(pos, hit.normal, m_roamRangeMax);
     }
 
-    public void Destroy(Sheep sheep)
+    public void Destroy(Sheep sheep, bool shouldDestroy = true)
     {
+        sheep.transform.SetParent(null);
         m_soundAgent.Play("SheepDeath", false, Random.Range(0.85f, 1.25f));
         m_sheepList.Remove(sheep);
-        Destroy(sheep.gameObject);
+        if(shouldDestroy)
+            Destroy(sheep.gameObject, 5.0f);
 
         if (m_sheepList.Count == 0)
         {

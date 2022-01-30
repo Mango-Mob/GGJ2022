@@ -130,7 +130,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a2b03d0be69995744ae7d0b5a99481cb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -151,7 +151,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 2
+  m_Time: 0.5
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.1
@@ -159,13 +159,22 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
+        time: 0.025001526
         value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.9757494
+        value: 0.96967804
+        inSlope: -0.047581572
+        outSlope: -0.047581572
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.11975848
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
@@ -181,8 +190,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.49468166, b: 0, a: 1}
-      key1: {r: 1, g: 0.49411765, b: 0, a: 1}
+      key0: {r: 1, g: 1, b: 1, a: 0.2509804}
+      key1: {r: 1, g: 1, b: 1, a: 0.2509804}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -211,7 +220,7 @@ TrailRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 1
     shadowBias: 0.5
     generateLightingData: 0
   m_MinVertexDistance: 0.1
@@ -258,7 +267,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7910785749039747768}
-  m_LocalRotation: {x: 0.009907363, y: 0.071618795, z: -0.0007114154, w: 0.99738264}
+  m_LocalRotation: {x: 0.0014779933, y: -0.15278432, z: 0.00022849711, w: 0.9882584}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

@@ -7,6 +7,7 @@ using UnityEngine.AI;
 public class Sheep : MonoBehaviour
 {
     protected NavMeshAgent m_myLegs;
+    protected Animator m_sheepAnimControl;
 
     [Header("Sheep Stats")]
     public float m_roamDist = 5f;
@@ -15,20 +16,27 @@ public class Sheep : MonoBehaviour
     public float m_waitMax = 2.0f;
     public float m_shotReactRange = 5.0f;
     public float m_maxReactDist = 5.0f;
+    public float m_chanceToFidget = 0.05f;
 
     private Coroutine m_currentScaredRoutine;
     private float m_scaredDuration;
     protected Vector3 m_target;
     private float m_waitTime;
 
+    public bool m_isDead = false;
     public bool m_isWaitingForDestination = true;
 
     public string m_name = "Sheep";
 
     private float m_timer;
+    private float m_defaultAcc;
+
+    public GameObject m_shotVFXPrefab;
     protected virtual void Awake()
     {
         m_myLegs = GetComponentInChildren<NavMeshAgent>();
+        m_sheepAnimControl = GetComponentInChildren<Animator>();
+        m_defaultAcc = m_myLegs.acceleration;
     }
 
     // Start is called before the first frame update
@@ -41,7 +49,13 @@ public class Sheep : MonoBehaviour
 
     // Update is called once per frame
     protected virtual void Update()
-    {        
+    {
+        if(m_isDead)
+        {
+            m_myLegs.isStopped = true;
+            return;
+        }
+            
         if (m_myLegs.IsNearDestination(m_stoppingDistance))
         {
             if(m_timer < m_waitTime)
@@ -51,6 +65,26 @@ public class Sheep : MonoBehaviour
             else if(m_timer >= m_waitTime)
             {
                 m_isWaitingForDestination = true;
+            }
+        }
+
+        if(!(this is Wolf))
+        {
+            AnimationUpdate();
+        }
+    }
+
+    protected virtual void AnimationUpdate()
+    {
+        m_sheepAnimControl.SetBool("IsMoving", m_myLegs.velocity.magnitude > 0.25f);
+        float mod = (m_myLegs.acceleration - m_defaultAcc) / m_defaultAcc;
+        m_sheepAnimControl.SetFloat("velocityMod", mod);
+
+        if (m_timer < m_waitTime)
+        {
+            if (Random.Range(0, 1000f) < m_chanceToFidget * 1000)
+            {
+                m_sheepAnimControl.SetTrigger("IsFidget");
             }
         }
     }
@@ -67,7 +101,18 @@ public class Sheep : MonoBehaviour
 
     public virtual string Kill(bool fromShot = false)
     {
-        GetComponentInParent<SheepPack>().Destroy(this);
+        GetComponentInParent<SheepPack>().Destroy(this, fromShot);
+        m_isDead = true;
+        m_sheepAnimControl.SetBool("IsDead", m_isDead);
+        if (fromShot)
+        {
+            m_sheepAnimControl.gameObject.SetActive(false);
+            Instantiate(m_shotVFXPrefab, transform.position + transform.up * 0.5f, transform.rotation);
+        }
+        else
+        {
+            GetComponentInChildren<Collider>().enabled = false;
+        }
         return m_name;
     }
 
