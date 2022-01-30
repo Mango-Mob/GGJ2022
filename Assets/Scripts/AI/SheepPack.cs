@@ -154,11 +154,14 @@ public class SheepPack : MonoBehaviour
         RaycastHit hit;
         Physics.Raycast(pos, Vector3.down * transform.position.y, out hit, 1 << LayerMask.NameToLayer("Ground"));
 
+#if UNITY_EDITOR
         Handles.color = Color.green;
         Handles.DrawWireDisc(pos, hit.normal, m_roamRangeMin);
 
         Handles.color = Color.red;
         Handles.DrawWireDisc(pos, hit.normal, m_roamRangeMax);
+#endif
+
     }
 
     public void Destroy(Sheep sheep, bool shouldDestroy = true)

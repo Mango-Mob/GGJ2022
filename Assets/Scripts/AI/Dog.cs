@@ -200,8 +200,10 @@ public class Dog : MonoBehaviour
             Gizmos.color = Color.green;
             Gizmos.DrawLine(transform.position, transform.position + transform.forward * 2f);
 
+#if UNITY_EDITOR
             Handles.color = Color.yellow;
             Handles.DrawWireDisc(transform.position, Vector3.up, m_detectRange);
+#endif
         }
     }
 
