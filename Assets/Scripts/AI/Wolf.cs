@@ -291,7 +291,7 @@ public class Wolf : Sheep
     private bool IsVisibleByCamera()
     {
         Vector3 viewPos = GameManager.Instance.m_playerCamera.WorldToViewportPoint(transform.position);
-        
+
         return (viewPos.x <= 1.0f && viewPos.x >= 0.0f) && (viewPos.y <= 1.0f && viewPos.y >= 0.0f) && viewPos.z > 0;
     }
 
