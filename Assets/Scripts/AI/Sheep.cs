@@ -23,6 +23,7 @@ public class Sheep : MonoBehaviour
     protected Vector3 m_target;
     private float m_waitTime;
 
+    public bool m_isDead = false;
     public bool m_isWaitingForDestination = true;
 
     public string m_name = "Sheep";
@@ -48,6 +49,12 @@ public class Sheep : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
+        if(m_isDead)
+        {
+            m_myLegs.isStopped = true;
+            return;
+        }
+            
         if (m_myLegs.IsNearDestination(m_stoppingDistance))
         {
             if(m_timer < m_waitTime)
@@ -93,7 +100,17 @@ public class Sheep : MonoBehaviour
 
     public virtual string Kill(bool fromShot = false)
     {
-        GetComponentInParent<SheepPack>().Destroy(this);
+        GetComponentInParent<SheepPack>().Destroy(this, fromShot);
+        m_isDead = true;
+        m_sheepAnimControl.SetBool("IsDead", m_isDead);
+        if (fromShot)
+        {
+            m_sheepAnimControl.gameObject.SetActive(false);
+        }
+        else
+        {
+            GetComponentInChildren<Collider>().enabled = false;
+        }
         return m_name;
     }
 
