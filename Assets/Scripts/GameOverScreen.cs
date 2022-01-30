@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AudioSystem.Managers;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +23,7 @@ public class GameOverScreen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        AudioManager.Instance.m_globalVolume = 1.0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 

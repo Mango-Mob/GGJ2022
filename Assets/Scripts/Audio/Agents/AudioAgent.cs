@@ -21,7 +21,7 @@ namespace AudioSystem.Agents
 
         public bool IsGlobal = false;
 
-        protected virtual void Start()
+        protected virtual void Awake()
         {
             AudioManager.Instance.agents.Add(this);
 

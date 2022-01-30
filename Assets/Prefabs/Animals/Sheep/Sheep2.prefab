@@ -271,8 +271,11 @@ MonoBehaviour:
   m_shotReactRange: 5
   m_maxReactDist: 8
   m_chanceToFidget: 0.05
+  m_isDead: 0
   m_isWaitingForDestination: 1
   m_name: Sheep
+  m_shotVFXPrefab: {fileID: 2592984013104685171, guid: 9c9f5bfc0251bf0459fd09b8a7b626e7,
+    type: 3}
 --- !u!195 &8552250843281757180
 NavMeshAgent:
   m_ObjectHideFlags: 0

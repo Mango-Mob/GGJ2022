@@ -5,10 +5,10 @@ using UnityEngine;
 public class Player_Movement : MonoBehaviour
 {
     [SerializeField] private float m_moveSpeed = 10.0f;
+    [SerializeField] private float m_sprintSpeed = 10.0f;
     [SerializeField] private float m_jumpSpeed = 10.0f;
     [SerializeField] private float m_gravitySpeed = 9.81f;
     [SerializeField] [Range(0.0f, 1.0f)] private float m_scopeMoveMult = 0.3f;
-
 
     private CharacterController characterController;
     private Player_Controller playerController;
@@ -33,13 +33,19 @@ public class Player_Movement : MonoBehaviour
     }
     public void Move(float _x, float _z)
     {
-        if (InputManager.Instance.IsKeyDown(KeyType.SPACE) && characterController.isGrounded)
+        if (InputManager.Instance.IsKeyPressed(KeyType.SPACE) && characterController.isGrounded)
         {
             m_yVelocity = m_jumpSpeed;
         }
 
+        bool isSprinting = false;
+        if (_z > 0.0f && InputManager.Instance.IsKeyPressed(KeyType.L_SHIFT))
+            isSprinting = true;
+
+        playerController.m_animator.SetBool("IsSprinting", isSprinting);
+
         Vector3 move = transform.right * _x + transform.forward * _z;
 
-        characterController.Move(move * m_moveSpeed * Time.deltaTime * (playerController.playerCamera.m_isScoped ? m_scopeMoveMult : 1.0f));
+        characterController.Move(move * (isSprinting ? m_sprintSpeed : m_moveSpeed) * Time.deltaTime * (playerController.playerCamera.m_isScoped ? m_scopeMoveMult : 1.0f));
     }
 }

@@ -38,7 +38,9 @@ public class Wolf : Sheep
 
     public GameObject m_poofVFX;
     private MultiAudioAgent m_audioAgent;
+    public Animator m_wolfAnimControl;
 
+    private bool m_isAttacking = false;
     public string m_fakeName;
     protected override void Awake()
     {
@@ -49,7 +51,7 @@ public class Wolf : Sheep
     protected override void Start()
     {
         m_targetPack = this.GetClosest<SheepPack>(GameManager.Instance.m_packOfSheep);
-
+        m_sheepAnimControl = GetComponentInChildren<Animator>();
         m_target = Vector3.zero;
         m_myLegs.speed = m_unblendSpeed;
         if (m_targetPack != null)
@@ -67,6 +69,10 @@ public class Wolf : Sheep
     // Update is called once per frame
     protected override void Update()
     {
+        AnimationUpdate();
+        if (m_isDead)
+            return;
+
         Vector3 moveTarget = m_targetPack != null ? m_targetPack.GetAveragePosition() : m_target;
         isBeingWatched = IsVisibleByCamera();
 
@@ -75,6 +81,12 @@ public class Wolf : Sheep
             Reveal();
         }
 
+        m_myLegs.isStopped = m_isAttacking;
+        if (m_isAttacking)
+        {
+            return;
+        }
+        
         switch (m_currentState)
         {
             case AIState.MovingToPack:
@@ -123,7 +135,7 @@ public class Wolf : Sheep
                 }
                 break;
             case AIState.Hunt:
-                if(m_targetSheep != null)
+                if(m_targetSheep != null && !m_targetSheep.m_isDead)
                     m_myLegs.SetDestination(m_targetSheep.transform.position);
                 else if (m_targetPack != null)
                     m_targetSheep = m_targetPack.GetClosestSheep(transform.position);
@@ -137,30 +149,18 @@ public class Wolf : Sheep
                 {
                     if(m_targetPack.m_sheepList.Count > 1)
                     {
-                        string name = m_targetSheep.Kill(false);
-                        if (name != string.Empty)
-                        {
-                            KillFeedManager.Instance.DisplayWolfKill(m_name, name);
-                        }
-                        m_audioAgent.Play($"WolfAttack{Random.Range(1, 3)}", false, Random.Range(0.85f, 1.25f));
-                        m_timeTillKill = Random.Range(m_KillTimeMin, m_KillTimeMax);
+                        Attack();
                         TransitionTo(AIState.Blend);
                     }
                     else
                     {
-                        string name = m_targetSheep.Kill(false);
-                        if (name != string.Empty)
-                        {
-                            KillFeedManager.Instance.DisplayWolfKill(m_name, name);
-                        }
-                        m_audioAgent.Play($"WolfAttack{Random.Range(1, 3)}", false, Random.Range(0.85f, 1.25f));
-                        m_timeTillKill = Random.Range(m_KillTimeMin, m_KillTimeMax);
+                        Attack();
                         TransitionTo(AIState.MovingToPack);
                     }
                 }
                 break;
             case AIState.Berserk:
-                if (m_targetSheep == null)
+                if (m_targetSheep == null || m_targetSheep.m_isDead)
                 {
                     Sheep nextTarget = GameManager.Instance.GetClosestSheep(transform.position);
                     
@@ -180,18 +180,7 @@ public class Wolf : Sheep
 
                 if (m_myLegs.IsNearDestination(m_killRange) && m_timeTillKill < 0)
                 {
-                    m_timeTillKill = 1.5f;
-                    string name = m_targetSheep.Kill(false);
-                    if(name != string.Empty)
-                    {
-                        KillFeedManager.Instance.DisplayWolfKill(m_name, name);
-                    }
-
-                    m_audioAgent.Play($"WolfAttack{Random.Range(1, 3)}", false, Random.Range(0.85f, 1.25f));
-                    if (m_targetPack != null && m_targetPack.m_sheepList.Count == 0)
-                    {
-                        m_targetPack = null;
-                    }
+                    m_isAttacking = true;
                 }
                 break;
             default:
@@ -200,16 +189,42 @@ public class Wolf : Sheep
         }
     }
 
-
     protected override void AnimationUpdate()
     {
         if(m_sheepBody.activeInHierarchy)
             base.AnimationUpdate();
         else
         {
-            
+            m_wolfAnimControl.SetBool("IsDead", m_isDead);
+            m_wolfAnimControl.SetBool("IsMoving", m_myLegs.velocity.magnitude > 0.20f && !m_isAttacking);
+            m_wolfAnimControl.SetBool("IsAttacking", m_isAttacking);
         }
     }
+
+    public void Attack()
+    {
+        if (m_targetSheep == null || m_targetSheep.m_isDead)
+            return;
+
+        string name = m_targetSheep.Kill(false);
+        if (name != string.Empty)
+        {
+            KillFeedManager.Instance.DisplayWolfKill(m_name, name);
+        }
+
+        if (m_targetPack != null && m_targetPack.m_sheepList.Count == 0)
+        {
+            m_targetPack = null;
+        }
+        m_audioAgent.Play($"WolfAttack{Random.Range(1, 3)}", false, Random.Range(0.85f, 1.25f));
+        m_timeTillKill = (m_currentState == AIState.Berserk) ? 1.5f : Random.Range(m_KillTimeMin, m_KillTimeMax);
+    }
+
+    public void SetAttackState(bool status)
+    {
+        m_isAttacking = status;
+    }
+
     private void TransitionTo(AIState state)
     {
         if (m_currentState == state)
@@ -250,17 +265,12 @@ public class Wolf : Sheep
                 m_myLegs.angularSpeed *= 1.5f;
                 m_myLegs.acceleration *= 1.5f;
                 m_timeTillKill = 0;
-                if (m_targetPack == null)
+
+                m_targetSheep = GameManager.Instance.GetClosestSheep(transform.position);
+                if (m_targetSheep == null || m_targetSheep.m_isDead)
                 {
-                    if (GameManager.Instance.m_packOfSheep.Count > 0)
-                    {
-                        TransitionTo(AIState.Idle);
-                        return;
-                    }
-                    m_targetPack = this.GetClosest<SheepPack>(GameManager.Instance.m_packOfSheep);
-                    
+                    TransitionTo(AIState.Idle);
                 }
-                m_targetSheep = m_targetPack.GetClosestSheep(transform.position);
                 break;
             default:
                 break;
@@ -281,7 +291,7 @@ public class Wolf : Sheep
     private bool IsVisibleByCamera()
     {
         Vector3 viewPos = GameManager.Instance.m_playerCamera.WorldToViewportPoint(transform.position);
-        
+
         return (viewPos.x <= 1.0f && viewPos.x >= 0.0f) && (viewPos.y <= 1.0f && viewPos.y >= 0.0f) && viewPos.z > 0;
     }
 
@@ -299,6 +309,9 @@ public class Wolf : Sheep
         Reveal(false);
         TransitionTo(AIState.Idle);
         m_audioAgent.Play("WolfReveal");
+        m_isDead = true;
+        m_myLegs.isStopped = true;
+        m_wolfAnimControl.GetComponentInChildren<Collider>().enabled = false;
         Destroy(gameObject, 5f);
         return m_name;
     }
