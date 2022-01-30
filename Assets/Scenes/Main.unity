@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: b588524cc57cfd541a3e9e0570e56b7b, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.5770029, g: 0.11505387, b: 0.04688316, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3530,10 +3530,15 @@ PrefabInstance:
       propertyPath: m_bulletCount
       value: 
       objectReference: {fileID: 1303986022}
+    - target: {fileID: 4731087355394301953, guid: 3e4dc87f5eb1d8f4f87bdea20c593aac,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 71309100f7caa8a428ca8f33ef8affff, type: 2}
     - target: {fileID: 7171610242077350867, guid: 3e4dc87f5eb1d8f4f87bdea20c593aac,
         type: 3}
       propertyPath: m_moveSpeed
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e4dc87f5eb1d8f4f87bdea20c593aac, type: 3}
@@ -14680,11 +14685,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerHUD
       objectReference: {fileID: 0}
+    - target: {fileID: 2298059714375417075, guid: f7629f31ad8a4574982fc484d778cf96,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4c0c6404f483c394eb05f21e7711e62a,
+        type: 3}
+    - target: {fileID: 3224709407400702576, guid: f7629f31ad8a4574982fc484d778cf96,
+        type: 3}
+      propertyPath: WolfIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 320fedf2e9f17d74aa9c28836179becd,
+        type: 3}
     - target: {fileID: 3224709407400702576, guid: f7629f31ad8a4574982fc484d778cf96,
         type: 3}
       propertyPath: PlayerIcon
       value: 
-      objectReference: {fileID: 21300000, guid: 0b128b0781f8a5f42be268c726755371,
+      objectReference: {fileID: 21300000, guid: 8b9f9bccb642b5a4598c40606416e33f,
+        type: 3}
+    - target: {fileID: 8551658678043678063, guid: f7629f31ad8a4574982fc484d778cf96,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c7c46e6505b47bc40b432a1ad5fe3190,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7629f31ad8a4574982fc484d778cf96, type: 3}

@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3002546254380786358
 Transform:
   m_ObjectHideFlags: 0
@@ -126,6 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
+  m_audioAgent: {fileID: 7916743651031249973}
   m_detectVFX: {fileID: 87725408432292944}
   m_currentState: 0
   m_stopRange: 1
@@ -176,6 +177,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a844aaad3284d7a438aca1056f867e10, type: 3}
   - {fileID: 8300000, guid: 4a23d6d1b3720704192559d3f6c5a741, type: 3}
   - {fileID: 8300000, guid: cc20c4ca237ca394b953624376194a01, type: 3}
+  - {fileID: 8300000, guid: 97eb275ab04c6264d9bba2a340706f44, type: 3}
   audioPlayersCount: 5
   channel: 1
 --- !u!1 &729794953402260626
@@ -365,3 +367,4 @@ MonoBehaviour:
   terainMask:
     serializedVersion: 2
     m_Bits: 1024
+  m_instant: 0

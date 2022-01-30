@@ -1,4 +1,5 @@
 ﻿using AudioSystem.Agents;
+using AudioSystem.Managers;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -125,25 +126,29 @@ public class GameManager : Singleton<GameManager>
             if (m_wolfList.Count == 0)
             {
                 //Victory!
-                GameOverScreen.SetScene(ScreenState.Victory, "Wolves are defeated", GetSheepCount(), m_startTime);
+                GameOverScreen.SetScene(ScreenState.Victory, "The wolves have lost!", GetSheepCount(), m_startTime);
                 LevelManager.Instance.LoadNewLevel("EndScreen");
                 m_endConditionMet = true;
+
+                AudioManager.Instance.FadeGlobalVolume(1.0f, 0.0f);
                 return;
             }
             if (m_packOfSheep.Count == 0)
             {
                 //Defeat :(
-                GameOverScreen.SetScene(ScreenState.Defeat, "Wolves have killed all the sheep", m_wolfList.Count, m_startTime);
+                GameOverScreen.SetScene(ScreenState.Defeat, "The wolves have won!", m_wolfList.Count, m_startTime);
                 LevelManager.Instance.LoadNewLevel("EndScreen");
                 m_endConditionMet = true;
+                AudioManager.Instance.FadeGlobalVolume(1.0f, 0.0f);
                 return;
             }
             if (m_ammoCount <= 0)
             {
                 //Defeat :(
-                GameOverScreen.SetScene(ScreenState.Defeat, "You have ran out of ammo", m_wolfList.Count, m_startTime);
+                GameOverScreen.SetScene(ScreenState.Defeat, "You've ran out of ammo!", m_wolfList.Count, m_startTime);
                 LevelManager.Instance.LoadNewLevel("EndScreen", LevelManager.Transition.OUTOFAMMO);
                 m_endConditionMet = true;
+                AudioManager.Instance.FadeGlobalVolume(10.0f, 0.0f);
                 return;
             }
         }

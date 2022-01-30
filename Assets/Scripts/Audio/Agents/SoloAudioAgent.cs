@@ -22,9 +22,9 @@ namespace AudioSystem.Agents
 
         protected AudioPlayer player = null;
 
-        protected override void Start()
+        protected override void Awake()
         {
-            base.Start();
+            base.Awake();
             player = new AudioPlayer(this.gameObject, mainClip);
 
             Update();

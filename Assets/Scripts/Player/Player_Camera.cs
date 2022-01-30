@@ -167,7 +167,7 @@ public class Player_Camera : MonoBehaviour
     }
     public bool CommandDog()
     {
-        RaycastHit[] hits = Physics.RaycastAll(transform.position, m_camera.transform.forward, 1000.0f, m_commandTargetLayerMask);
+        RaycastHit[] hits = Physics.RaycastAll(m_camera.transform.position, m_camera.transform.forward, 1000.0f, m_commandTargetLayerMask);
 
         if (hits.Length != 0)
         {
@@ -176,7 +176,8 @@ public class Player_Camera : MonoBehaviour
                 return false;
             }
 
-            Instantiate(m_dogPingPrefabVFX, hits[0].point, Quaternion.identity);
+            GameObject vfx = Instantiate(m_dogPingPrefabVFX, hits[0].point, Quaternion.identity);
+            vfx.transform.up = hits[0].normal;
 
             m_usedDogFlag = true;
 

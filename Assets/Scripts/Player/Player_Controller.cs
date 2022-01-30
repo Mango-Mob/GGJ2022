@@ -9,6 +9,7 @@ public class Player_Controller : MonoBehaviour
     [Header("General")]
     [SerializeField] private int m_maxDogCommands = 3;
 
+    public Animator m_animator { get; private set; }
     public Player_Camera playerCamera { get; private set; }
     public Player_Movement playerMovement { get; private set; }
     public MultiAudioAgent audioAgent { get; private set; }
@@ -27,6 +28,7 @@ public class Player_Controller : MonoBehaviour
     void Start()
     {
         audioAgent = GetComponent<MultiAudioAgent>();
+        m_animator = GetComponentInChildren<Animator>();
         playerCamera = GetComponentInChildren<Player_Camera>();
         playerMovement = GetComponentInChildren<Player_Movement>();
 
@@ -58,36 +60,58 @@ public class Player_Controller : MonoBehaviour
         playerCamera.MoveCamera(mouseMove * Time.deltaTime);
 
         // Scope
-        if (PlayerPrefs.GetInt("ToggleAim") == 1)
+        if (m_animator.GetBool("CanShoot"))
         {
-            if (!m_reloading && InputManager.Instance.GetMouseDown(MouseButton.RIGHT))
+            if (PlayerPrefs.GetInt("ToggleAim") == 1)
             {
-                playerCamera.ToggleScope(!playerCamera.m_isScoped);
+                if (!m_reloading && InputManager.Instance.GetMouseDown(MouseButton.RIGHT))
+                {
+                    if (playerCamera.m_isScoped)
+                    {
+                        //m_animator.SetBool("IsScoping", false);
+                        m_animator.SetTrigger("StartScope");
+                    }
+                    else
+                    {
+                        //m_animator.SetBool("IsScoping", true);
+                        m_animator.SetTrigger("StopScope");
+                    }
+
+                    //playerCamera.ToggleScope(!playerCamera.m_isScoped);
+                }
+            }
+            else
+            {
+                if (InputManager.Instance.GetMousePress(MouseButton.RIGHT))
+                {
+                    if (!playerCamera.m_isScoped && !m_reloading)
+                        m_animator.SetTrigger("StartScope");
+                    //playerCamera.ToggleScope(true);
+                }
+                else
+                {
+                    if (playerCamera.m_isScoped)
+                        m_animator.SetTrigger("StopScope");
+                    //playerCamera.ToggleScope(false);
+                }
+            }
+
+            // Shoot Gun
+            if (!m_reloading && GameManager.Instance.m_ammoCount > 0 && InputManager.Instance.GetMouseDown(MouseButton.LEFT))
+            {
+                if (PlayerPrefs.GetInt("InfiniteAmmo") != 1)
+                    GameManager.Instance.m_ammoCount--;
+                playerCamera.ShootGun();
+
+                audioAgent.Play("Gunshot");
+                m_animator.SetTrigger("Shoot");
+                StartCoroutine(ReloadRifle());
             }
         }
         else
         {
-            if (InputManager.Instance.GetMousePress(MouseButton.RIGHT))
-            {
-                if (!playerCamera.m_isScoped && !m_reloading)
-                    playerCamera.ToggleScope(true);
-            }
-            else
-            {
-                if (playerCamera.m_isScoped)
-                    playerCamera.ToggleScope(false);
-            }
-        }
-
-        // Shoot Gun
-        if (!m_reloading && GameManager.Instance.m_ammoCount > 0 && InputManager.Instance.GetMouseDown(MouseButton.LEFT))
-        {
-            GameManager.Instance.m_ammoCount--;
-            playerCamera.ShootGun();
-
-
-            audioAgent.Play("Gunshot");
-            StartCoroutine(ReloadRifle());
+            //if (playerCamera.m_isScoped)
+            //    m_animator.SetTrigger("StopScope");
         }
 
         if (InputManager.Instance.GetMouseDown(MouseButton.MIDDLE))
@@ -123,18 +147,33 @@ public class Player_Controller : MonoBehaviour
             m_wolfCount.text = $"{GameManager.Instance.m_wolfList.Count} Wolves";
         }
     }
+
+    public void SetScope(bool _true)
+    {
+        playerCamera.ToggleScope(_true);
+        if (!_true && m_reloading)
+        {
+            m_animator.SetTrigger("Reload");
+        }
+    }
     IEnumerator ReloadRifle()
     {
         m_reloading = true;
         yield return new WaitForSecondsRealtime(m_reloadDelay);
 
-        playerCamera.ToggleScope(false);
+        if (playerCamera.m_isScoped)
+            m_animator.SetTrigger("StopScope");
+        else
+            m_animator.SetTrigger("Reload");
+    }
+    public void StartReload()
+    {
         audioAgent.Play("RifleLoad");
-
-        yield return new WaitForSecondsRealtime(0.3f);
+    }
+    public void StopReload()
+    {
         m_reloading = false;
     }
-
     static Vector2 GetMovementAxis()
     {
         Vector2 move = Vector2.zero;

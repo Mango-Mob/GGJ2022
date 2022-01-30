@@ -154,18 +154,23 @@ public class SheepPack : MonoBehaviour
         RaycastHit hit;
         Physics.Raycast(pos, Vector3.down * transform.position.y, out hit, 1 << LayerMask.NameToLayer("Ground"));
 
+#if UNITY_EDITOR
         Handles.color = Color.green;
         Handles.DrawWireDisc(pos, hit.normal, m_roamRangeMin);
 
         Handles.color = Color.red;
         Handles.DrawWireDisc(pos, hit.normal, m_roamRangeMax);
+#endif
+
     }
 
-    public void Destroy(Sheep sheep)
+    public void Destroy(Sheep sheep, bool shouldDestroy = true)
     {
+        sheep.transform.SetParent(null);
         m_soundAgent.Play("SheepDeath", false, Random.Range(0.85f, 1.25f));
         m_sheepList.Remove(sheep);
-        Destroy(sheep.gameObject);
+        if(shouldDestroy)
+            Destroy(sheep.gameObject, 5.0f);
 
         if (m_sheepList.Count == 0)
         {
