@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 1364485586109942544}
   - component: {fileID: 4843351117978589139}
   - component: {fileID: 359020426725003626}
+  - component: {fileID: 3613171256134752635}
+  - component: {fileID: 5225715584441119325}
   m_Layer: 0
   m_Name: trunk2
   m_TagString: Untagged
@@ -79,3 +81,33 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &3613171256134752635
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5873320970293853141}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 2.02
+  m_Height: 10
+  m_Direction: 1
+  m_Center: {x: -0.47, y: 0, z: -2.51}
+--- !u!208 &5225715584441119325
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5873320970293853141}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 2.02, y: 5, z: 2.02}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.47, y: 0, z: -2.51}
+  m_TimeToStationary: 0.5
