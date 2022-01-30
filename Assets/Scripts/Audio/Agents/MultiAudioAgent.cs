@@ -52,6 +52,7 @@ namespace AudioSystem.Agents
                 player.Update();
             }
         }
+
         public bool Play(string clipName, bool isLooping = false, float pitch = 1.0f)
         {
             AudioClip clip;
