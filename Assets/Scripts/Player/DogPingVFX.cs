@@ -19,10 +19,13 @@ public class DogPingVFX : MonoBehaviour
     private float m_startingTime;
 
     private bool m_moveDog = false;
+    private Dog m_dog;
 
     // Start is called before the first frame update
     void Start()
     {
+        m_dog = FindObjectOfType<Dog>();
+
         m_sprite = GetComponentInChildren<SpriteRenderer>();
         m_vfxTimer = GetComponentInChildren<VFXTimerScript>();
         m_startingTime = m_vfxTimer.m_timer;
@@ -35,12 +38,12 @@ public class DogPingVFX : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (m_vfxTimer.m_timer < 0.5f)
+        if (m_vfxTimer.m_timer < 0.5f || Vector3.Distance(m_dog.transform.position, transform.position) < 2.0f)
             m_moveDog = true;
 
         if (m_moveDog)
         {
-            m_dogModel.transform.position -= transform.up * m_dogMoveRate;
+            m_dogModel.transform.position -= transform.up * m_dogMoveRate * Time.deltaTime;
         }
 
         if (transform.localScale.x < m_targetScale)
@@ -59,14 +62,5 @@ public class DogPingVFX : MonoBehaviour
         Color color = m_sprite.color;
         color.a -= Time.deltaTime / m_startingTime;
         m_sprite.color = color;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.GetComponent<Dog>())
-        {
-            m_moveDog = true;
-            Debug.Log("Dog Detected");
-        }
     }
 }
