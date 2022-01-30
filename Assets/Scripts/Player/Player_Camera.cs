@@ -177,7 +177,6 @@ public class Player_Camera : MonoBehaviour
             }
 
             Instantiate(m_dogPingPrefabVFX, hits[0].point, Quaternion.identity);
-
             m_usedDogFlag = true;
 
             return true;
