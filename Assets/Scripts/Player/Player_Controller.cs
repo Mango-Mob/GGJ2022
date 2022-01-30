@@ -138,12 +138,16 @@ public class Player_Controller : MonoBehaviour
         yield return new WaitForSecondsRealtime(m_reloadDelay);
 
         playerCamera.ToggleScope(false);
+        m_animator.SetTrigger("Reload");
+    }
+    public void StartReload()
+    {
         audioAgent.Play("RifleLoad");
-
-        yield return new WaitForSecondsRealtime(0.3f);
+    }
+    public void StopReload()
+    {
         m_reloading = false;
     }
-
     static Vector2 GetMovementAxis()
     {
         Vector2 move = Vector2.zero;

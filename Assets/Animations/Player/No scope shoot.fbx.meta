@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 09cd13541b2053d4b86d765a416294ae
+guid: 18686011b215a5e44bffebc66d37e0b8
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable:
   - first:
       74: 1827226128182048838
-    second: Player Reload
+    second: Player no scope fire
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -35,11 +35,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Player Reload
+      name: Player no scope fire
       takeName: Take 001
       internalID: 0
-      firstFrame: 4
-      lastFrame: 45
+      firstFrame: 50
+      lastFrame: 65
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
