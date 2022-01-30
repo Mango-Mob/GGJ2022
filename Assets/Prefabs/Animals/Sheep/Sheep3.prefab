@@ -274,7 +274,7 @@ MonoBehaviour:
   m_isDead: 0
   m_isWaitingForDestination: 1
   m_name: Sheep
-  m_shotVFXPrefab: {fileID: 2592984013104685171, guid: 9c9f5bfc0251bf0459fd09b8a7b626e7,
+  m_shotVFXPrefab: {fileID: 8427014465571558476, guid: fc5bf937a2820de4da1ee71b3ef1e3f9,
     type: 3}
 --- !u!195 &8552250843281757180
 NavMeshAgent:
@@ -348,6 +348,7 @@ MonoBehaviour:
   terainMask:
     serializedVersion: 2
     m_Bits: 1024
+  m_instant: 0
 --- !u!136 &4983283369830171320
 CapsuleCollider:
   m_ObjectHideFlags: 0

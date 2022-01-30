@@ -7,7 +7,7 @@ public class MenuScreen : MonoBehaviour
     // Start is called before the first frame update
     public void Play()
     {
-        LevelManager.Instance.LoadNewLevel("Main");
+        LevelManager.Instance.LoadNewLevel("Main2");
     }
 
     public void Quit()
