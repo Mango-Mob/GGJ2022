@@ -8,6 +8,7 @@ public class AlignWithTerrain : MonoBehaviour
     Vector3 theRay;
 
     public LayerMask terainMask;
+    public bool m_instant = false;
 
     void FixedUpdate()
     {
@@ -24,7 +25,7 @@ public class AlignWithTerrain : MonoBehaviour
 
             Quaternion targetRotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.parent.rotation;
 
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime / 0.15f);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, (m_instant ? 1.0f : Time.deltaTime / 0.15f));
         }
     }
 }
