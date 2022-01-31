@@ -18,6 +18,8 @@ public class Sheep : MonoBehaviour
     public float m_maxReactDist = 5.0f;
     public float m_chanceToFidget = 0.05f;
 
+    public Transform m_hatLocation;
+
     private Coroutine m_currentScaredRoutine;
     private float m_scaredDuration;
     protected Vector3 m_target;
@@ -43,6 +45,9 @@ public class Sheep : MonoBehaviour
         m_sheepAnimControl = GetComponentInChildren<Animator>();
         m_defaultAcc = m_myLegs.acceleration;
         m_namePlateText = m_namePlate.GetComponentInChildren<TextMesh>();
+
+        if (PlayerPrefs.GetInt("GameJamMode", 1) == 0)
+            HatManager.Instance.GetAHat(m_hatLocation);
     }
 
     // Start is called before the first frame update

@@ -409,6 +409,7 @@ MonoBehaviour:
   m_shotReactRange: 5
   m_maxReactDist: 8
   m_chanceToFidget: 0.05
+  m_hatLocation: {fileID: 6279545247383656916}
   m_isDead: 0
   m_isWaitingForDestination: 1
   m_name: Sheep
@@ -706,6 +707,36 @@ Transform:
   m_Father: {fileID: 994240708122966729}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5406396715160480024
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6279545247383656916}
+  m_Layer: 8
+  m_Name: Hat_Loc
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6279545247383656916
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5406396715160480024}
+  m_LocalRotation: {x: 0.12897913, y: 0.12960912, z: 0.68273944, w: 0.7074127}
+  m_LocalPosition: {x: -0.617001, y: -0.0020004306, z: -0.13299993}
+  m_LocalScale: {x: 1.5000002, y: 1.5000002, z: 1.5000002}
+  m_Children: []
+  m_Father: {fileID: 423619692342657525}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0.31500003, y: 21.069, z: 88.025}
 --- !u!1 &6197534192698147013
 GameObject:
   m_ObjectHideFlags: 0
@@ -766,6 +797,7 @@ Transform:
   m_Children:
   - {fileID: 7259719668251307440}
   - {fileID: 994240708122966729}
+  - {fileID: 6279545247383656916}
   m_Father: {fileID: 6706623805402846891}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

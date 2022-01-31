@@ -13,6 +13,7 @@ public class GameOverScreen : MonoBehaviour
     public Text m_subTitle;
     public Text m_remainingStat;
     public Text m_timeStat;
+    public Text m_bulletCountText;
 
     protected static int remainEntities;
     protected static DateTime startTime;
@@ -44,6 +45,18 @@ public class GameOverScreen : MonoBehaviour
             default:
                 break;
         }
+        if (PlayerPrefs.GetInt("GameJamMode", 1) == 0)
+        {
+            if(GameManager.m_ammoMax > 0)
+                m_bulletCountText.text = $"Bullets remaining: {GameManager.Instance.m_ammoCount} (out of {GameManager.m_ammoMax})";
+            else
+                m_bulletCountText.text = $"Bullets remaining: \u221E (out of \u221E)";
+        }
+        else
+        {
+            m_bulletCountText.gameObject.SetActive(false);
+        }
+            
     }
     public void Play()
     {
