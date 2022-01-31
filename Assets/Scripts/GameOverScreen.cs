@@ -38,7 +38,7 @@ public class GameOverScreen : MonoBehaviour
             case ScreenState.Defeat:
                 m_title.text = "Defeat";
                 m_subTitle.text = m_stateReason;
-                m_remainingStat.text = $"Remaining Wolf:  {remainEntities}";
+                m_remainingStat.text = $"Remaining Wolves:  {remainEntities}";
                 m_timeStat.text = $"Time: {(endTime - startTime).ToString("c").Substring(0, 12)}";
                 break;
             default:
