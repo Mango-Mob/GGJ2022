@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Materials/Textures/Sheep/Sheepieces.meta
 guid: e19884462cee63f4dbfa0900404f0ed9
+=======
+guid: 06af731d9e232a34e862a2ad32959c17
+>>>>>>> origin/fetus:Assets/Illustration/UI/Wolf.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
